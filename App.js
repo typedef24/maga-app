@@ -10,6 +10,7 @@ import OnboardOneScreen from "./screens/OnboardOneScreen";
 import OnboardTwoScreen from "./screens/OnboardTwoScreen";
 import OnboardThreeScreen from "./screens/OnboardThreeScreen";
 import OnboardFourScreen from "./screens/OnboardFourScreen";
+import SignUpScreen from "./screens/SignUpScreen";
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,7 @@ export default function App(props) {
             <Stack.Screen name="onboard2" component={OnboardTwoScreen} />
             <Stack.Screen name="onboard3" component={OnboardThreeScreen} />
             <Stack.Screen name="onboard4" component={OnboardFourScreen} />
+            <Stack.Screen name="signup" component={SignUpScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>

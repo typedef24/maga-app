@@ -16,7 +16,7 @@ export default function OnboardFourScreen({ navigation }) {
         You invest with the end goal in mind. And when its time, you walk away
         with all the profits you deserve
       </Text>
-      <TouchableOpacity style={styles.btn}>
+      <TouchableOpacity onPress={() => navigation.navigate("signup")} style={styles.btn}>
         <Text style={styles.btnText}>SIGN UP</Text>
       </TouchableOpacity>
       <View style={styles.navIcon}>

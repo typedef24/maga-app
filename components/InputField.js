@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text } from 'react-native';
+import { Text, InputField } from 'react-native';
 
 export function InputField() {
   return (
