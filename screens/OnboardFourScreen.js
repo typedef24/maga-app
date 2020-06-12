@@ -4,6 +4,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 
 // import image
 import Image1 from "../assets/images/onboard4.png";
+import ButtonComponent from "../components/samples/button";
 
 export default function OnboardFourScreen({ navigation }) {
   return (
@@ -16,7 +17,10 @@ export default function OnboardFourScreen({ navigation }) {
         You invest with the end goal in mind. And when its time, you walk away
         with all the profits you deserve
       </Text>
-      <TouchableOpacity style={styles.btn}>
+      <TouchableOpacity
+        style={styles.btn}
+        onPress={() => navigation.navigate("Root")}
+      >
         <Text style={styles.btnText}>SIGN UP</Text>
       </TouchableOpacity>
       <View style={styles.navIcon}>

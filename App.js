@@ -29,6 +29,7 @@ export default function App(props) {
             <Stack.Screen name="onboard2" component={OnboardTwoScreen} />
             <Stack.Screen name="onboard3" component={OnboardThreeScreen} />
             <Stack.Screen name="onboard4" component={OnboardFourScreen} />
+            <Stack.Screen name="Root" component={BottomTabNavigator} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>
