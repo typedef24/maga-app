@@ -1,5 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as React from "react";
+import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
 import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
@@ -30,10 +31,10 @@ export default function BottomTabNavigator({ navigation, route }) {
         }}
       />
       <BottomTab.Screen
-        name="Links"
-        component={LinksScreen}
+        name="opportunities"
+        component={OppotunitiesScreen}
         options={{
-          title: "Resources",
+          title: "Opportunities",
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} name="md-bulb" />
           ),

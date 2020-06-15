@@ -9,13 +9,19 @@ export default function OnboardTwoScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.imgContainer}>
-        <Image style={styles.sliderImage} source={Image1} />
+        <Image
+          style={styles.sliderImage}
+          source={Image1}
+          resizeMode="contain"
+        />
       </View>
-      <Text style={styles.heading}>Set achievable goals</Text>
-      <Text style={styles.description}>
-        Invest with the end gaol in mind. choose an anticipated profit margin
-        and make realistic investments
-      </Text>
+      <View>
+        <Text style={styles.heading}>Set achievable goals</Text>
+        <Text style={styles.description}>
+          Invest with the end gaol in mind. choose an anticipated profit margin
+          and make realistic investments
+        </Text>
+      </View>
       <TouchableOpacity style={styles.btn}>
         <Text style={styles.btnText}>NEXT</Text>
       </TouchableOpacity>

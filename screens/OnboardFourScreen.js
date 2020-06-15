@@ -4,19 +4,24 @@ import Icon from "react-native-vector-icons/FontAwesome";
 
 // import image
 import Image1 from "../assets/images/onboard4.png";
-import ButtonComponent from "../components/samples/button";
 
 export default function OnboardFourScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.imgContainer}>
-        <Image style={styles.sliderImage} source={Image1} />
+        <Image
+          style={styles.sliderImage}
+          source={Image1}
+          resizeMode="contain"
+        />
       </View>
-      <Text style={styles.heading}>Make Real profits</Text>
-      <Text style={styles.description}>
-        You invest with the end goal in mind. And when its time, you walk away
-        with all the profits you deserve
-      </Text>
+      <View>
+        <Text style={styles.heading}>Make Real profits</Text>
+        <Text style={styles.description}>
+          You invest with the end goal in mind. And when its time, you walk away
+          with all the profits you deserve
+        </Text>
+      </View>
       <TouchableOpacity
         style={styles.btn}
         onPress={() => navigation.navigate("Root")}

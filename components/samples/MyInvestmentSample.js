@@ -1,25 +1,23 @@
-import * as React from "react";
-import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
+import React, { Component } from "react";
+import { Viewm, Text, StyleSheet, View, Image } from "react-native";
 import Icon from "@expo/vector-icons/FontAwesome";
 // Import image
-import Image1 from "../assets/images/investment.png";
+import Image1 from "../../assets/images/investment.png";
 
-export default function MyInvestment() {
+const MyInvestmentSample = () => {
   return (
     <View>
       {/* Bullish statistics */}
 
       {/* FIrst section */}
       <View style={styles.container}>
-        <TouchableOpacity>
-          <View style={styles.body}>
-            <Text style={{ width: "90%" }}>
-              Real estate investments funds in the dubai, los Angeles, new York
-              and sub-saharan Africa.
-            </Text>
-            <Image source={Image1} style={styles.Image}></Image>
-          </View>
-        </TouchableOpacity>
+        <View style={styles.body}>
+          <Text style={{ width: "90%" }}>
+            Real estate investments funds in the dubai, los Angeles, new York
+            and sub-saharan Africa.
+          </Text>
+          <Image source={Image1} style={styles.Image}></Image>
+        </View>
         <View style={styles.statistics}>
           <View style={styles.iconText}>
             <Icon
@@ -62,18 +60,16 @@ export default function MyInvestment() {
 
       {/* Second Scetion */}
       <View style={styles.container}>
-        <TouchableOpacity>
-          <View style={styles.body}>
-            <View style={{ width: "90%" }}>
-              <Text style={styles.headingMain}>AWAA AND SONS LTD</Text>
-              <Text style={styles.textMain}>
-                Real estate investments funds in the dubai, los Angeles, new
-                York and sub-saharan Africa.
-              </Text>
-            </View>
-            <Image source={Image1} style={styles.Image}></Image>
+        <View style={styles.body}>
+          <View style={{ width: "90%" }}>
+            <Text style={styles.headingMain}>AWAA AND SONS LTD</Text>
+            <Text style={styles.textMain}>
+              Real estate investments funds in the dubai, los Angeles, new York
+              and sub-saharan Africa.
+            </Text>
           </View>
-        </TouchableOpacity>
+          <Image source={Image1} style={styles.Image}></Image>
+        </View>
         <View style={styles.statistics}>
           <View style={styles.iconText}>
             <Icon
@@ -116,18 +112,16 @@ export default function MyInvestment() {
 
       {/* Bearish Statistics */}
       <View style={styles.dangerContainer}>
-        <TouchableOpacity>
-          <View style={styles.body}>
-            <View style={{ width: "90%" }}>
-              <Text style={styles.headingMain}>BIGSITTER AND BRO LLC</Text>
-              <Text style={styles.textMain}>
-                Real estate investments funds in the dubai, los Angeles, new
-                York and sub-saharan Africa.
-              </Text>
-            </View>
-            <Image source={Image1} style={styles.Image}></Image>
+        <View style={styles.body}>
+          <View style={{ width: "80%" }}>
+            <Text style={styles.headingMain}>BIGSITTER AND BRO LLC</Text>
+            <Text style={styles.textMain}>
+              Real estate investments funds in the dubai, los Angeles, new York
+              and sub-saharan Africa.
+            </Text>
           </View>
-        </TouchableOpacity>
+          <Image source={Image1} style={styles.Image}></Image>
+        </View>
         <View style={styles.dangerStatistics}>
           <View style={styles.iconText}>
             <Icon
@@ -169,7 +163,7 @@ export default function MyInvestment() {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -217,3 +211,5 @@ const styles = StyleSheet.create({
     padding: 16,
   },
 });
+
+export default MyInvestmentSample;
