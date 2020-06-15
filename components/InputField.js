@@ -1,8 +1,28 @@
 import * as React from 'react';
-import { Text, InputField } from 'react-native';
+import { View, TextInput, StyleSheet } from 'react-native';
+import fonts from "../constants/fonts";
 
-export function InputField() {
-  return (
-      <Text> This is the input field Component</Text>
-  );
+export default class InputField extends React.Component {
+  constructor (props) {
+    super(props);
+  }
+
+  render (){
+    return (
+      <View style={styles.container}>
+        <TextInput
+          {...this.props} // Inherit any props passed to it; e.g., multiline, numberOfLines below
+          style={{ height: 50, backgroundColor: "white", padding: 15, fontSize: fonts.large }}
+        />
+      </View>
+    );
+  }
+
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginBottom: 10,
+  },
+
+});
