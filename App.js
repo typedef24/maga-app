@@ -25,11 +25,47 @@ export default function App(props) {
         {Platform.OS === "ios" && <StatusBar barStyle="dark-content" />}
         <NavigationContainer linking={LinkingConfiguration}>
           <Stack.Navigator>
-            {/* <Stack.Screen name="Root" component={BottomTabNavigator} /> */}
-            <Stack.Screen name="onboard1" component={OnboardOneScreen} />
-            <Stack.Screen name="onboard2" component={OnboardTwoScreen} />
-            <Stack.Screen name="onboard3" component={OnboardThreeScreen} />
-            <Stack.Screen name="onboard4" component={OnboardFourScreen} />
+            <Stack.Screen
+              name="onboard1"
+              component={OnboardOneScreen}
+              options={{
+                headerShown: false,
+                // title: "Skip",
+                // headerTitleAlign: "right",
+                // headerStyle: {
+                //   borderBottomColor: "#fff",
+                // },
+              }}
+            />
+            <Stack.Screen
+              name="onboard2"
+              component={OnboardTwoScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="onboard3"
+              component={OnboardThreeScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="onboard4"
+              component={OnboardFourScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="Root"
+              component={BottomTabNavigator}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen name="opportunities" component={BottomTabNavigator} />
             <Stack.Screen name="signup" component={SignUpScreen} />
           </Stack.Navigator>
         </NavigationContainer>

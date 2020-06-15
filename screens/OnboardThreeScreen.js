@@ -9,13 +9,19 @@ export default function OnboardThreeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.imgContainer}>
-        <Image style={styles.sliderImage} source={Image1} />
+        <Image
+          style={styles.sliderImage}
+          source={Image1}
+          resizeMode="contain"
+        />
       </View>
-      <Text style={styles.heading}>Managed by experts</Text>
-      <Text style={styles.description}>
-        All your investments are managed by trained experts who have real world
-        expertise in the particular domain.
-      </Text>
+      <View>
+        <Text style={styles.heading}>Managed by experts</Text>
+        <Text style={styles.description}>
+          All your investments are managed by trained experts who have real
+          world expertise in the particular domain.
+        </Text>
+      </View>
       <TouchableOpacity style={styles.btn}>
         <Text style={styles.btnText}>NEXT</Text>
       </TouchableOpacity>

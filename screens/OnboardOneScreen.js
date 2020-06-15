@@ -7,6 +7,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 // import image
 import Image1 from "../assets/images/onboard1.png";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // const hideNav = navigationOptions({
 //   //To hide the ActionBar/NavigationBar
@@ -15,15 +16,21 @@ import Image1 from "../assets/images/onboard1.png";
 
 export default function OnboardOneScreen({ navigation, navigationOptions }) {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.imgContainer}>
-        <Image style={styles.sliderImage} source={Image1} />
+        <Image
+          style={styles.sliderImage}
+          source={Image1}
+          resizeMode="contain"
+        />
       </View>
-      <Text style={styles.heading}>Make secure investments</Text>
-      <Text style={styles.description}>
-        Invest in many carefully selected businesses which are guaranteed to
-        make good profits quicker.
-      </Text>
+      <View>
+        <Text style={styles.heading}>Make secure investments</Text>
+        <Text style={styles.description}>
+          Invest in many carefully selected businesses which are guaranteed to
+          make good profits quicker.
+        </Text>
+      </View>
       <TouchableOpacity style={styles.btn}>
         <Text style={styles.btnText}>GET STARTED</Text>
       </TouchableOpacity>
@@ -49,7 +56,7 @@ export default function OnboardOneScreen({ navigation, navigationOptions }) {
           </View>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
