@@ -1,9 +1,182 @@
-import * as React from 'react';
-import {Text } from 'react-native'
+import * as React from "react";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { PageTitle } from "../components/PageTitle";
+import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import Iconfont from "@expo/vector-icons/FontAwesome5";
 
+import image from "../assets/images/dish.png";
+import Layout from "../constants/Layout";
+import ProgressBarComponent from "../components/ProgressBarComponent";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function InvestmentsCardViewScreen() {
-    return (
-        <Text> This is the investments card view screen</Text>
-    );
+  return (
+    <View>
+      <PageTitle title="Investment Opportunities" />
+      <ScrollView style={{ marginBottom: 20 }}>
+        <View style={styles.container}>
+          <View style={styles.progress}>
+            <View style={styles.statusBar}>
+              <View style={styles.status}>
+                <Text style={styles.statusText}>Onging</Text>
+                <Icon
+                  name="bookmark"
+                  size={25}
+                  style={{ marginTop: -15 }}
+                  color="#003A8C"
+                />
+              </View>
+              <View style={styles.body}>
+                <Text style={{ width: Layout.window.width * 0.8 }}>
+                  Real estate investments funds in the dubai, los Angeles, new
+                  York and sub-saharan Africa.
+                </Text>
+                <Image source={image} style={styles.Image}></Image>
+              </View>
+            </View>
+            {/* </TouchableOpacity> */}
+            <View style={styles.statistics}>
+              <View style={styles.iconText}>
+                <Icon
+                  name="alert-decagram"
+                  size={15}
+                  color="#4D7BF3"
+                  style={{ paddingTop: 4 }}
+                />
+                <Text
+                  style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
+                >
+                  {" "}
+                  20
+                  {"%"}
+                </Text>
+              </View>
+              <View style={styles.iconText}>
+                <Icon
+                  name="square-inc-cash"
+                  size={15}
+                  color="#4D7BF3"
+                  style={{ paddingTop: 4 }}
+                />
+                <Text
+                  style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
+                >
+                  {" "}
+                  6 {"months"}
+                </Text>
+              </View>
+              <View style={styles.iconText}>
+                <Iconfont
+                  name="piggy-bank"
+                  size={15}
+                  color="#4D7BF3"
+                  style={{ paddingTop: 4 }}
+                />
+                <Text
+                  style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
+                >
+                  {" "}
+                  {"$"}
+                  4000
+                </Text>
+              </View>
+            </View>
+            <View style={styles.description}>
+              <Text>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </Text>
+            </View>
+            <View style={styles.details}>
+              <Text>Monthly Interest</Text>
+              <Text>13.6</Text>
+            </View>
+            <View style={styles.details}>
+              <Text>Monthly Interest</Text>
+              <Text>13.6</Text>
+            </View>
+            <View style={styles.details}>
+              <Text>Monthly Interest</Text>
+              <Text>13.6</Text>
+            </View>
+            <View style={styles.details}>
+              <Text>Monthly Interest</Text>
+              <Text>13.6</Text>
+            </View>
+          </View>
+        </View>
+        <ProgressBarComponent />
+      </ScrollView>
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#F4FBFF",
+  },
+  progress: {
+    borderTopWidth: 3,
+    borderTopColor: "#033c8d",
+    marginRight: 5,
+    marginLeft: 5,
+    marginBottom: 20,
+    shadowColor: "red",
+  },
+  statusBar: {
+    // backgroundColor: "#F4FBFF",
+  },
+  status: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 10,
+  },
+  statusText: {
+    backgroundColor: "green",
+    color: "#fff",
+    borderRadius: 5,
+    padding: 4,
+  },
+  body: {
+    flexDirection: "row",
+    paddingTop: 30,
+    paddingBottom: 10,
+    paddingRight: 10,
+    paddingLeft: 5,
+  },
+  headingMain: {
+    fontSize: 19,
+    color: "#2F3D52",
+    fontWeight: "bold",
+  },
+  statistics: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: "#f0dfe0",
+  },
+  details: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#f0dfe0",
+  },
+  description: {
+    padding: 10,
+  },
+  iconText: {
+    flexDirection: "row",
+    color: "blue",
+  },
+  Image: {
+    alignItems: "center",
+    marginTop: 10,
+  },
+});

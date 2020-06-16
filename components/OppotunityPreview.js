@@ -3,19 +3,29 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import Iconfont from "@expo/vector-icons/FontAwesome5";
 
-import Image1 from "../assets/images/dish.png";
 import ProgressBarComponent from "./ProgressBarComponent";
+import Layout from "../constants/Layout";
+import Image1 from "../assets/images/dish.png";
 
 import Color from "../constants/Colors";
 
-export function OppotunityPreview() {
+export function OppotunityPreview({ navigation, item }) {
   return (
     <View style={styles.container}>
-      <View style={styles.progress}>
+      {/* <View style={styles.progress}> */}
+      <View style={[item.rate >= 50 ? styles.success : styles.progress]}>
         {/* <TouchableOpacity> */}
         <View style={styles.statusBar}>
           <View style={styles.status}>
-            <Text style={styles.statusText}>Ongoing</Text>
+            <Text
+              style={[
+                item.status === "closed"
+                  ? styles.dangerText
+                  : styles.statusText,
+              ]}
+            >
+              {item.status}
+            </Text>
             <Icon
               name="bookmark"
               size={25}
@@ -25,11 +35,10 @@ export function OppotunityPreview() {
           </View>
           <TouchableOpacity>
             <View style={styles.body}>
-              <Text style={{ width: "90%" }}>
-                Real estate investments funds in the dubai, los Angeles, new
-                York and sub-saharan Africa.
+              <Text style={{ width: Layout.window.width * 0.8 }}>
+                {item.title}
               </Text>
-              <Image source={Image1} style={styles.Image}></Image>
+              <Image source={item.img} style={styles.Image}></Image>
             </View>
           </TouchableOpacity>
         </View>
@@ -46,7 +55,8 @@ export function OppotunityPreview() {
               style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
             >
               {" "}
-              20.5{"%"}
+              {item.rate}
+              {"%"}
             </Text>
           </View>
           <View style={styles.iconText}>
@@ -74,223 +84,12 @@ export function OppotunityPreview() {
               style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
             >
               {" "}
-              {"$"}4,300
+              {"$"}
+              {item.total}
             </Text>
           </View>
         </View>
-        <ProgressBarComponent />
-      </View>
-
-      <View style={styles.progress}>
-        {/* <TouchableOpacity> */}
-        <View style={styles.statusBar}>
-          <View style={styles.status}>
-            <Text style={styles.statusText}>Ongoing</Text>
-            <Icon
-              name="bookmark"
-              size={25}
-              style={{ marginTop: -15 }}
-              color="#003A8C"
-            />
-          </View>
-          <TouchableOpacity>
-            <View style={styles.body}>
-              <Text style={{ width: "90%" }}>
-                Real estate investments funds in the dubai, los Angeles, new
-                York and sub-saharan Africa.
-              </Text>
-              <Image source={Image1} style={styles.Image}></Image>
-            </View>
-          </TouchableOpacity>
-        </View>
-        {/* </TouchableOpacity> */}
-        <View style={styles.statistics}>
-          <View style={styles.iconText}>
-            <Icon
-              name="alert-decagram"
-              size={15}
-              color="#4D7BF3"
-              style={{ paddingTop: 4 }}
-            />
-            <Text
-              style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
-            >
-              {" "}
-              20.5{"%"}
-            </Text>
-          </View>
-          <View style={styles.iconText}>
-            <Icon
-              name="square-inc-cash"
-              size={15}
-              color="#4D7BF3"
-              style={{ paddingTop: 4 }}
-            />
-            <Text
-              style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
-            >
-              {" "}
-              6 {"months"}
-            </Text>
-          </View>
-          <View style={styles.iconText}>
-            <Iconfont
-              name="piggy-bank"
-              size={15}
-              color="#4D7BF3"
-              style={{ paddingTop: 4 }}
-            />
-            <Text
-              style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
-            >
-              {" "}
-              {"$"}4,300
-            </Text>
-          </View>
-        </View>
-        <ProgressBarComponent />
-      </View>
-
-      <View
-        style={({ borderTopColor: Color.warningBackground }, styles.progress)}
-      >
-        {/* <TouchableOpacity> */}
-        <View style={styles.statusBar}>
-          <View style={styles.status}>
-            <Text style={styles.statusText}>Ongoing</Text>
-            <Icon
-              name="bookmark"
-              size={25}
-              style={{ marginTop: -15 }}
-              color="#003A8C"
-            />
-          </View>
-          <TouchableOpacity>
-            <View style={styles.body}>
-              <Text style={{ width: "90%" }}>
-                Real estate investments funds in the dubai, los Angeles, new
-                York and sub-saharan Africa.
-              </Text>
-              <Image source={Image1} style={styles.Image}></Image>
-            </View>
-          </TouchableOpacity>
-        </View>
-        {/* </TouchableOpacity> */}
-        <View style={styles.statistics}>
-          <View style={styles.iconText}>
-            <Icon
-              name="alert-decagram"
-              size={15}
-              color="#4D7BF3"
-              style={{ paddingTop: 4 }}
-            />
-            <Text
-              style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
-            >
-              {" "}
-              20.5{"%"}
-            </Text>
-          </View>
-          <View style={styles.iconText}>
-            <Icon
-              name="square-inc-cash"
-              size={15}
-              color="#4D7BF3"
-              style={{ paddingTop: 4 }}
-            />
-            <Text
-              style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
-            >
-              {" "}
-              6 {"months"}
-            </Text>
-          </View>
-          <View style={styles.iconText}>
-            <Iconfont
-              name="piggy-bank"
-              size={15}
-              color="#4D7BF3"
-              style={{ paddingTop: 4 }}
-            />
-            <Text
-              style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
-            >
-              {" "}
-              {"$"}4,300
-            </Text>
-          </View>
-        </View>
-        <ProgressBarComponent />
-      </View>
-
-      <View style={styles.progress}>
-        {/* <TouchableOpacity> */}
-        <View style={styles.statusBar}>
-          <View style={styles.status}>
-            <Text style={styles.statusText}>Ongoing</Text>
-            <Icon
-              name="bookmark"
-              size={25}
-              style={{ marginTop: -15 }}
-              color="#003A8C"
-            />
-          </View>
-          <TouchableOpacity>
-            <View style={styles.body}>
-              <Text style={{ width: "90%" }}>
-                Real estate investments funds in the dubai, los Angeles, new
-                York and sub-saharan Africa.
-              </Text>
-              <Image source={Image1} style={styles.Image}></Image>
-            </View>
-          </TouchableOpacity>
-        </View>
-        {/* </TouchableOpacity> */}
-        <View style={styles.statistics}>
-          <View style={styles.iconText}>
-            <Icon
-              name="alert-decagram"
-              size={15}
-              color="#4D7BF3"
-              style={{ paddingTop: 4 }}
-            />
-            <Text
-              style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
-            >
-              {" "}
-              20.5{"%"}
-            </Text>
-          </View>
-          <View style={styles.iconText}>
-            <Icon
-              name="square-inc-cash"
-              size={15}
-              color="#4D7BF3"
-              style={{ paddingTop: 4 }}
-            />
-            <Text
-              style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
-            >
-              {" "}
-              6 {"months"}
-            </Text>
-          </View>
-          <View style={styles.iconText}>
-            <Iconfont
-              name="piggy-bank"
-              size={15}
-              color="#4D7BF3"
-              style={{ paddingTop: 4 }}
-            />
-            <Text
-              style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
-            >
-              {" "}
-              {"$"}4,300
-            </Text>
-          </View>
-        </View>
-        <ProgressBarComponent />
+        <ProgressBarComponent data={item} />
       </View>
     </View>
   );
@@ -299,11 +98,19 @@ export function OppotunityPreview() {
 const styles = StyleSheet.create({
   container: {
     // paddingBottom: 10,
-    marginBottom: 58,
+    // marginBottom: 58,
   },
   progress: {
     borderTopWidth: 3,
-    borderTopColor: "#003A8C",
+    borderTopColor: "red",
+    marginRight: 5,
+    marginLeft: 5,
+    marginBottom: 20,
+    shadowColor: "red",
+  },
+  success: {
+    borderTopWidth: 3,
+    borderTopColor: "green",
     marginRight: 5,
     marginLeft: 5,
     marginBottom: 20,
@@ -319,6 +126,12 @@ const styles = StyleSheet.create({
   },
   statusText: {
     backgroundColor: "green",
+    color: "#fff",
+    borderRadius: 5,
+    padding: 4,
+  },
+  dangerText: {
+    backgroundColor: "red",
     color: "#fff",
     borderRadius: 5,
     padding: 4,
