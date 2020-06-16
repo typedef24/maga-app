@@ -64,9 +64,9 @@ export default class LoginScreen extends React.Component {
               />
               <TouchableOpacity
                 style={{ alignItems: "flex-end" }}
-                onPress={() => this.props.navigation.navigate("signup")}
+                onPress={() => this.props.navigation.navigate("resetPasswordScreen")}
               >
-                <Text style={globalStyles.btnLabel2}>Signup</Text>
+                <Text style={globalStyles.btnLabel2}>Forgot password</Text>
               </TouchableOpacity>
             </View>
             <View>

@@ -20,12 +20,19 @@ export default class SignUpScreen extends React.Component {
       email: "",
       password: "",
       confirmPassword: "",
+      errorStr: '',
     };
   }
 
-  handleSignup(){
-    alert("Summitted data: " + JSON.stringify(this.state));
-  };
+  handleSignup() {
+    //check if password match
+    if (this.state.password !== this.state.confirmPassword) {
+      this.setState({ errorStr: "Passwords didn't match" });
+      //more code still has to be written wrt validation
+
+    }
+
+  }
 
   render() {
     return (
@@ -38,6 +45,14 @@ export default class SignUpScreen extends React.Component {
             colors={["#003a8c", "#137fe9"]}
             style={styles.gradient}
           >
+            { this.state.errorStr ?
+              <View style={ styles.errorBox }>
+                <FontAwesome name="exclamation-triangle" size={20} color="white" style={{ marginRight: 10 }} />
+                <Text style={ globalStyles.label }>{ this.state.errorStr }</Text>
+              </View>
+              :
+              <Text style={{ display: "none" }}></Text>
+            }
             <View>
               <Text style={globalStyles.label}>Email</Text>
               <InputField
@@ -56,6 +71,7 @@ export default class SignUpScreen extends React.Component {
               />
               <Text style={globalStyles.label}>Repeat Password</Text>
               <InputField
+                inputStyle={ this.state.errorStr ? { borderColor: "red", color: "red", borderWidth: 1 } : {} }
                 secureTextEntry={true}
                 textContentType="password"
                 value={this.state.confirmPassword}
@@ -70,7 +86,9 @@ export default class SignUpScreen extends React.Component {
                 body={<Text style={globalStyles.btnLabel}>Signup</Text>}
                 touchableStyleProps={{ backgroundColor: "#52c41a" }}
                 touchableProps={{
-                  onPress: () => { this.handleSignup() },
+                  onPress: () => {
+                    this.handleSignup();
+                  },
                 }}
               />
               <TouchableOpacity
@@ -85,12 +103,22 @@ export default class SignUpScreen extends React.Component {
               <View style={{ flexDirection: "row", marginTop: 10 }}>
                 <Button
                   body={
-                    <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
                       <FontAwesome name="facebook" size={20} color="white" />
                       <Text style={globalStyles.btnLabel}>Facebook</Text>
                     </View>
                   }
-                  touchableStyleProps={{ backgroundColor: "#4d7bf3", flex: 1, marginRight: 30 }}
+                  touchableStyleProps={{
+                    backgroundColor: "#4d7bf3",
+                    flex: 1,
+                    marginRight: 30,
+                  }}
                   touchableProps={{
                     onPress: () => {
                       alert("Button clicked!!");
@@ -99,7 +127,13 @@ export default class SignUpScreen extends React.Component {
                 />
                 <Button
                   body={
-                    <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
                       <FontAwesome name="google" size={20} color="white" />
                       <Text style={globalStyles.btnLabel}>Google</Text>
                     </View>
@@ -130,4 +164,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 15,
   },
+
+  errorBox: {
+    flexDirection: "row",
+    backgroundColor: "#4a7fba",
+    marginBottom: 20,
+    padding: 10,
+    paddingBottom: 0,
+  }
+
 });

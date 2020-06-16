@@ -12,6 +12,8 @@ import OnboardThreeScreen from "./screens/OnboardThreeScreen";
 import OnboardFourScreen from "./screens/OnboardFourScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import LoginScreen from "./screens/LoginScreen";
+import ResetPasswordScreen from "./screens/ResetPasswordScreen";
+import ResetPasswordConfirmationScreen from "./screens/ResetPasswordConfirmationScreen"
 import InvestmentsCardViewScreen from "./screens/InvestmentsCardViewScreen";
 
 const Stack = createStackNavigator();
@@ -85,6 +87,18 @@ export default function App(props) {
             <Stack.Screen
               name="investment-card"
               component={InvestmentsCardViewScreen}
+            />
+            <Stack.Screen
+              name="resetPasswordScreen"
+              component={ResetPasswordScreen} options={{
+                headerShown: false,
+              }} 
+            />
+            <Stack.Screen
+              name="resetPasswordConfirmationScreen"
+              component={ ResetPasswordConfirmationScreen } options={{
+                headerShown: false,
+              }} 
             />
           </Stack.Navigator>
         </NavigationContainer>
