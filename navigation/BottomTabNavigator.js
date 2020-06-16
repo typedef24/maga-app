@@ -1,12 +1,12 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import * as React from "react";
-import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
 import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
-import LinksScreen from "../screens/LinksScreen";
 import OnboardOneScreen from "../screens/OnboardOneScreen";
 import OppotunitiesScreen from "../screens/OppotunitiesScreen";
+import InvestmentsCardViewScreen from "../screens/InvestmentsCardViewScreen";
+
 import { Button } from "react-native";
 
 const BottomTab = createBottomTabNavigator();
@@ -26,7 +26,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         options={{
           title: "Home",
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} name="md-home" />
+            <TabBarIcon focused={focused} name="home" />
           ),
         }}
       />
@@ -36,7 +36,7 @@ export default function BottomTabNavigator({ navigation, route }) {
         options={{
           title: "Opportunities",
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} name="md-bulb" />
+            <TabBarIcon focused={focused} name="lightbulb" />
           ),
         }}
       />
@@ -46,7 +46,17 @@ export default function BottomTabNavigator({ navigation, route }) {
         options={{
           title: "Onboard One",
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} name="md-search"></TabBarIcon>
+            <TabBarIcon focused={focused} name="search-dollar"></TabBarIcon>
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="investment-card"
+        component={InvestmentsCardViewScreen}
+        options={{
+          title: "Onboard One",
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} name="piggy-bank"></TabBarIcon>
           ),
         }}
       />
@@ -54,9 +64,9 @@ export default function BottomTabNavigator({ navigation, route }) {
         name="oppotunities"
         component={OppotunitiesScreen}
         options={{
-          title: "Oppotunities Screen",
+          title: "Profile",
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} name="md-settings"></TabBarIcon>
+            <TabBarIcon focused={focused} name="user"></TabBarIcon>
           ),
         }}
       ></BottomTab.Screen>
