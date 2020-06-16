@@ -12,6 +12,7 @@ import OnboardThreeScreen from "./screens/OnboardThreeScreen";
 import OnboardFourScreen from "./screens/OnboardFourScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import LoginScreen from "./screens/LoginScreen";
+import InvestmentsCardViewScreen from "./screens/InvestmentsCardViewScreen";
 
 const Stack = createStackNavigator();
 
@@ -67,17 +68,23 @@ export default function App(props) {
               }}
             />
             <Stack.Screen name="opportunities" component={BottomTabNavigator} />
-            <Stack.Screen 
+            <Stack.Screen
               name="signup"
-              component={SignUpScreen} options={{
+              component={SignUpScreen}
+              options={{
                 headerShown: false,
-              }} 
+              }}
             />
-            <Stack.Screen 
+            <Stack.Screen
               name="login"
-              component={LoginScreen} options={{
+              component={LoginScreen}
+              options={{
                 headerShown: false,
-              }} 
+              }}
+            />
+            <Stack.Screen
+              name="investment-card"
+              component={InvestmentsCardViewScreen}
             />
           </Stack.Navigator>
         </NavigationContainer>
