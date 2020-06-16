@@ -28,4 +28,12 @@ export default {
     fontWeight: "bold",
   },
 
+  labelPicScreen: {
+    color: colors.white,
+    fontFamily: fonts.family,
+    fontSize: fonts.xlarge,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+
 };

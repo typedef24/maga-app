@@ -12,7 +12,7 @@ export default class InputField extends React.Component {
       <View style={styles.container}>
         <TextInput
           {...this.props} // Inherit any props passed to it; e.g., multiline, numberOfLines below
-          style={{ height: 50, backgroundColor: "white", padding: 15, fontSize: fonts.large }}
+          style={{ ...this.props.inputStyle, height: 50, backgroundColor: "white", padding: 15, fontSize: fonts.large }}
         />
       </View>
     );
@@ -22,7 +22,7 @@ export default class InputField extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 10,
+    marginBottom: 10
   },
 
 });
