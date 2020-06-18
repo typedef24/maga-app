@@ -8,9 +8,8 @@ export default function MyInvestment() {
   return (
     <View>
       {/* Bullish statistics */}
-
       {/* FIrst section */}
-      <View style={styles.container}>
+      <View style={[styles.container, styles.shadowStyle]}>
         <TouchableOpacity>
           <View style={styles.body}>
             <Text style={{ width: "90%" }}>
@@ -61,7 +60,7 @@ export default function MyInvestment() {
       </View>
 
       {/* Second Scetion */}
-      <View style={styles.container}>
+      <View style={[styles.container, styles.shadowStyle]}>
         <TouchableOpacity>
           <View style={styles.body}>
             <View style={{ width: "90%" }}>
@@ -115,7 +114,7 @@ export default function MyInvestment() {
       </View>
 
       {/* Bearish Statistics */}
-      <View style={styles.dangerContainer}>
+      <View style={[styles.dangerContainer, styles.shadowStyle]}>
         <TouchableOpacity>
           <View style={styles.body}>
             <View style={{ width: "90%" }}>
@@ -171,12 +170,26 @@ export default function MyInvestment() {
   );
 }
 
+function elevationShadowStyle(elevation) {
+  return {
+    elevation,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 0.5 * elevation },
+    shadowOpacity: 0.4,
+    shadowRadius: 0.8 * elevation,
+  };
+}
+
 const styles = StyleSheet.create({
+  containerMain: {
+    backgroundColor: "red",
+  },
   container: {
     borderTopWidth: 3,
     borderTopColor: "#003A8C",
-    paddingBottom: 10,
+    margin: 5,
   },
+  shadowStyle: elevationShadowStyle(5),
   body: {
     flexDirection: "row",
     paddingTop: 30,
@@ -208,7 +221,8 @@ const styles = StyleSheet.create({
   dangerContainer: {
     borderTopWidth: 3,
     borderTopColor: "#A8071A",
-    paddingBottom: 10,
+    // paddingBottom: 10,
+    margin: 5,
   },
   dangerStatistics: {
     flexDirection: "row",
