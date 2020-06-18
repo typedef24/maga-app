@@ -5,16 +5,16 @@ import Iconfont from "@expo/vector-icons/FontAwesome5";
 
 import ProgressBarComponent from "./ProgressBarComponent";
 import Layout from "../constants/Layout";
-import Image1 from "../assets/images/dish.png";
-
-import Color from "../constants/Colors";
 
 export function OppotunityPreview({ navigation, item }) {
   return (
     <View style={styles.container}>
-      {/* <View style={styles.progress}> */}
-      <View style={[item.rate >= 50 ? styles.success : styles.progress]}>
-        {/* <TouchableOpacity> */}
+      <View
+        style={[
+          item.rate >= 50 ? styles.success : styles.progress,
+          styles.shadowStyle,
+        ]}
+      >
         <View style={styles.statusBar}>
           <View style={styles.status}>
             <Text
@@ -33,7 +33,11 @@ export function OppotunityPreview({ navigation, item }) {
               color="#003A8C"
             />
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={(item) =>
+              navigation.navigate("investment-details", { item })
+            }
+          >
             <View style={styles.body}>
               <Text style={{ width: Layout.window.width * 0.8 }}>
                 {item.title}
@@ -42,7 +46,6 @@ export function OppotunityPreview({ navigation, item }) {
             </View>
           </TouchableOpacity>
         </View>
-        {/* </TouchableOpacity> */}
         <View style={styles.statistics}>
           <View style={styles.iconText}>
             <Icon
@@ -95,11 +98,23 @@ export function OppotunityPreview({ navigation, item }) {
   );
 }
 
+// Implementing BorderShaow
+function elevationShadowStyle(elevation) {
+  return {
+    elevation,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 0.5 * elevation },
+    shadowOpacity: 0.4,
+    shadowRadius: 0.8 * elevation,
+  };
+}
+
 const styles = StyleSheet.create({
   container: {
     // paddingBottom: 10,
     // marginBottom: 58,
   },
+  shadowStyle: elevationShadowStyle(5),
   progress: {
     borderTopWidth: 3,
     borderTopColor: "red",
@@ -122,7 +137,7 @@ const styles = StyleSheet.create({
   status: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 10,
+    margin: 5,
   },
   statusText: {
     backgroundColor: "green",

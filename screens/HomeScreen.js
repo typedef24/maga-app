@@ -17,7 +17,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import MyInvestmentPreview from "../components/MyInvestmentPreview";
 import MyInvestment from "../components/MyInvestment";
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
@@ -37,7 +37,10 @@ export default function HomeScreen() {
         <ScrollView>
           <View style={styles.scrolHeading}>
             <Text style={{ fontSize: 16, fontWeight: "bold" }}>Portfiolio</Text>
-            <TouchableOpacity style={styles.linkText}>
+            <TouchableOpacity
+              style={styles.linkText}
+              onPress={() => navigation.navigate("myinvestsments")}
+            >
               <Text>see all </Text>
               <Icon name="ios-arrow-forward" size={20} />
             </TouchableOpacity>

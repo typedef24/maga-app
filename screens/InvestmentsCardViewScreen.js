@@ -8,12 +8,14 @@ import image from "../assets/images/dish.png";
 import Layout from "../constants/Layout";
 import ProgressBarComponent from "../components/ProgressBarComponent";
 import { ScrollView } from "react-native-gesture-handler";
+import globalStyles from "../constants/globalStyles";
+import Button from "../components/Button";
 
-export default function InvestmentsCardViewScreen() {
+export default function InvestmentsCardViewScreen({ navigation }) {
   return (
     <View>
       <PageTitle title="Investment Opportunities" />
-      <ScrollView style={{ marginBottom: 20 }}>
+      <ScrollView style={({ marginBottom: 20 }, styles.containerMain)}>
         <View style={styles.container}>
           <View style={styles.progress}>
             <View style={styles.statusBar}>
@@ -87,9 +89,6 @@ export default function InvestmentsCardViewScreen() {
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris
                 nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
               </Text>
             </View>
             <View style={styles.details}>
@@ -97,28 +96,48 @@ export default function InvestmentsCardViewScreen() {
               <Text>13.6</Text>
             </View>
             <View style={styles.details}>
-              <Text>Monthly Interest</Text>
-              <Text>13.6</Text>
+              <Text>Backout Penalty</Text>
+              <Text>20{"%"}</Text>
             </View>
             <View style={styles.details}>
-              <Text>Monthly Interest</Text>
-              <Text>13.6</Text>
+              <Text>Investment lifetime</Text>
+              <Text>infinite</Text>
             </View>
             <View style={styles.details}>
-              <Text>Monthly Interest</Text>
-              <Text>13.6</Text>
+              <Text>Success Index</Text>
+              <Text>7.6</Text>
             </View>
           </View>
+          <ProgressBarComponent />
         </View>
-        <ProgressBarComponent />
+        <Button
+          onPress={() => navigation.navigate("signup")}
+          body={<Text style={globalStyles.btnLabel}>Explore</Text>}
+          touchableStyleProps={{
+            backgroundColor: "#52c41a",
+            marginRight: 5,
+            marginLeft: 5,
+            marginTop: 20,
+          }}
+          touchableProps={{
+            onPress: () => {
+              navigation.navigate("investment-detail");
+            },
+          }}
+        />
       </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  containerMain: {
+    // height: Layout.window.height * 0.8,
+  },
   container: {
     backgroundColor: "#F4FBFF",
+    marginRight: 5,
+    marginLeft: 5,
   },
   progress: {
     borderTopWidth: 3,
@@ -144,8 +163,7 @@ const styles = StyleSheet.create({
   },
   body: {
     flexDirection: "row",
-    paddingTop: 30,
-    paddingBottom: 10,
+    paddingTop: 5,
     paddingRight: 10,
     paddingLeft: 5,
   },
@@ -158,18 +176,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: "#f0dfe0",
   },
   details: {
     flexDirection: "row",
     justifyContent: "space-between",
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#f0dfe0",
+    padding: 7,
+    borderTopWidth: 1,
+    borderTopColor: "#f0dfe0",
   },
   description: {
-    padding: 10,
+    padding: 5,
+    borderTopWidth: 1,
+    borderTopColor: "#f0dfe0",
   },
   iconText: {
     flexDirection: "row",

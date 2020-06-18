@@ -3,11 +3,12 @@ import * as React from "react";
 
 import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
-import OnboardOneScreen from "../screens/OnboardOneScreen";
 import OppotunitiesScreen from "../screens/OppotunitiesScreen";
 import InvestmentsCardViewScreen from "../screens/InvestmentsCardViewScreen";
+import MyInvestmentsScreen from "../screens/MyInvestmentsScreen";
 
 import { Button } from "react-native";
+import TargetInvestmentsScreen from "../screens/TargetInvestmentsScreen";
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = "Home";
@@ -41,12 +42,22 @@ export default function BottomTabNavigator({ navigation, route }) {
         }}
       />
       <BottomTab.Screen
-        name="profile"
-        component={OnboardOneScreen}
+        name="target-investments"
+        component={TargetInvestmentsScreen}
         options={{
-          title: "Onboard One",
+          title: "Target",
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} name="search-dollar"></TabBarIcon>
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="myinvestsments"
+        component={MyInvestmentsScreen}
+        options={{
+          title: "Investments",
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} name="piggy-bank"></TabBarIcon>
           ),
         }}
       />
@@ -54,22 +65,12 @@ export default function BottomTabNavigator({ navigation, route }) {
         name="investment-card"
         component={InvestmentsCardViewScreen}
         options={{
-          title: "Onboard One",
-          tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} name="piggy-bank"></TabBarIcon>
-          ),
-        }}
-      />
-      <BottomTab.Screen
-        name="oppotunities"
-        component={OppotunitiesScreen}
-        options={{
           title: "Profile",
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} name="user"></TabBarIcon>
           ),
         }}
-      ></BottomTab.Screen>
+      />
     </BottomTab.Navigator>
   );
 }

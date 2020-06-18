@@ -19,10 +19,8 @@ export default class Button extends React.Component {
 }
 
 const styles = StyleSheet.create({
-
   container: {
     //marginBottom: 10,
     //alignContent: "center"
   },
-
 });

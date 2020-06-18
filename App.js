@@ -13,8 +13,13 @@ import OnboardFourScreen from "./screens/OnboardFourScreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import LoginScreen from "./screens/LoginScreen";
 import ResetPasswordScreen from "./screens/ResetPasswordScreen";
-import ResetPasswordConfirmationScreen from "./screens/ResetPasswordConfirmationScreen"
+import ResetPasswordConfirmationScreen from "./screens/ResetPasswordConfirmationScreen";
 import InvestmentsCardViewScreen from "./screens/InvestmentsCardViewScreen";
+import InvestmentDetailsScreen from "./screens/InvestmentDetailsScreen";
+import ContactSupportScreen from "./screens/ContactSupportScreen";
+import MyInvestmentsScreen from "./screens/MyInvestmentsScreen";
+import TargetInvestmentsScreen from "./screens/TargetInvestmentsScreen";
+import MyInvestment from "./components/MyInvestment";
 
 const Stack = createStackNavigator();
 
@@ -29,6 +34,7 @@ export default function App(props) {
         {Platform.OS === "ios" && <StatusBar barStyle="dark-content" />}
         <NavigationContainer linking={LinkingConfiguration}>
           <Stack.Navigator>
+            {/* OnBoarding Navigation Screen */}
             <Stack.Screen
               name="onboard1"
               component={OnboardOneScreen}
@@ -62,6 +68,8 @@ export default function App(props) {
                 headerShown: false,
               }}
             />
+
+            {/* Bottom Nav */}
             <Stack.Screen
               name="Root"
               component={BottomTabNavigator}
@@ -77,6 +85,8 @@ export default function App(props) {
                 headerShown: false,
               }}
             />
+
+            {/* Authentication Nav */}
             <Stack.Screen
               name="login"
               component={LoginScreen}
@@ -84,21 +94,54 @@ export default function App(props) {
                 headerShown: false,
               }}
             />
+
+            <Stack.Screen
+              name="resetPasswordScreen"
+              component={ResetPasswordScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="resetPasswordConfirmationScreen"
+              component={ResetPasswordConfirmationScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
+
+            {/* Screens Nav */}
             <Stack.Screen
               name="investment-card"
               component={InvestmentsCardViewScreen}
             />
             <Stack.Screen
-              name="resetPasswordScreen"
-              component={ResetPasswordScreen} options={{
-                headerShown: false,
-              }} 
+              name="investment-detail"
+              component={InvestmentDetailsScreen}
+              options={{
+                title: "Investment Details",
+              }}
             />
             <Stack.Screen
-              name="resetPasswordConfirmationScreen"
-              component={ ResetPasswordConfirmationScreen } options={{
-                headerShown: false,
-              }} 
+              name="contact-support"
+              component={ContactSupportScreen}
+              options={{
+                title: "Send Message",
+              }}
+            />
+            <Stack.Screen
+              name="myinvestsments"
+              component={MyInvestmentsScreen}
+              options={{
+                title: "My Investments",
+              }}
+            />
+            <Stack.Screen
+              name="target-investments"
+              component={TargetInvestmentsScreen}
+              option={{
+                title: "Target Investments",
+              }}
             />
           </Stack.Navigator>
         </NavigationContainer>
