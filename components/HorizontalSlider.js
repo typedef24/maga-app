@@ -3,14 +3,14 @@ import { View, Text, Slider, StyleSheet } from "react-native";
 
 import Layout from "../constants/Layout";
 
-export function HorizontalSlider() {
+export function HorizontalSlider({ minValue, maxValue, unit }) {
   const [value, setValue] = useState(0);
   return (
     <View style={styles.slideTime}>
       <Slider
         step={1}
-        minimumValue={0}
-        maximumValue={36}
+        minimumValue={minValue}
+        maximumValue={maxValue}
         value={value}
         onValueChange={(slideValue) => setValue(slideValue)}
         minimumTrackTintColor="#003a8c"
@@ -18,7 +18,9 @@ export function HorizontalSlider() {
         thumbTintColor="#003a8c"
         style={styles.slider}
       />
-      <Text>{value} months</Text>
+      <Text>
+        {value} {unit}
+      </Text>
     </View>
   );
 }
@@ -29,6 +31,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   slider: {
-    width: Layout.window.width * 0.8,
+    width: Layout.window.width * 0.72,
   },
 });

@@ -6,7 +6,7 @@ import Iconfont from "@expo/vector-icons/FontAwesome5";
 import ProgressBarComponent from "./ProgressBarComponent";
 import Layout from "../constants/Layout";
 
-export function OppotunityPreview({ navigation, item }) {
+export function OppotunityPreview({ item }) {
   return (
     <View style={styles.container}>
       <View
@@ -33,11 +33,7 @@ export function OppotunityPreview({ navigation, item }) {
               color="#003A8C"
             />
           </View>
-          <TouchableOpacity
-            onPress={(item) =>
-              navigation.navigate("investment-details", { item })
-            }
-          >
+          <TouchableOpacity>
             <View style={styles.body}>
               <Text style={{ width: Layout.window.width * 0.8 }}>
                 {item.title}
