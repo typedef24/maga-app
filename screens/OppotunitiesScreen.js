@@ -8,7 +8,7 @@ import { PageTitle } from "../components/PageTitle";
 export default function OppotunitiesScreen({ navigation }) {
   const [items, setItems] = useState([
     {
-      id: 1,
+      id: "1",
       title:
         "Real estate investments funds in the dubai, los Angeles, new York and sub-saharan Africa.",
       description:
@@ -19,7 +19,7 @@ export default function OppotunitiesScreen({ navigation }) {
       total: 2000,
     },
     {
-      id: 2,
+      id: "2",
       title:
         "Restaurant chain specialized in Mexican, Irish and African dishes.",
       description:
@@ -30,7 +30,7 @@ export default function OppotunitiesScreen({ navigation }) {
       total: 3000,
     },
     {
-      id: 3,
+      id: "3",
       title:
         "Online store specialized in casual outfits for both men and women of all sizes.",
       description:
@@ -41,7 +41,7 @@ export default function OppotunitiesScreen({ navigation }) {
       total: 500,
     },
     {
-      id: 4,
+      id: "4",
       title:
         "Real estate investments funds in the dubai, los Angeles, new York and sub-saharan Africa.",
       description:

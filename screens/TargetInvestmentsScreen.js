@@ -8,10 +8,11 @@ import { Accordion } from "../components/Accordion";
 import globalStyles from "../constants/globalStyles";
 import Button from "../components/Button";
 import fonts from "../constants/fonts";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function TargetInvestmentsScreen({ navigation }) {
   return (
-    <View>
+    <ScrollView style={{ flex: 1, backgroundColor: "white" }}>
       <PageTitle title="Target Investments" />
       <View style={styles.container}>
         <View style={styles.containerContent}>
@@ -54,7 +55,7 @@ export default function TargetInvestmentsScreen({ navigation }) {
           }}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 }
 

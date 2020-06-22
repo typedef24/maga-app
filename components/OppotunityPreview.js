@@ -29,7 +29,7 @@ export function OppotunityPreview({ item }) {
             <Icon
               name="bookmark"
               size={25}
-              style={{ marginTop: -15 }}
+              style={{ marginTop: -10 }}
               color="#003A8C"
             />
           </View>
@@ -46,7 +46,7 @@ export function OppotunityPreview({ item }) {
           <View style={styles.iconText}>
             <Icon
               name="alert-decagram"
-              size={15}
+              size={20}
               color="#4D7BF3"
               style={{ paddingTop: 4 }}
             />
@@ -61,7 +61,7 @@ export function OppotunityPreview({ item }) {
           <View style={styles.iconText}>
             <Icon
               name="square-inc-cash"
-              size={15}
+              size={20}
               color="#4D7BF3"
               style={{ paddingTop: 4 }}
             />
@@ -75,7 +75,7 @@ export function OppotunityPreview({ item }) {
           <View style={styles.iconText}>
             <Iconfont
               name="piggy-bank"
-              size={15}
+              size={20}
               color="#4D7BF3"
               style={{ paddingTop: 4 }}
             />
@@ -167,6 +167,7 @@ const styles = StyleSheet.create({
   },
   iconText: {
     flexDirection: "row",
+    alignItems: "center",
     color: "blue",
   },
   Image: {
