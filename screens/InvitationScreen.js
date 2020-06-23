@@ -5,7 +5,7 @@ import Layout from "../constants/Layout";
 import Button from "../components/Button";
 import globalStyles from "../constants/globalStyles";
 
-export default function InvitationScreen() {
+export default function InvitationScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.containerBody}>
@@ -18,7 +18,11 @@ export default function InvitationScreen() {
           <TextInput placeholder="paste here..." style={styles.inputStyle} />
         </View>
         <Button
-          onPress={() => navigation.navigate("signup")}
+          touchableProps={{
+            onPress: () => {
+              navigation.navigate("withdraw-investment");
+            },
+          }}
           body={
             <Text
               style={[globalStyles.btnLabel, { textTransform: "uppercase" }]}
