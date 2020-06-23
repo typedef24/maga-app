@@ -4,11 +4,17 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "../components/Button";
 import globalStyles from "../constants/globalStyles";
 import fonts from "../constants/fonts";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
+import CheckBox from "react-native-check-box";
+import { RadioButton } from "react-native-paper";
 
 export default class PaymentScreen extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      termsChecked: false,
+      paymentMethod: "",
+    };
   }
 
   render() {
@@ -110,9 +116,89 @@ export default class PaymentScreen extends React.Component {
               </View>
             </View>
 
-            <Text style={{ textAlign: "center", padding: 10, fontWeight: "bold", color: "#2f3d52", fontSize: fonts.large }}>select payment method</Text>
-            
+            <Text
+              style={{
+                textAlign: "center",
+                padding: 10,
+                fontWeight: "bold",
+                color: "#2f3d52",
+                fontSize: fonts.large,
+              }}
+            >
+              select payment method
+            </Text>
 
+            <View style={{ marginBottom: 40 }}>
+              <View style={{ flexDirection: "row", borderWidth: 1, borderColor: this.state.paymentMethod === "Bank Transfer" ? "#5c8bc0" : "#c3eaff", backgroundColor: this.state.paymentMethod == "Bank Transfer" ? "#bae7ff" : "#f4fbff", padding: 10, alignItems: "center" }}>
+                <RadioButton
+                  value="Bank Transfer"
+                  status={
+                    this.state.paymentMethod === "Bank Transfer"
+                      ? "checked"
+                      : "unchecked"
+                  }
+                  onPress={() => {
+                    this.setState({ paymentMethod: "Bank Transfer" });
+                  }}
+                />
+                <FontAwesome5
+                  name="money-check-alt"
+                  size={20}
+                  color="#003a8c"
+                  style={{ marginLeft: 20, marginRight: 10 }}
+                />
+                <Text
+                  style={{
+                    fontSize: fonts.large,
+                    fontWeight: "bold",
+                    color: "#003a8c",
+                  }}
+                >
+                  Bank Transfer
+                </Text>
+              </View>
+              <View style={{ flexDirection: "row", borderWidth: 1, borderColor: this.state.paymentMethod === "Paypal" ? "#5c8bc0" : "#c3eaff", backgroundColor: this.state.paymentMethod === "Paypal" ? "#bae7ff" : "#f4fbff", padding: 10, alignItems: "center" }}>
+                <RadioButton
+                  value="Paypal"
+                  status={
+                    this.state.paymentMethod === "Paypal"
+                      ? "checked"
+                      : "unchecked"
+                  }
+                  onPress={() => {
+                    this.setState({ paymentMethod: "Paypal" });
+                  }}
+                />
+                <FontAwesome
+                  name="paypal"
+                  size={20}
+                  color="#003a8c"
+                  style={{ marginLeft: 20, marginRight: 10 }}
+                />
+                <Text
+                  style={{
+                    fontSize: fonts.large,
+                    fontWeight: "bold",
+                    color: "#003a8c",
+                  }}
+                >
+                  Paypal
+                </Text>
+              </View>
+            </View>
+
+            <CheckBox
+              style={{ flex: 1, padding: 10, marginTop: 5 }}
+              onClick={() => {
+                this.setState({
+                  termsChecked: !this.state.termsChecked,
+                });
+              }}
+              isChecked={this.state.termsChecked}
+              rightText={
+                "I have read and approved all content of prospectus and Fund facts sheet. I understand the risk to my investment decision and Kemet LLC is not responsible for any losses in the investment. I agree to Kemet LLC terms and conditions and Privacy policy."
+              }
+            />
           </View>
           <Button
             body={<Text style={globalStyles.btnLabel}>CONTINUE</Text>}

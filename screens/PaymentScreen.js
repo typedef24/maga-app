@@ -2,6 +2,7 @@ import * as React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "../components/Button";
+import ModalComponent from "../components/ModalComponent";
 import globalStyles from "../constants/globalStyles";
 import fonts from "../constants/fonts";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
@@ -13,6 +14,9 @@ import { FontAwesome5 } from "@expo/vector-icons";
 export default class PaymentScreen extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      modalVisible: false,
+    };
   }
 
   render() {
@@ -118,11 +122,44 @@ export default class PaymentScreen extends React.Component {
               />
             </View>
           </View>
+
+          <ModalComponent
+            visible={this.state.modalVisible}
+            onRequestClose={() => {
+              this.setState({ modalVisible: false });
+            }}
+            title="NAV cut-off Time"
+            closeFxn={() => {
+              this.setState({ modalVisible: false });
+            }}
+          >
+            <View style={{ backgroundColor: "white", padding: 15 }}>
+              <Text style={{ fontSize: fonts.medium, lineHeight: 20 }}>
+                Your transactions will be based on calculation using the Net
+                Asset Value (NAV) of the same Bounce Day if payment confirmation
+                is made before 12:00PM (cut-off-time). If payment confirmation
+                exceeds the cut-off time or done on a holiday, then the
+                transaction will be base on the NAV of the next Bounce Day.
+              </Text>
+            </View>
+            <Button
+              body={<Text style={globalStyles.btnLabel}>OK, I UNDERSTAND</Text>}
+              touchableStyleProps={{ backgroundColor: "#003a8c" }}
+              touchableProps={{
+                onPress: () => { 
+                  this.setState({ modalVisible: false });
+                  this.props.navigation.navigate("paymentScreen2");
+                },
+              }}
+            />
+          </ModalComponent>
+
           <Button
             body={<Text style={globalStyles.btnLabel}>CONFIRM</Text>}
             touchableStyleProps={{ backgroundColor: "#52c41a" }}
             touchableProps={{
-              onPress: () => this.props.navigation.navigate("paymentScreen2"),
+              //onPress: () => this.props.navigation.navigate("paymentScreen2"),
+              onPress: () => this.setState({ modalVisible: true }),
             }}
           />
         </View>
