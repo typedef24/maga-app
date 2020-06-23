@@ -3,14 +3,15 @@ import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import Icon from "@expo/vector-icons/FontAwesome";
 // Import image
 import Image1 from "../assets/images/investment.png";
+import InvestmentDetailScreen from "../screens/InvestmentDetailsScreen";
 
-export default function MyInvestment() {
+export default function MyInvestment(props) {
   return (
     <View>
       {/* Bullish statistics */}
       {/* FIrst section */}
       <View style={[styles.container, styles.shadowStyle]}>
-        <TouchableOpacity>
+        <TouchableOpacity {...props.touchableProps}>
           <View style={styles.body}>
             <Text style={{ width: "90%" }}>
               Real estate investments funds in the dubai, los Angeles, new York
@@ -23,7 +24,7 @@ export default function MyInvestment() {
           <View style={styles.iconText}>
             <Icon
               name="line-chart"
-              size={13}
+              size={20}
               color="#fff"
               style={{ paddingTop: 4 }}
             />
@@ -35,7 +36,7 @@ export default function MyInvestment() {
           <View style={styles.iconText}>
             <Icon
               name="calendar"
-              size={13}
+              size={20}
               color="#fff"
               style={{ paddingTop: 4 }}
             />
@@ -47,7 +48,7 @@ export default function MyInvestment() {
           <View style={styles.iconText}>
             <Icon
               name="money"
-              size={13}
+              size={20}
               color="#fff"
               style={{ paddingTop: 4 }}
             />
@@ -77,7 +78,7 @@ export default function MyInvestment() {
           <View style={styles.iconText}>
             <Icon
               name="line-chart"
-              size={13}
+              size={20}
               color="#fff"
               style={{ paddingTop: 4 }}
             />
@@ -89,7 +90,7 @@ export default function MyInvestment() {
           <View style={styles.iconText}>
             <Icon
               name="calendar"
-              size={13}
+              size={20}
               color="#fff"
               style={{ paddingTop: 4 }}
             />
@@ -101,7 +102,7 @@ export default function MyInvestment() {
           <View style={styles.iconText}>
             <Icon
               name="money"
-              size={13}
+              size={20}
               color="#fff"
               style={{ paddingTop: 4 }}
             />
@@ -131,7 +132,7 @@ export default function MyInvestment() {
           <View style={styles.iconText}>
             <Icon
               name="line-chart"
-              size={13}
+              size={20}
               color="#fff"
               style={{ paddingTop: 4 }}
             />
@@ -143,7 +144,7 @@ export default function MyInvestment() {
           <View style={styles.iconText}>
             <Icon
               name="calendar"
-              size={13}
+              size={20}
               color="#fff"
               style={{ paddingTop: 4 }}
             />
@@ -155,7 +156,7 @@ export default function MyInvestment() {
           <View style={styles.iconText}>
             <Icon
               name="money"
-              size={13}
+              size={20}
               color="#fff"
               style={{ paddingTop: 4 }}
             />
@@ -211,6 +212,7 @@ const styles = StyleSheet.create({
   },
   iconText: {
     flexDirection: "row",
+    alignItems: "center",
   },
   Image: {
     alignItems: "center",

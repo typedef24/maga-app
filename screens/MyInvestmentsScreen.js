@@ -6,12 +6,18 @@ import MyInvestment from "../components/MyInvestment";
 import { ScrollView } from "react-native-gesture-handler";
 import { PageTitle } from "../components/PageTitle";
 
-export default function MyInvestmentsScreen() {
+export default function MyInvestmentsScreen({ navigation }) {
   return (
     <View>
-      <PageTitle title="Investment Opportunities" />
-      <ScrollView style={styles.container}>
-        <MyInvestment />
+      <PageTitle title="My Investments" />
+      <ScrollView>
+        <MyInvestment
+          touchableProps={{
+            onPress: () => {
+              navigation.navigate("details-screen");
+            },
+          }}
+        />
       </ScrollView>
     </View>
   );
@@ -30,7 +36,4 @@ function elevationShadowStyle(elevation) {
 
 const styles = StyleSheet.create({
   shadowStyle: elevationShadowStyle(5),
-  container: {
-    margin: 5,
-  },
 });

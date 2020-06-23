@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, SafeAreaView } from "react-native";
 
 import font from "../constants/fonts";
 import globalStyles from "../constants/globalStyles";
@@ -10,7 +10,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 const NoResultScreen = ({ navigation }) => {
   return (
-    <View style={styles.Maincontainer}>
+    <SafeAreaView style={styles.Maincontainer}>
       <View style={[styles.container, { marginTop: 20 }]}>
         <Text style={styles.textHeading}>
           Sorry, No current investment options meet your criteria
@@ -28,7 +28,7 @@ const NoResultScreen = ({ navigation }) => {
           }}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
   Maincontainer: {
     flex: 1,
     justifyContent: "space-between",
+    backgroundColor: "white",
   },
   container: {
     alignItems: "center",

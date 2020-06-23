@@ -21,6 +21,8 @@ import MyInvestmentsScreen from "./screens/MyInvestmentsScreen";
 import TargetInvestmentsScreen from "./screens/TargetInvestmentsScreen";
 import FilterResultsScreen from "./screens/FilterResultsScreen";
 import NoResultScreen from "./screens/NoResultScreen";
+import DetailsInvestmentScreen from "./screens/DetailsInvestmentScreen";
+import InvitationScreen from "./screens/InvitationScreen";
 
 const Stack = createStackNavigator();
 
@@ -156,6 +158,22 @@ export default function App(props) {
               component={NoResultScreen}
               options={{
                 headerTitle: false,
+              }}
+            />
+            <Stack.Screen
+              name="details-screen"
+              component={DetailsInvestmentScreen}
+              options={{
+                title: "Details Investments",
+              }}
+            />
+
+            {/* Invitation page */}
+            <Stack.Screen
+              name="invite-others"
+              component={InvitationScreen}
+              options={{
+                title: "Invite Others",
               }}
             />
           </Stack.Navigator>
