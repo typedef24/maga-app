@@ -17,6 +17,8 @@ import ProgressBarComponent from "../components/ProgressBarComponent";
 import Button from "../components/Button";
 import globalStyles from "../constants/globalStyles";
 import Font from "../constants/fonts";
+import PopuMenuComponent from "../components/popupMenu";
+import ModalComponent from "../components/ModalComponent";
 
 export default class DetailsInvestmentScreen extends Component {
   state = {
@@ -36,9 +38,12 @@ export default class DetailsInvestmentScreen extends Component {
         )}
         {/* FIrst section */}
         <View style={[styles.container, styles.shadowStyle]}>
-          <View>
-            <View style={styles.statusRow}>
-              <Text style={styles.statusText}>Onging</Text>
+          <View style={{ backgroundColor: "#F4FBFF" }}>
+            <View style={{ flex: 1 }}>
+              <View style={styles.statusRow}>
+                <Text style={styles.statusText}>Onging</Text>
+              </View>
+              {/* <ModalComponent style={{ flex: 1, zIndex: 4 }} /> */}
             </View>
             <View style={styles.body}>
               <Text style={{ width: Layout.window.width * 0.82 }}>
@@ -216,7 +221,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingRight: 10,
     paddingLeft: 5,
-    backgroundColor: "#F4FBFF",
+    // backgroundColor: ,
   },
   description: {
     padding: 10,
