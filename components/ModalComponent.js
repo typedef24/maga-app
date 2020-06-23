@@ -2,13 +2,10 @@ import * as React from "react";
 import {
   View,
   Text,
-  StyleSheet,
   Modal,
   TouchableOpacity,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import Button from "../components/Button";
-import globalStyles from "../constants/globalStyles";
 import fonts from "../constants/fonts";
 
 export default class ModalComponent extends React.Component {
@@ -72,5 +69,3 @@ export default class ModalComponent extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({});

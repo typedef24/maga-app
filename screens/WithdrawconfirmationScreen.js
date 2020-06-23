@@ -1,9 +1,43 @@
-import * as React from 'react';
-import {Text } from 'react-native'
+import * as React from "react";
+import { Text, View, SafeAreaView, Image, StyleSheet } from "react-native";
 
+import image from "../assets/images/withdrawConfirm.png";
+import Font from "../constants/fonts";
+import BottomTabNavigator from "../navigation/BottomTabNavigator";
 
-export default function WithdrawConfirmationScreen() {
-    return (
-        <Text> This is the withdraw confirmation screen screen</Text>
-    );
+export default function WithdrawConfirmationScreen({ navigation }) {
+  navigation.setOptions();
+  return (
+    <SafeAreaView style={styles.Maincontainer}>
+      <View style={[styles.container, { marginTop: 50 }]}>
+        <Text style={styles.textHeading}>
+          You have successfully withdrawn your investment.
+        </Text>
+        <Image source={image} style={{ marginTop: 65 }} />
+      </View>
+      <View style={styles.btnContainer}>{/* <BottomTabNavigator /> */}</View>
+    </SafeAreaView>
+  );
 }
+
+const styles = StyleSheet.create({
+  Maincontainer: {
+    flex: 1,
+    justifyContent: "space-between",
+    backgroundColor: "white",
+  },
+  container: {
+    flex: 1,
+    alignItems: "center",
+  },
+  btnContainer: {
+    marginBottom: 20,
+    marginRight: 10,
+    marginLeft: 10,
+  },
+  textHeading: {
+    fontSize: Font.large,
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+});

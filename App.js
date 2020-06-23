@@ -24,6 +24,10 @@ import NoResultScreen from "./screens/NoResultScreen";
 import CompareInvestmentsScreen from "./screens/CompareInvestmentsScreen";
 import PaymentScreen from "./screens/PaymentScreen";
 import PaymentScreen2 from "./screens/PaymentScreen2";
+import DetailsInvestmentScreen from "./screens/DetailsInvestmentScreen";
+import InvitationScreen from "./screens/InvitationScreen";
+import WithdrawInvestmentTermsScreen from "./screens/WithdrawInvestmentTermsScreen";
+import WithdrawConfirmationScreen from "./screens/WithdrawconfirmationScreen";
 
 const Stack = createStackNavigator();
 
@@ -181,6 +185,37 @@ export default function App(props) {
               component={NoResultScreen}
               options={{
                 headerTitle: false,
+              }}
+            />
+            <Stack.Screen
+              name="details-screen"
+              component={DetailsInvestmentScreen}
+              options={{
+                title: "Details Investments",
+              }}
+            />
+
+            {/* Invitation page */}
+            <Stack.Screen
+              name="invite-others"
+              component={InvitationScreen}
+              options={{
+                title: "Invite Others",
+              }}
+            />
+
+            <Stack.Screen
+              name="withdraw-investment"
+              component={WithdrawInvestmentTermsScreen}
+              options={{
+                title: "Withdraw Investment",
+              }}
+            />
+            <Stack.Screen
+              name="withdraw-confirmation"
+              component={WithdrawConfirmationScreen}
+              options={{
+                headerShown: false,
               }}
             />
           </Stack.Navigator>
