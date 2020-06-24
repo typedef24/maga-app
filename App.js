@@ -21,12 +21,17 @@ import MyInvestmentsScreen from "./screens/MyInvestmentsScreen";
 import TargetInvestmentsScreen from "./screens/TargetInvestmentsScreen";
 import FilterResultsScreen from "./screens/FilterResultsScreen";
 import NoResultScreen from "./screens/NoResultScreen";
+// import CompareInvestmentsScreen from "./screens/CompareInvestmentsScreen";
+import PaymentScreen from "./screens/PaymentScreen";
+import PaymentScreen2 from "./screens/PaymentScreen2";
+import PaymentScreen3 from "./screens/PaymentScreen3";
+import CheckoutScreen from "./screens/CheckoutScreen";
 import DetailsInvestmentScreen from "./screens/DetailsInvestmentScreen";
 import InvitationScreen from "./screens/InvitationScreen";
 import WithdrawInvestmentTermsScreen from "./screens/WithdrawInvestmentTermsScreen";
 import WithdrawConfirmationScreen from "./screens/WithdrawconfirmationScreen";
-import CompareInvesmentsScreen from "./screens/CompareInvestmentsScreen";
 import CompareInvestmentsScreen from "./screens/CompareInvestmentsScreen";
+import InvestmentPerformanceScreen from "./screens/InvestmentPerformance";
 
 const Stack = createStackNavigator();
 
@@ -109,6 +114,7 @@ export default function App(props) {
                 headerShown: false,
               }}
             />
+
             <Stack.Screen
               name="resetPasswordConfirmationScreen"
               component={ResetPasswordConfirmationScreen}
@@ -146,8 +152,43 @@ export default function App(props) {
             <Stack.Screen
               name="target-investments"
               component={TargetInvestmentsScreen}
-              option={{
+              options={{
                 title: "Target Investments",
+              }}
+            />
+            <Stack.Screen
+              name="investmentPerformanceScreen"
+              component={InvestmentPerformanceScreen}
+              options={{
+                title: "Investment performance",
+              }}
+            />
+            <Stack.Screen
+              name="paymentScreen"
+              component={PaymentScreen}
+              options={{
+                title: "Payment",
+              }}
+            />
+            <Stack.Screen
+              name="paymentScreen2"
+              component={PaymentScreen2}
+              options={{
+                title: "Payment",
+              }}
+            />
+            <Stack.Screen
+              name="paymentScreen3"
+              component={PaymentScreen3}
+              options={{
+                title: "Payment",
+              }}
+            />
+            <Stack.Screen
+              name="checkoutScreen"
+              component={CheckoutScreen}
+              options={{
+                headerShown: false,
               }}
             />
             <Stack.Screen

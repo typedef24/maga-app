@@ -183,7 +183,7 @@ export default class FilterResultsScreen extends React.Component {
             touchableStyleProps={{ backgroundColor: "#52c41a" }}
             touchableProps={{
               onPress: () => {
-                this.handleSubmit();
+                // this.handleSubmit();
               },
             }}
           />
