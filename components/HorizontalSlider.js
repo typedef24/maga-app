@@ -3,26 +3,21 @@ import { View, Text, Slider, StyleSheet } from "react-native";
 
 import Layout from "../constants/Layout";
 
-export function HorizontalSlider({ minValue, maxValue, unit }) {
-  const [value, setValue] = useState(0);
-  return (
-    <View style={styles.slideTime}>
-      <Slider
-        step={1}
-        minimumValue={minValue}
-        maximumValue={maxValue}
-        value={value}
-        onValueChange={(slideValue) => setValue(slideValue)}
-        minimumTrackTintColor="#003a8c"
-        maximumTrackTintColor="#bae7ff"
-        thumbTintColor="#003a8c"
-        style={styles.slider}
-      />
-      <Text>
-        {value} {unit}
-      </Text>
-    </View>
-  );
+export default class HorizontalSlider extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <View style={styles.slideTime}>
+        <Slider {...this.props} style={styles.slider} />
+        <Text>
+          {this.props.value} {this.props.unit}
+        </Text>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

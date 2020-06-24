@@ -25,6 +25,8 @@ import DetailsInvestmentScreen from "./screens/DetailsInvestmentScreen";
 import InvitationScreen from "./screens/InvitationScreen";
 import WithdrawInvestmentTermsScreen from "./screens/WithdrawInvestmentTermsScreen";
 import WithdrawConfirmationScreen from "./screens/WithdrawconfirmationScreen";
+import CompareInvesmentsScreen from "./screens/CompareInvestmentsScreen";
+import CompareInvestmentsScreen from "./screens/CompareInvestmentsScreen";
 
 const Stack = createStackNavigator();
 
@@ -191,6 +193,13 @@ export default function App(props) {
               component={WithdrawConfirmationScreen}
               options={{
                 headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="compare-investments"
+              component={CompareInvestmentsScreen}
+              options={{
+                title: "Compare Investments",
               }}
             />
           </Stack.Navigator>

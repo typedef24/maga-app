@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, StatusBar, Platform, StyleSheet } from "react-native";
+import { Text, StatusBar, Platform, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FlatList } from "react-native-gesture-handler";
 import { OppotunityPreview } from "../components/OppotunityPreview";
@@ -16,6 +16,7 @@ export default function OppotunitiesScreen({ navigation }) {
       status: "ongoing",
       img: require("../assets/images/dish.png"),
       rate: 90,
+      duration: 6,
       total: 2000,
     },
     {
@@ -27,6 +28,7 @@ export default function OppotunitiesScreen({ navigation }) {
       status: "ongoing",
       img: require("../assets/images/dish.png"),
       rate: 50,
+      duration: 6,
       total: 3000,
     },
     {
@@ -38,6 +40,7 @@ export default function OppotunitiesScreen({ navigation }) {
       status: "closed",
       img: require("../assets/images/dish.png"),
       rate: 10,
+      duration: 6,
       total: 500,
     },
     {
@@ -49,6 +52,7 @@ export default function OppotunitiesScreen({ navigation }) {
       status: "ongoing",
       img: require("../assets/images/dish.png"),
       rate: 80,
+      duration: 6,
       total: 9000,
     },
   ]);

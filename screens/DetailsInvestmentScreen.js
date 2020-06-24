@@ -17,8 +17,6 @@ import ProgressBarComponent from "../components/ProgressBarComponent";
 import Button from "../components/Button";
 import globalStyles from "../constants/globalStyles";
 import Font from "../constants/fonts";
-import PopuMenuComponent from "../components/popupMenu";
-import ModalComponent from "../components/ModalComponent";
 
 export default class DetailsInvestmentScreen extends Component {
   state = {
@@ -174,7 +172,11 @@ export default class DetailsInvestmentScreen extends Component {
               </List.Accordion>
             </List.Section>
           </View>
-          <ProgressBarComponent />
+          <ProgressBarComponent
+            progressBarStyle={{
+              backgroundColor: "#91D5FF",
+            }}
+          />
         </View>
         <Button
           touchableProps={{
@@ -221,7 +223,6 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingRight: 10,
     paddingLeft: 5,
-    // backgroundColor: ,
   },
   description: {
     padding: 10,

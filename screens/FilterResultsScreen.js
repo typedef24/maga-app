@@ -1,23 +1,36 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Picker } from "react-native";
 
 import font from "../constants/fonts";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { Accordion } from "../components/Accordion";
+import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
+import HorizontalSlider from "../components/HorizontalSlider";
+import Accordion from "../components/Accordion";
 import Layout from "../constants/Layout";
+import Button from "../components/Button";
+import globalStyles from "../constants/globalStyles";
 
 export default class FilterResultsScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       stateExample: "",
+      industry: "",
+      duration: 0,
+      roi: "",
+      fund: "",
+      price: "",
     };
+  }
+
+  // Apply filter
+  handleFilter() {
+    alert("Data " + JSON.stringify(this.state));
   }
 
   render() {
     const { navigation } = this.props;
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <View style={styles.headerText}>
           <TouchableOpacity onPress={() => navigation.navigate("no-result")}>
             <Text style={styles.textStyle}>Cancel</Text>
@@ -70,8 +83,35 @@ export default class FilterResultsScreen extends React.Component {
           </TouchableOpacity>
         </View>
         <View style={styles.section}>
+          <Text style={styles.textHeading}>Return on investment</Text>
+          <HorizontalSlider
+            step={1}
+            minimumValue={0}
+            maximumValue={12}
+            unit="months"
+            value={this.state.duration}
+            onValueChange={(slideValue) =>
+              this.setState({ duration: slideValue })
+            }
+            minimumTrackTintColor="#003a8c"
+            maximumTrackTintColor="#bae7ff"
+            thumbTintColor="#003a8c"
+          />
+        </View>
+        <View style={styles.section}>
           <Text style={styles.textHeading}>Select Industry</Text>
-          <Accordion label1="Industry1" label2="Industry2" label3="Industry3" />
+          <Accordion
+            // Inherit prop from child
+            mode="dropdown"
+            selectedValue={this.state.risk}
+            onValueChange={(itemValue) => {
+              this.setState({ risk: itemValue });
+            }}
+          >
+            <Picker.Item label="Industry1" value="Industry1" />
+            <Picker.Item label="Industry2" value="Industry2" />
+            <Picker.Item label="Industry3" value="Industry3" />
+          </Accordion>
         </View>
         <View style={styles.section}>
           <Text style={styles.textHeading}>Funding mood</Text>
@@ -135,7 +175,20 @@ export default class FilterResultsScreen extends React.Component {
             </TouchableOpacity>
           </View>
         </View>
-      </View>
+        <View style={styles.btnStyle}>
+          <Button
+            body={
+              <Text style={globalStyles.btnLabel}>Suggest Investments</Text>
+            }
+            touchableStyleProps={{ backgroundColor: "#52c41a" }}
+            touchableProps={{
+              onPress: () => {
+                this.handleSubmit();
+              },
+            }}
+          />
+        </View>
+      </ScrollView>
     );
   }
 }
@@ -213,5 +266,10 @@ const styles = StyleSheet.create({
   },
   section: {
     margin: 10,
+  },
+  btnStyle: {
+    marginTop: 50,
+    marginRight: 5,
+    marginLeft: 5,
   },
 });

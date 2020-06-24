@@ -5,9 +5,9 @@ import { ProgressBar } from "react-native-paper";
 
 import Layout from "../constants/Layout";
 
-export default function ProgressBarComponent({ item }) {
+export default function ProgressBarComponent(props) {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { ...props.progressBarStyle }]}>
       <ProgressBar progress={0.8} color="#003A8C" style={styles.progressBar} />
       <View style={styles.person}>
         <Icon
@@ -24,7 +24,6 @@ export default function ProgressBarComponent({ item }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#91D5FF",
     padding: 10,
     flexDirection: "row",
     justifyContent: "space-between",
