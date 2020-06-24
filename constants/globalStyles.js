@@ -19,6 +19,15 @@ export default {
     fontWeight: "bold",
   },
 
+  btnLabelSm: {
+    alignSelf: "center",
+    color: Colors.white,
+    fontFamily: fonts.family,
+    fontSize: fonts.medium,
+    padding: 10,
+    fontWeight: "bold",
+  },
+
   btnLabel2: {
     color: Colors.white,
     fontFamily: fonts.family,

@@ -93,7 +93,7 @@ export default class SignUpScreen extends React.Component {
               />
               <TouchableOpacity
                 style={{ alignItems: "flex-end" }}
-                onPress={() => this.props.navigation.navigate("login")}
+                onPress={ () => this.props.navigation.navigate("login") }
               >
                 <Text style={globalStyles.btnLabel2}>Login</Text>
               </TouchableOpacity>
