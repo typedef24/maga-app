@@ -108,7 +108,11 @@ export default function InvestmentsCardViewScreen({ navigation }) {
               <Text>7.6</Text>
             </View>
           </View>
-          <ProgressBarComponent />
+          <ProgressBarComponent
+            progressBarStyle={{
+              backgroundColor: "#91D5FF",
+            }}
+          />
         </View>
         <Button
           onPress={() => navigation.navigate("signup")}
