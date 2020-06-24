@@ -8,6 +8,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 // import image
 import Image1 from "../assets/images/onboard1.png";
 import { SafeAreaView } from "react-native-safe-area-context";
+import AsyncStorage from '@react-native-community/async-storage';
 
 // const hideNav = navigationOptions({
 //   //To hide the ActionBar/NavigationBar
