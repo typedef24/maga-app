@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "../components/Button";
 import globalStyles from "../constants/globalStyles";
@@ -8,13 +8,24 @@ import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 import CheckBox from "react-native-check-box";
 import { RadioButton } from "react-native-paper";
 
-export default class PaymentScreen extends React.Component {
+export default class PaymentScreen2 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       termsChecked: false,
       paymentMethod: "",
     };
+  }
+
+  handleSubmit(){
+    if(!this.state.termsChecked && !this.state.paymentMethod)
+      Alert.alert("NOTICE!", "Please select a payment method and accept our terms and conditions of service to continue. Thanks");
+    else if(this.state.termsChecked && !this.state.paymentMethod)
+      Alert.alert("NOTICE!", "Please select a payment method to continue. Thanks");
+    else if(!this.state.termsChecked && this.state.paymentMethod)
+      Alert.alert("NOTICE!", "Please you have to accept our terms and conditions of service to continue. Thanks");
+    else
+      this.props.navigation.navigate("paymentScreen3", { paymentMethod: this.state.paymentMethod });
   }
 
   render() {
@@ -208,7 +219,7 @@ export default class PaymentScreen extends React.Component {
               marginLeft: 15,
             }}
             touchableProps={{
-              onPress: () => this.props.navigation.navigate("paymentScreen2"),
+              onPress: () => this.handleSubmit(),
             }}
           />
         </View>
