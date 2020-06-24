@@ -17,8 +17,6 @@ import ProgressBarComponent from "../components/ProgressBarComponent";
 import Button from "../components/Button";
 import globalStyles from "../constants/globalStyles";
 import Font from "../constants/fonts";
-import PopuMenuComponent from "../components/popupMenu";
-import ModalComponent from "../components/ModalComponent";
 
 export default class DetailsInvestmentScreen extends Component {
   state = {

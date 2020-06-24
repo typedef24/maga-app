@@ -1,7 +1,6 @@
 import * as React from "react";
 import { StyleSheet, View, Text, StatusBar, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import InputField from "../components/InputField";
 import globalStyles from "../constants/globalStyles";
 import { SafeAreaView } from "react-native-safe-area-context";
 // import image

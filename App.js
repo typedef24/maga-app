@@ -24,6 +24,8 @@ import NoResultScreen from "./screens/NoResultScreen";
 import CompareInvestmentsScreen from "./screens/CompareInvestmentsScreen";
 import PaymentScreen from "./screens/PaymentScreen";
 import PaymentScreen2 from "./screens/PaymentScreen2";
+import PaymentScreen3 from "./screens/PaymentScreen3";
+import CheckoutScreen from "./screens/CheckoutScreen";
 import DetailsInvestmentScreen from "./screens/DetailsInvestmentScreen";
 import InvitationScreen from "./screens/InvitationScreen";
 import WithdrawInvestmentTermsScreen from "./screens/WithdrawInvestmentTermsScreen";
@@ -171,6 +173,20 @@ export default function App(props) {
               component={ PaymentScreen2 }
               options={{
                 title: "Payment",
+              }}
+            />
+            <Stack.Screen
+              name="paymentScreen3"
+              component={ PaymentScreen3 }
+              options={{
+                title: "Payment",
+              }}
+            />
+            <Stack.Screen
+              name="checkoutScreen"
+              component={ CheckoutScreen }
+              options={{
+                headerShown: false,
               }}
             />
             <Stack.Screen
