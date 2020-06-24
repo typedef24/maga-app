@@ -11,7 +11,7 @@ import fonts from "../constants/fonts";
 import Button from "../components/Button";
 import globalStyles from "../constants/globalStyles";
 
-export default function ContactSupportScreen({ navigation}) {
+export default function ContactSupportScreen({ navigation }) {
   return (
     <View style={styles.container}>
       {Platform.OS === "android" && (
@@ -32,7 +32,7 @@ export default function ContactSupportScreen({ navigation}) {
       </View>
       <Button
         touchableProps={{
-          onPress: () => navigation.navigate("compareInvestmentsScreen"),
+          onPress: () => navigation.navigate("investmentPerformanceScreen"),
         }}
         body={
           <Text style={[globalStyles.btnLabel, { textTransform: "uppercase" }]}>

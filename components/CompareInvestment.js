@@ -1,12 +1,16 @@
-import * as React from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import React from "react";
+import { View, Text, Image, StyleSheet } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import Iconfont from "@expo/vector-icons/FontAwesome5";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 import ProgressBarComponent from "./ProgressBarComponent";
 import Layout from "../constants/Layout";
+import fonts from "../constants/fonts";
+import Button from "../components/Button";
+import globalStyles from "../constants/globalStyles";
 
-export function OppotunityPreview({ item }) {
+const CompareInvestmentsComponent = ({ item }) => {
   return (
     <View style={styles.container}>
       <View
@@ -33,14 +37,14 @@ export function OppotunityPreview({ item }) {
               color="#003A8C"
             />
           </View>
-          <TouchableOpacity>
+          <View>
             <View style={styles.body}>
               <Text style={{ width: Layout.window.width * 0.8 }}>
                 {item.title}
               </Text>
               <Image source={item.img} style={styles.Image}></Image>
             </View>
-          </TouchableOpacity>
+          </View>
         </View>
         <View style={styles.statistics}>
           <View style={styles.iconText}>
@@ -92,13 +96,66 @@ export function OppotunityPreview({ item }) {
         <ProgressBarComponent
           data={item}
           progressBarStyle={{
-            backgroundColor: "#91D5FF",
+            backgroundColor: "white",
+            borderTopWidth: 1,
+            borderTopColor: "#f0dfe0",
           }}
         />
+        <View style={styles.compareStyle}>
+          <View style={{ flexDirection: "row" }}>
+            <Button
+              body={
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRightWidth: 1,
+                    borderRightColor: "#e6e6e6",
+                  }}
+                >
+                  <Text style={[globalStyles.btnLabel, { color: "#0b4291" }]}>
+                    Invest
+                  </Text>
+                </View>
+              }
+              touchableStyleProps={{
+                backgroundColor: "#f5f5f5",
+                flex: 1,
+              }}
+              touchableProps={{
+                onPress: () => {
+                  alert("Button clicked!!");
+                },
+              }}
+            />
+            <Button
+              body={
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text style={[globalStyles.btnLabel, { color: "#5b5b5b" }]}>
+                    Add to compare
+                  </Text>
+                </View>
+              }
+              touchableStyleProps={{ backgroundColor: "#f5f5f5", flex: 1 }}
+              touchableProps={{
+                onPress: () => {
+                  alert("Button clicked!!");
+                },
+              }}
+            />
+          </View>
+        </View>
       </View>
     </View>
   );
-}
+};
 
 // Implementing BorderShaow
 function elevationShadowStyle(elevation) {
@@ -175,4 +232,16 @@ const styles = StyleSheet.create({
   Image: {
     alignItems: "center",
   },
+  compareStyle: {
+    backgroundColor: "#f5f5f5",
+  },
+  compareText1: {
+    fontSize: fonts.medium,
+    textTransform: "uppercase",
+    color: "#003a8c",
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
 });
+
+export default CompareInvestmentsComponent;

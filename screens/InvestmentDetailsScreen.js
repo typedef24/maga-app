@@ -191,7 +191,11 @@ export default function InvestmentDetailsScreen({ navigation }) {
               <Text style={styles.textSupport}>Support</Text>
             </TouchableOpacity>
           </View>
-          <ProgressBarComponent />
+          <ProgressBarComponent
+            progressBarStyle={{
+              backgroundColor: "#91D5FF",
+            }}
+          />
         </View>
         <Button
           onPress={() => navigation.navigate("signup")}

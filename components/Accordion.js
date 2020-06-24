@@ -3,24 +3,22 @@ import { View, Picker, Text, StyleSheet } from "react-native";
 
 import Layout from "../constants/Layout";
 
-export function Accordion({ label1, label2, label3 }) {
-  const [selectedValue, setSelectedValue] = useState("");
-  return (
-    <View>
-      <Picker
-        mode="dropdown"
-        selectedValue={selectedValue}
-        style={styles.selectedValueStyle}
-        onValueChange={(itemValue, itemIndex) => {
-          setSelectedValue(itemValue);
-        }}
-      >
-        <Picker.Item label={label1} value={label1} />
-        <Picker.Item label={label2} value={label2} />
-        <Picker.Item label={label3} value={label3} />
-      </Picker>
-    </View>
-  );
+export default class Accordion extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <View>
+        <Picker
+          {...this.props}
+          style={styles.selectedValueStyle}
+          {...this.props.children}
+        />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

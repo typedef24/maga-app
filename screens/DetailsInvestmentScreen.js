@@ -172,7 +172,11 @@ export default class DetailsInvestmentScreen extends Component {
               </List.Accordion>
             </List.Section>
           </View>
-          <ProgressBarComponent />
+          <ProgressBarComponent
+            progressBarStyle={{
+              backgroundColor: "#91D5FF",
+            }}
+          />
         </View>
         <Button
           touchableProps={{
@@ -219,7 +223,6 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingRight: 10,
     paddingLeft: 5,
-    // backgroundColor: ,
   },
   description: {
     padding: 10,
