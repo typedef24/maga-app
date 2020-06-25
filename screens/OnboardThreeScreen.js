@@ -1,13 +1,42 @@
 import * as React from "react";
-import { View, Image, TouchableOpacity, Text, StyleSheet } from "react-native";
+import {
+  View,
+  Image,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  Platform,
+  StatusBar,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { MaterialIcons } from "@expo/vector-icons";
 
 // import image
 import Image1 from "../assets/images/onboard3.png";
+import fonts from "../constants/fonts";
 
 export default function OnboardThreeScreen({ navigation }) {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      {Platform.OS === "android" && (
+        <StatusBar backgroundColor="white" barStyle="dark-content" />
+      )}
+      <View style={styles.headerContainer}>
+        <TouchableOpacity
+          style={{ padding: 10 }}
+          onPress={() => navigation.navigate("onboard2")}
+        >
+          <MaterialIcons name="keyboard-arrow-left" size={35} color="black" />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={{ padding: 10 }}
+          onPress={() => navigation.navigate("login")}
+        >
+          <Text style={{ fontSize: fonts.medium, marginRight: 10 }}>Skip</Text>
+        </TouchableOpacity>
+      </View>
       <View style={styles.imgContainer}>
         <Image
           style={styles.sliderImage}
@@ -22,7 +51,10 @@ export default function OnboardThreeScreen({ navigation }) {
           world expertise in the particular domain.
         </Text>
       </View>
-      <TouchableOpacity style={styles.btn}>
+      <TouchableOpacity
+        style={styles.btn}
+        onPress={() => navigation.navigate("onboard4")}
+      >
         <Text style={styles.btnText}>NEXT</Text>
       </TouchableOpacity>
       <View style={styles.navIcon}>
@@ -47,7 +79,7 @@ export default function OnboardThreeScreen({ navigation }) {
           </View>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -56,7 +88,11 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "space-between",
-    marginTop: 50,
+    backgroundColor: "white",
+  },
+  headerContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   headerText: {
     textAlign: "right",

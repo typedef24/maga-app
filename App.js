@@ -1,5 +1,11 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  CardStyleInterpolators,
+  TransitionPresets,
+  HeaderBackButton,
+  BlurView,
+} from "@react-navigation/stack";
 import * as React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
 
@@ -21,7 +27,6 @@ import MyInvestmentsScreen from "./screens/MyInvestmentsScreen";
 import TargetInvestmentsScreen from "./screens/TargetInvestmentsScreen";
 import FilterResultsScreen from "./screens/FilterResultsScreen";
 import NoResultScreen from "./screens/NoResultScreen";
-// import CompareInvestmentsScreen from "./screens/CompareInvestmentsScreen";
 import PaymentScreen from "./screens/PaymentScreen";
 import PaymentScreen2 from "./screens/PaymentScreen2";
 import PaymentScreen3 from "./screens/PaymentScreen3";
@@ -32,11 +37,24 @@ import WithdrawInvestmentTermsScreen from "./screens/WithdrawInvestmentTermsScre
 import WithdrawConfirmationScreen from "./screens/WithdrawconfirmationScreen";
 import CompareInvestmentsScreen from "./screens/CompareInvestmentsScreen";
 import InvestmentPerformanceScreen from "./screens/InvestmentPerformance";
+import RiskProfilesScreen from "./screens/RiskProfilesScreen";
 
 const Stack = createStackNavigator();
 
 export default function App(props) {
   const isLoadingComplete = useCachedResources();
+
+  const config = {
+    animation: "spring",
+    config: {
+      stiffness: 1000,
+      damping: 50,
+      mass: 3,
+      overshootClamping: false,
+      restDisplacementThreshold: 0.01,
+      restSpeedThreshold: 0.01,
+    },
+  };
 
   if (!isLoadingComplete) {
     return null;
@@ -45,13 +63,24 @@ export default function App(props) {
       <View style={styles.container}>
         {Platform.OS === "ios" && <StatusBar barStyle="dark-content" />}
         <NavigationContainer linking={LinkingConfiguration}>
-          <Stack.Navigator>
+          <Stack.Navigator
+            screenOptions={{
+              gestureDirection: "horizontal",
+              cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+              // ...TransitionPresets.SlideFromRightIOS,
+            }}
+          >
             {/* OnBoarding Navigation Screen */}
             <Stack.Screen
               name="onboard1"
               component={OnboardOneScreen}
               options={{
                 headerShown: false,
+                gestureEnabled: true,
+                transitionSpec: {
+                  open: config,
+                  close: config,
+                },
                 // title: "Skip",
                 // headerTitleAlign: "right",
                 // headerStyle: {
@@ -64,6 +93,11 @@ export default function App(props) {
               component={OnboardTwoScreen}
               options={{
                 headerShown: false,
+                gestureEnabled: true,
+                transitionSpec: {
+                  open: config,
+                  close: config,
+                },
               }}
             />
             <Stack.Screen
@@ -71,6 +105,12 @@ export default function App(props) {
               component={OnboardThreeScreen}
               options={{
                 headerShown: false,
+                gestureEnabled: true,
+
+                transitionSpec: {
+                  open: config,
+                  close: config,
+                },
               }}
             />
             <Stack.Screen
@@ -78,6 +118,11 @@ export default function App(props) {
               component={OnboardFourScreen}
               options={{
                 headerShown: false,
+                gestureEnabled: true,
+                transitionSpec: {
+                  open: config,
+                  close: config,
+                },
               }}
             />
 
@@ -241,6 +286,15 @@ export default function App(props) {
               component={CompareInvestmentsScreen}
               options={{
                 title: "Compare Investments",
+              }}
+            />
+
+            {/* Risk profile */}
+            <Stack.Screen
+              name="risk-profiles"
+              component={RiskProfilesScreen}
+              options={{
+                title: "Risk Profile",
               }}
             />
           </Stack.Navigator>
