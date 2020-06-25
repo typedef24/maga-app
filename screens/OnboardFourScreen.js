@@ -1,13 +1,34 @@
 import * as React from "react";
-import { View, Image, TouchableOpacity, Text, StyleSheet } from "react-native";
+import {
+  View,
+  Image,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  Platform,
+  StatusBar,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { MaterialIcons } from "@expo/vector-icons";
 
-// import image
 import Image1 from "../assets/images/onboard4.png";
 
 export default function OnboardFourScreen({ navigation }) {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      {Platform.OS === "android" && (
+        <StatusBar backgroundColor="white" barStyle="dark-content" />
+      )}
+      <View style={styles.headerContainer}>
+        <TouchableOpacity
+          style={{ padding: 10 }}
+          onPress={() => navigation.navigate("onboard3")}
+        >
+          <MaterialIcons name="keyboard-arrow-left" size={35} color="black" />
+        </TouchableOpacity>
+        <View></View>
+      </View>
       <View style={styles.imgContainer}>
         <Image
           style={styles.sliderImage}
@@ -60,7 +81,7 @@ export default function OnboardFourScreen({ navigation }) {
           </View>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -69,8 +90,11 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "space-between",
-    // justifyContent: "center",
-    marginTop: 50,
+    backgroundColor: "white",
+  },
+  headerContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   headerText: {
     textAlign: "right",
