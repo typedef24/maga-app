@@ -3,6 +3,10 @@ import { Text, SafeAreaView, View, StyleSheet } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 
 import CompareInvestmentsComponent from "../components/CompareInvestment";
+import Button from "../components/Button";
+import globalStyles from "../constants/globalStyles";
+import Layout from "../constants/Layout";
+import fonts from "../constants/fonts";
 
 export default function CompareInvestmentsScreen() {
   const investments = [
@@ -48,25 +52,42 @@ export default function CompareInvestmentsScreen() {
     },
   ];
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.containerMain}>
       <FlatList
         data={investments}
-        renderItem={({ item }) => {
-          return (
-            <View>
-              <CompareInvestmentsComponent item={item} />
-            </View>
-          );
-        }}
+        renderItem={({ item }) => <CompareInvestmentsComponent item={item} />}
       />
-      <Text>Hello</Text>
-      <View style={styles.containerMain}>
-        <View>
-          <Text>Hello</Text>
+      <View style={styles.container}>
+        <View style={styles.boxContainer}>
+          <TouchableOpacity style={styles.boxSimple}>
+            <Text>Box</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.boxSimple}>
+            <Text>Box</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.boxSimple}>
+            <Text>Box</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.boxSimple}>
+            <Text>Box</Text>
+          </TouchableOpacity>
         </View>
         <View>
-          <TouchableOpacity>
-            <Text>Compare</Text>
+          <TouchableOpacity
+            style={{
+              borderWidth: 0.5,
+              borderColor: "#000",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: 15,
+              marginLeft: 20,
+            }}
+          >
+            <Text
+              style={{ padding: 5, color: "#0b4291", fontSize: fonts.large }}
+            >
+              Compare
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -75,6 +96,32 @@ export default function CompareInvestmentsScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {},
-  containerMain: {},
+  containerMain: {
+    flex: 1,
+    backgroundColor: "white",
+  },
+  container: {
+    flexDirection: "row",
+    backgroundColor: "#e6f7ff",
+    padding: 10,
+    // justifyContent: "space-between",
+  },
+  boxContainer: {
+    flexDirection: "row",
+    borderRightWidth: 1,
+    borderRightColor: "#c5eaff",
+    paddingRight: 10,
+
+    // width: Layout.window.width * 0.7,
+  },
+  boxSimple: {
+    backgroundColor: "#fff",
+    borderWidth: 0.5,
+    borderColor: "#000",
+    padding: 13,
+    marginTop: 10,
+    marginBottom: 10,
+    marginRight: 5,
+    marginLeft: 5,
+  },
 });
