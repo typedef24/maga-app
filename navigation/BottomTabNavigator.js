@@ -27,7 +27,11 @@ export default function BottomTabNavigator({ navigation, route }) {
         options={{
           title: "Home",
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} name="home" />
+            <TabBarIcon
+              focused={focused}
+              name="home"
+              bottomNavStyleProps={{ marginBottom: -3 }}
+            />
           ),
         }}
       />
@@ -37,7 +41,11 @@ export default function BottomTabNavigator({ navigation, route }) {
         options={{
           title: "Opportunities",
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} name="lightbulb" />
+            <TabBarIcon
+              focused={focused}
+              name="lightbulb"
+              bottomNavStyleProps={{ marginBottom: -3 }}
+            />
           ),
         }}
       />
@@ -45,9 +53,19 @@ export default function BottomTabNavigator({ navigation, route }) {
         name="target-investments"
         component={TargetInvestmentsScreen}
         options={{
-          title: "Target",
+          title: "",
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} name="search-dollar"></TabBarIcon>
+            <TabBarIcon
+              focused={focused}
+              name="search-dollar"
+              bottomNavStyleProps={{
+                marginBottom: -3,
+                color: "white",
+                backgroundColor: "#4670d7",
+                borderRadius: 30,
+                padding: 10,
+              }}
+            ></TabBarIcon>
           ),
         }}
       />
@@ -57,7 +75,11 @@ export default function BottomTabNavigator({ navigation, route }) {
         options={{
           title: "Investments",
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} name="piggy-bank"></TabBarIcon>
+            <TabBarIcon
+              focused={focused}
+              name="piggy-bank"
+              bottomNavStyleProps={{ marginBottom: -3 }}
+            ></TabBarIcon>
           ),
         }}
       />
@@ -67,7 +89,11 @@ export default function BottomTabNavigator({ navigation, route }) {
         options={{
           title: "Profile",
           tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} name="user"></TabBarIcon>
+            <TabBarIcon
+              focused={focused}
+              name="user"
+              bottomNavStyleProps={{ marginBottom: -3 }}
+            ></TabBarIcon>
           ),
         }}
       />

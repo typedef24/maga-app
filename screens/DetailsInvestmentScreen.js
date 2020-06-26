@@ -9,19 +9,27 @@ import {
 } from "react-native";
 import { List, Divider } from "react-native-paper";
 import Icon from "@expo/vector-icons/FontAwesome";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 import Image1 from "../assets/images/investment.png";
 import Layout from "../constants/Layout";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import ProgressBarComponent from "../components/ProgressBarComponent";
 import Button from "../components/Button";
+import ModalComponent from "../components/ModalComponent";
 import globalStyles from "../constants/globalStyles";
 import Font from "../constants/fonts";
+import { SimpleLineIcons } from "@expo/vector-icons";
 
 export default class DetailsInvestmentScreen extends Component {
-  state = {
-    expanded: true,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalVisible: false,
+      expanded: true,
+    };
+  }
 
   _handlePress = () =>
     this.state({
@@ -36,10 +44,174 @@ export default class DetailsInvestmentScreen extends Component {
         )}
         {/* FIrst section */}
         <View style={[styles.container, styles.shadowStyle]}>
+          <ModalComponent
+            visible={this.state.modalVisible}
+            onRequestClose={() => {
+              this.setState({ modalVisible: false });
+            }}
+            title=""
+            closeFxn={() => {
+              this.setState({ modalVisible: false });
+            }}
+          >
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                marginLeft: 10,
+              }}
+            >
+              <SimpleLineIcons name="share" size={20} color="black" />
+              <Button
+                body={
+                  <Text
+                    style={[
+                      globalStyles.btnLabel,
+                      {
+                        color: "black",
+                        fontSize: Font.medium,
+                        fontWeight: "300",
+                      },
+                    ]}
+                  >
+                    Invite Other Investors
+                  </Text>
+                }
+                touchableProps={{
+                  onPress: () => {
+                    this.setState({ modalVisible: false });
+                    this.props.navigation.navigate("invite-others");
+                  },
+                }}
+              />
+            </View>
+            <Divider color="red" />
+
+            {/* Performance History */}
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                marginLeft: 10,
+              }}
+            >
+              <MaterialIcons name="show-chart" size={24} color="black" />
+              <Button
+                body={
+                  <Text
+                    style={[
+                      globalStyles.btnLabel,
+                      {
+                        color: "black",
+                        fontSize: Font.medium,
+                        fontWeight: "300",
+                      },
+                    ]}
+                  >
+                    Performance History
+                  </Text>
+                }
+                touchableProps={{
+                  onPress: () => {
+                    this.setState({ modalVisible: false });
+                    this.props.navigation.navigate(
+                      "investmentPerformanceScreen"
+                    );
+                  },
+                }}
+              />
+            </View>
+            <Divider color="red" />
+
+            {/* Contact Support */}
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <MaterialCommunityIcons
+                name="email-outline"
+                size={24}
+                color="black"
+              />
+              <Button
+                body={
+                  <Text
+                    style={[
+                      globalStyles.btnLabel,
+                      {
+                        color: "black",
+                        fontSize: Font.medium,
+                        fontWeight: "300",
+                      },
+                    ]}
+                  >
+                    Contact Support
+                  </Text>
+                }
+                touchableProps={{
+                  onPress: () => {
+                    this.setState({ modalVisible: false });
+                    this.props.navigation.navigate("contact-support");
+                  },
+                }}
+              />
+            </View>
+            <Divider color="red" />
+
+            {/* Cancel Investment */}
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <MaterialCommunityIcons
+                name="close-circle-outline"
+                size={24}
+                color="black"
+              />
+              <Button
+                body={
+                  <Text
+                    style={[
+                      globalStyles.btnLabel,
+                      {
+                        color: "black",
+                        fontSize: Font.medium,
+                        fontWeight: "300",
+                      },
+                    ]}
+                  >
+                    Cancel Investment
+                  </Text>
+                }
+                touchableProps={{
+                  onPress: () => {
+                    this.setState({ modalVisible: false });
+                    alert("Investment Canceled!");
+                  },
+                }}
+              />
+            </View>
+          </ModalComponent>
+
           <View style={{ backgroundColor: "#F4FBFF" }}>
             <View style={{ flex: 1 }}>
               <View style={styles.statusRow}>
                 <Text style={styles.statusText}>Onging</Text>
+                <TouchableOpacity
+                  onPress={() => this.setState({ modalVisible: true })}
+                >
+                  <Text style={{ paddingRight: 15, fontSize: Font.large }}>
+                    ...
+                  </Text>
+                </TouchableOpacity>
               </View>
               {/* <ModalComponent style={{ flex: 1, zIndex: 4 }} /> */}
             </View>
@@ -219,7 +391,7 @@ const styles = StyleSheet.create({
   },
   body: {
     flexDirection: "row",
-    paddingTop: 30,
+    paddingTop: 10,
     paddingBottom: 10,
     paddingRight: 10,
     paddingLeft: 5,
@@ -236,8 +408,9 @@ const styles = StyleSheet.create({
   statusText: {
     backgroundColor: "green",
     color: "#fff",
-    borderRadius: 5,
+    borderRadius: 10,
     margin: 5,
+    padding: 5,
   },
   headingMain: {
     fontSize: 19,
