@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView } from "react-native";
 
 // Import components
 import MyInvestment from "../components/MyInvestment";
@@ -8,7 +8,7 @@ import { PageTitle } from "../components/PageTitle";
 
 export default function MyInvestmentsScreen({ navigation }) {
   return (
-    <View>
+    <SafeAreaView style={styles.container}>
       <PageTitle title="My Investments" />
       <ScrollView>
         <MyInvestment
@@ -19,7 +19,7 @@ export default function MyInvestmentsScreen({ navigation }) {
           }}
         />
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -36,4 +36,8 @@ function elevationShadowStyle(elevation) {
 
 const styles = StyleSheet.create({
   shadowStyle: elevationShadowStyle(5),
+  container: {
+    backgroundColor: "white",
+    flex: 1,
+  },
 });
