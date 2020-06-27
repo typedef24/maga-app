@@ -18,6 +18,17 @@ export default function WithdrawConfirmationScreen({ navigation }) {
       </View>
       <View style={styles.btnContainer}>
         <Button
+          body={<Text style={globalStyles.btnLabel}>Compare Table</Text>}
+          touchableStyleProps={{ backgroundColor: "#91d5ff" }}
+          touchableProps={{
+            onPress: () => {
+              navigation.navigate("compare-table");
+            },
+          }}
+        />
+      </View>
+      <View style={styles.btnContainer}>
+        <Button
           body={<Text style={globalStyles.btnLabel}>Compare Investment</Text>}
           touchableStyleProps={{ backgroundColor: "#52c41a" }}
           touchableProps={{

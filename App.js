@@ -38,6 +38,7 @@ import WithdrawConfirmationScreen from "./screens/WithdrawconfirmationScreen";
 import CompareInvestmentsScreen from "./screens/CompareInvestmentsScreen";
 import InvestmentPerformanceScreen from "./screens/InvestmentPerformance";
 import RiskProfilesScreen from "./screens/RiskProfilesScreen";
+import CompareTableScreen from "./screens/CompareTableScreen";
 
 const Stack = createStackNavigator();
 
@@ -284,6 +285,13 @@ export default function App(props) {
             <Stack.Screen
               name="compare-investments"
               component={CompareInvestmentsScreen}
+              options={{
+                title: "Compare Investments",
+              }}
+            />
+            <Stack.Screen
+              name="compare-table"
+              component={CompareTableScreen}
               options={{
                 title: "Compare Investments",
               }}
