@@ -106,7 +106,7 @@ export default class TargetInvestmentsScreen extends React.Component {
         <View style={styles.btnSearch}>
           <Button
             body={<Text style={globalStyles.btnLabel}>No result</Text>}
-            touchableStyleProps={{ backgroundColor: "#52c41a" }}
+            touchableStyleProps={{ backgroundColor: "#91d5ff" }}
             touchableProps={{
               onPress: () => {
                 this.props.navigation.navigate("no-result");

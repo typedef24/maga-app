@@ -5,8 +5,6 @@ import font from "../constants/fonts";
 import globalStyles from "../constants/globalStyles";
 import image from "../assets/images/no-result.png";
 import Button from "../components/Button";
-import fonts from "../constants/fonts";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 const NoResultScreen = ({ navigation }) => {
   return (

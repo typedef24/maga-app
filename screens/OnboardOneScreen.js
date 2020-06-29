@@ -1,14 +1,21 @@
 import * as React from "react";
-import { View, Image, TouchableOpacity, Text, StyleSheet } from "react-native";
+import {
+  View,
+  Image,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  Platform,
+  StatusBar,
+} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { MaterialIcons } from "@expo/vector-icons";
+import Swipeable from "react-native-gesture-handler/Swipeable";
 
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-
-// import image
 import Image1 from "../assets/images/onboard1.png";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AsyncStorage from '@react-native-community/async-storage';
+import fonts from "../constants/fonts";
 
 // const hideNav = navigationOptions({
 //   //To hide the ActionBar/NavigationBar
@@ -16,8 +23,30 @@ import AsyncStorage from '@react-native-community/async-storage';
 // });
 
 export default function OnboardOneScreen({ navigation, navigationOptions }) {
+  const RightAction = (progress, dragX) => {
+    const scale = dragX.interpolate({
+      inputRange: [0, 100],
+      outputRange: [0, 1],
+      extrapolate: "clamp",
+    });
+    return <View>{/* <OnboardTwoScreen /> */}</View>;
+  };
+
   return (
+    // <Swipeable renderRightActions={RightAction} >
     <SafeAreaView style={styles.container}>
+      {Platform.OS === "android" && (
+        <StatusBar backgroundColor="white" barStyle="dark-content" />
+      )}
+      <View style={styles.headerContainer}>
+        <View></View>
+        <TouchableOpacity
+          style={{ padding: 10 }}
+          onPress={() => navigation.navigate("login")}
+        >
+          <Text style={{ fontSize: fonts.medium, marginRight: 10 }}>Skip</Text>
+        </TouchableOpacity>
+      </View>
       <View style={styles.imgContainer}>
         <Image
           style={styles.sliderImage}
@@ -32,7 +61,10 @@ export default function OnboardOneScreen({ navigation, navigationOptions }) {
           make good profits quicker.
         </Text>
       </View>
-      <TouchableOpacity style={styles.btn}>
+      <TouchableOpacity
+        style={styles.btn}
+        onPress={() => navigation.navigate("onboard2")}
+      >
         <Text style={styles.btnText}>GET STARTED</Text>
       </TouchableOpacity>
       <View style={styles.navIcon}>
@@ -58,6 +90,7 @@ export default function OnboardOneScreen({ navigation, navigationOptions }) {
         </TouchableOpacity>
       </View>
     </SafeAreaView>
+    // </Swipeable>
   );
 }
 
@@ -66,7 +99,11 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "space-between",
-    marginTop: 50,
+    backgroundColor: "white",
+  },
+  headerContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   headerText: {
     textAlign: "right",

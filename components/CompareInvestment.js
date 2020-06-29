@@ -2,7 +2,6 @@ import React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import Iconfont from "@expo/vector-icons/FontAwesome5";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 import ProgressBarComponent from "./ProgressBarComponent";
 import Layout from "../constants/Layout";
