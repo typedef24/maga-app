@@ -1,10 +1,8 @@
 import React from "react";
-import { Text, SafeAreaView, StyleSheet, View, TextInput } from "react-native";
-import Clipboard from "@react-native-community/clipboard";
-
-import Layout from "../constants/Layout";
+import { Text, SafeAreaView, StyleSheet, View, TextInput, Clipboard } from "react-native";
 import Button from "../components/Button";
 import globalStyles from "../constants/globalStyles";
+import Toast from "react-native-simple-toast";
 
 export default class InvitationScreen extends React.Component {
   constructor(props) {
@@ -14,12 +12,6 @@ export default class InvitationScreen extends React.Component {
       clipboardContent: null,
     };
   }
-
-  readFromClipboard = async () => {
-    // alert("Copied text");
-    const clipboardContent = await Clipboard.getString();
-    this.setState({ clipboardContent });
-  };
 
   render() {
     return (
@@ -60,8 +52,14 @@ export default class InvitationScreen extends React.Component {
           />
           <Button
             touchableProps={{
-              // onPress: () => this.readFromClipboard(),
-              onPress: () => alert("Text copied"),
+              onPress: () => {
+                Clipboard.setString(this.state.text);
+                Toast.showWithGravity(
+                  "Coppied to your clipboard",
+                  Toast.LONG,
+                  Toast.BOTTOM
+                );
+              },
             }}
             body={
               <Text
