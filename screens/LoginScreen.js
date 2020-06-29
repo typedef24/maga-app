@@ -22,9 +22,10 @@ export default class LoginScreen extends React.Component {
     };
   }
 
-  handleLogin(){
-    alert("Summitted data: " + JSON.stringify(this.state));
-  };
+  handleLogin() {
+    //alert("Summitted data: " + JSON.stringify(this.state));
+    this.props.navigation.navigate("Root");
+  }
 
   render() {
     return (
@@ -59,14 +60,18 @@ export default class LoginScreen extends React.Component {
                 body={<Text style={globalStyles.btnLabel}>Login</Text>}
                 touchableStyleProps={{ backgroundColor: "#52c41a" }}
                 touchableProps={{
-                  onPress: () => { this.handleLogin() },
+                  onPress: () => {
+                    this.handleLogin();
+                  },
                 }}
               />
               <TouchableOpacity
                 style={{ alignItems: "flex-end" }}
-                onPress={() => this.props.navigation.navigate("resetPasswordScreen")}
+                onPress={() =>
+                  this.props.navigation.navigate("resetPasswordScreen")
+                }
               >
-                <Text style={globalStyles.btnLabel2}>Forgot password</Text>
+                <Text style={globalStyles.btnLabel2}>Forgot password?</Text>
               </TouchableOpacity>
             </View>
             <View>
@@ -74,12 +79,22 @@ export default class LoginScreen extends React.Component {
               <View style={{ flexDirection: "row", marginTop: 10 }}>
                 <Button
                   body={
-                    <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
                       <FontAwesome name="facebook" size={20} color="white" />
                       <Text style={globalStyles.btnLabel}>Facebook</Text>
                     </View>
                   }
-                  touchableStyleProps={{ backgroundColor: "#4d7bf3", flex: 1, marginRight: 30 }}
+                  touchableStyleProps={{
+                    backgroundColor: "#4d7bf3",
+                    flex: 1,
+                    marginRight: 30,
+                  }}
                   touchableProps={{
                     onPress: () => {
                       alert("Button clicked!!");
@@ -88,7 +103,13 @@ export default class LoginScreen extends React.Component {
                 />
                 <Button
                   body={
-                    <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
                       <FontAwesome name="google" size={20} color="white" />
                       <Text style={globalStyles.btnLabel}>Google</Text>
                     </View>
@@ -100,6 +121,26 @@ export default class LoginScreen extends React.Component {
                     },
                   }}
                 />
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "flex-end",
+                  alignItems: "center",
+                  marginTop: 5,
+                }}
+              >
+                <Text style={[ globalStyles.btnLabel2, {fontWeight: "100"} ]}>
+                  Don't have an account?
+                </Text>
+                <TouchableOpacity
+                  style={{ marginLeft: 10 }}
+                  onPress={() =>
+                    this.props.navigation.navigate("signup")
+                  }
+                >
+                  <Text style={globalStyles.btnLabel2}>Sign up</Text>
+                </TouchableOpacity>
               </View>
             </View>
           </LinearGradient>

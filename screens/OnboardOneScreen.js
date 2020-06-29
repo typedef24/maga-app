@@ -14,7 +14,7 @@ import Image1 from "../assets/images/onboard1.png";
 import { SafeAreaView } from "react-native-safe-area-context";
 import fonts from "../constants/fonts";
 
-export default function OnboardOneScreen({ navigation, navigationOptions }) {
+export default function OnboardOneScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       {Platform.OS === "android" && (

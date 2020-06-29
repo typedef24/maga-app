@@ -91,12 +91,26 @@ export default class SignUpScreen extends React.Component {
                   },
                 }}
               />
-              <TouchableOpacity
-                style={{ alignItems: "flex-end" }}
-                onPress={ () => this.props.navigation.navigate("login") }
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "flex-end",
+                  alignItems: "center",
+                  marginTop: 5,
+                }}
               >
-                <Text style={globalStyles.btnLabel2}>Login</Text>
-              </TouchableOpacity>
+                <Text style={[ globalStyles.btnLabel2, {fontWeight: "100"} ]}>
+                  Have an account?
+                </Text>
+                <TouchableOpacity
+                  style={{ marginLeft: 10 }}
+                  onPress={() =>
+                    this.props.navigation.navigate("login")
+                  }
+                >
+                  <Text style={globalStyles.btnLabel2}>Login</Text>
+                </TouchableOpacity>
+              </View>
             </View>
             <View>
               <Text style={globalStyles.btnLabel2}>Signup with</Text>

@@ -2,11 +2,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import {
   createStackNavigator,
   CardStyleInterpolators,
-  TransitionPresets,
-  HeaderBackButton,
-  BlurView,
 } from "@react-navigation/stack";
-import * as React from "react";
+import React, { useState } from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
 
 import useCachedResources from "./hooks/useCachedResources";
@@ -31,6 +28,7 @@ import PaymentScreen from "./screens/PaymentScreen";
 import PaymentScreen2 from "./screens/PaymentScreen2";
 import PaymentScreen3 from "./screens/PaymentScreen3";
 import CheckoutScreen from "./screens/CheckoutScreen";
+import TransactionsScreen from "./screens/TransactionsScreen";
 import DetailsInvestmentScreen from "./screens/DetailsInvestmentScreen";
 import InvitationScreen from "./screens/InvitationScreen";
 import WithdrawInvestmentTermsScreen from "./screens/WithdrawInvestmentTermsScreen";
@@ -39,12 +37,51 @@ import CompareInvestmentsScreen from "./screens/CompareInvestmentsScreen";
 import InvestmentPerformanceScreen from "./screens/InvestmentPerformance";
 import RiskProfilesScreen from "./screens/RiskProfilesScreen";
 import CompareTableScreen from "./screens/CompareTableScreen";
-import TransactionsScreen from "./screens/TransactionsScreen";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const Stack = createStackNavigator();
 
-export default function App(props) {
-  const isLoadingComplete = useCachedResources();
+export default function App({ props }) {
+  const isLoadingComplete = useCachedResources(1);
+
+  const [isInstalling, setIsInstalling] = useState();
+  //setIsInstalling(1);
+  //alert(isInstalling);
+
+  React.useEffect(() => {
+    async function checkFirstInstall() {
+      //alert("Hello");
+      try {
+        const jsonValue = await AsyncStorage.getItem("appInstalled");
+        jsonValue != null ? JSON.parse(jsonValue) : null;
+        if (jsonValue) {
+          //not first time access
+          //return false;
+          setIsInstalling(false);
+        } else {
+          //store in AsyncStorage against next time lunch
+          try {
+            const jsonValue = JSON.stringify(true);
+            await AsyncStorage.setItem("appInstalled", jsonValue);
+            //return true;
+            setIsInstalling(true);
+          } catch (e) {
+            // saving error
+            console.warn(
+              "Error saving to AsyncStorage! Hope your device supports AsyncStorage?"
+            );
+          }
+        }
+      } catch (e) {
+        // error reading value
+        console.warn(
+          "Error reading from AsyncStorage! Hope your device supports AsyncStorage?"
+        );
+      }
+    }
+
+    checkFirstInstall();
+  }, []);
 
   const config = {
     animation: "spring",
@@ -73,23 +110,33 @@ export default function App(props) {
             }}
           >
             {/* OnBoarding Navigation Screen */}
-            <Stack.Screen
-              name="onboard1"
-              component={OnboardOneScreen}
-              options={{
-                headerShown: false,
-                gestureEnabled: true,
-                transitionSpec: {
-                  open: config,
-                  close: config,
-                },
-                // title: "Skip",
-                // headerTitleAlign: "right",
-                // headerStyle: {
-                //   borderBottomColor: "#fff",
-                // },
-              }}
-            />
+            {isInstalling == true ? (
+              <Stack.Screen
+                name="onboard1"
+                component={OnboardOneScreen}
+                options={{
+                  headerShown: false,
+                  gestureEnabled: true,
+                  transitionSpec: {
+                    open: config,
+                    close: config,
+                  },
+                  // title: "Skip",
+                  // headerTitleAlign: "right",
+                  // headerStyle: {
+                  //   borderBottomColor: "#fff",
+                  // },
+                }}
+              />
+            ) : (
+              <Stack.Screen
+                name="login"
+                component={LoginScreen}
+                options={{
+                  headerShown: false,
+                }}
+              />
+            )}
             <Stack.Screen
               name="onboard2"
               component={OnboardTwoScreen}
@@ -140,15 +187,6 @@ export default function App(props) {
             <Stack.Screen
               name="signup"
               component={SignUpScreen}
-              options={{
-                headerShown: false,
-              }}
-            />
-
-            {/* Authentication Nav */}
-            <Stack.Screen
-              name="login"
-              component={LoginScreen}
               options={{
                 headerShown: false,
               }}
@@ -236,6 +274,13 @@ export default function App(props) {
               component={CheckoutScreen}
               options={{
                 headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="transactionsScreen"
+              component={TransactionsScreen}
+              options={{
+                title: "Transactions",
               }}
             />
             <Stack.Screen

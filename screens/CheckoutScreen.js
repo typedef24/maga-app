@@ -51,7 +51,7 @@ export default class CheckoutScreen extends React.Component {
               backgroundColor: "#52c41a",
             }}
             touchableProps={{
-              onPress: () => this.props.navigation.navigate("checkoutScreen"),
+              onPress: () => this.props.navigation.navigate("transactionsScreen"),
             }}
           />
         </View>
