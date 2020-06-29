@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, SafeAreaView, View, StyleSheet } from "react-native";
+import { Text, SafeAreaView, View, StyleSheet, Image } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 
 import CompareInvestmentsComponent from "../components/CompareInvestment";
@@ -7,6 +7,8 @@ import Button from "../components/Button";
 import globalStyles from "../constants/globalStyles";
 import Layout from "../constants/Layout";
 import fonts from "../constants/fonts";
+
+import img from "../assets/images/dish.png";
 
 export default function CompareInvestmentsScreen() {
   const investments = [
@@ -60,16 +62,32 @@ export default function CompareInvestmentsScreen() {
       <View style={styles.container}>
         <View style={styles.boxContainer}>
           <TouchableOpacity style={styles.boxSimple}>
-            <Text>Box</Text>
+            <Image
+              source={img}
+              style={{ height: 30, width: 30 }}
+              resizeMode="cover"
+            />
           </TouchableOpacity>
           <TouchableOpacity style={styles.boxSimple}>
-            <Text>Box</Text>
+            <Image
+              source={img}
+              style={{ height: 30, width: 30 }}
+              resizeMode="cover"
+            />
           </TouchableOpacity>
           <TouchableOpacity style={styles.boxSimple}>
-            <Text>Box</Text>
+            <Image
+              source={img}
+              style={{ height: 30, width: 30 }}
+              resizeMode="cover"
+            />
           </TouchableOpacity>
           <TouchableOpacity style={styles.boxSimple}>
-            <Text>Box</Text>
+            <Image
+              source={img}
+              style={{ height: 30, width: 30 }}
+              resizeMode="cover"
+            />
           </TouchableOpacity>
         </View>
         <View>
@@ -80,11 +98,11 @@ export default function CompareInvestmentsScreen() {
               justifyContent: "center",
               alignItems: "center",
               marginTop: 15,
-              marginLeft: 20,
+              marginLeft: 5,
             }}
           >
             <Text
-              style={{ padding: 5, color: "#0b4291", fontSize: fonts.large }}
+              style={{ padding: 3, color: "#0b4291", fontSize: fonts.large }}
             >
               Compare
             </Text>
@@ -103,22 +121,20 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     backgroundColor: "#e6f7ff",
+    justifyContent: "space-between",
     padding: 10,
-    // justifyContent: "space-between",
   },
   boxContainer: {
+    // flex: 1,
     flexDirection: "row",
     borderRightWidth: 1,
     borderRightColor: "#c5eaff",
-    paddingRight: 10,
-
-    // width: Layout.window.width * 0.7,
   },
   boxSimple: {
     backgroundColor: "#fff",
     borderWidth: 0.5,
     borderColor: "#000",
-    padding: 13,
+    padding: 10,
     marginTop: 10,
     marginBottom: 10,
     marginRight: 5,

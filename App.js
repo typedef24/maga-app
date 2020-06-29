@@ -61,8 +61,8 @@ export default function App({ props }) {
         } else {
           //store in AsyncStorage against next time lunch
           try {
-            const jsonValue = JSON.stringify(true)
-            await AsyncStorage.setItem('appInstalled', jsonValue)
+            const jsonValue = JSON.stringify(true);
+            await AsyncStorage.setItem("appInstalled", jsonValue);
             //return true;
             setIsInstalling(true);
           } catch (e) {
@@ -78,7 +78,7 @@ export default function App({ props }) {
           "Error reading from AsyncStorage! Hope your device supports AsyncStorage?"
         );
       }
-    };
+    }
 
     checkFirstInstall();
   }, []);

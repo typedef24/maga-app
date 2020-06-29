@@ -13,10 +13,9 @@ export default class FilterResultsScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      stateExample: "",
+      risk: "",
       industry: "",
-      duration: 0,
-      roi: "",
+      roi: 0,
       fund: "",
       price: "",
     };
@@ -41,12 +40,10 @@ export default class FilterResultsScreen extends React.Component {
           </TouchableOpacity>
         </View>
         <View style={styles.contentContainer}>
-          <TouchableOpacity
-            onPress={() => this.setState({ stateExample: "Low risk" })}
-          >
+          <TouchableOpacity onPress={() => this.setState({ risk: "Low risk" })}>
             <View
               style={
-                this.state.stateExample == "Low risk"
+                this.state.risk == "Low risk"
                   ? styles.chooseItem
                   : styles.chooseItem1
               }
@@ -54,12 +51,10 @@ export default class FilterResultsScreen extends React.Component {
               <Text style={styles.choosetxt}>Low risk</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => this.setState({ stateExample: "Medium" })}
-          >
+          <TouchableOpacity onPress={() => this.setState({ risk: "Medium" })}>
             <View
               style={
-                this.state.stateExample == "Medium"
+                this.state.risk == "Medium"
                   ? styles.chooseItem
                   : styles.chooseItem1
               }
@@ -69,11 +64,11 @@ export default class FilterResultsScreen extends React.Component {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => this.setState({ stateExample: "High risk" })}
+            onPress={() => this.setState({ risk: "High risk" })}
           >
             <View
               style={
-                this.state.stateExample == "High risk"
+                this.state.risk == "High risk"
                   ? styles.chooseItem
                   : styles.chooseItem1
               }
@@ -89,10 +84,8 @@ export default class FilterResultsScreen extends React.Component {
             minimumValue={0}
             maximumValue={12}
             unit="months"
-            value={this.state.duration}
-            onValueChange={(slideValue) =>
-              this.setState({ duration: slideValue })
-            }
+            value={this.state.roi}
+            onValueChange={(slideValue) => this.setState({ roi: slideValue })}
             minimumTrackTintColor="#003a8c"
             maximumTrackTintColor="#bae7ff"
             thumbTintColor="#003a8c"
@@ -103,9 +96,9 @@ export default class FilterResultsScreen extends React.Component {
           <Accordion
             // Inherit prop from child
             mode="dropdown"
-            selectedValue={this.state.risk}
+            selectedValue={this.state.industry}
             onValueChange={(itemValue) => {
-              this.setState({ risk: itemValue });
+              this.setState({ industry: itemValue });
             }}
           >
             <Picker.Item label="Industry1" value="Industry1" />
@@ -116,12 +109,10 @@ export default class FilterResultsScreen extends React.Component {
         <View style={styles.section}>
           <Text style={styles.textHeading}>Funding mood</Text>
           <View style={styles.selectBox}>
-            <TouchableOpacity
-              onPress={() => this.setState({ stateExample: "Fixed" })}
-            >
+            <TouchableOpacity onPress={() => this.setState({ fund: "Fixed" })}>
               <View
                 style={
-                  this.state.stateExample == "Fixed"
+                  this.state.fund == "Fixed"
                     ? styles.selectBox1
                     : styles.selectBox2
                 }
@@ -130,11 +121,11 @@ export default class FilterResultsScreen extends React.Component {
               </View>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => this.setState({ stateExample: "Variable" })}
+              onPress={() => this.setState({ fund: "Variable" })}
             >
               <View
                 style={
-                  this.state.stateExample == "Variable"
+                  this.state.fund == "Variable"
                     ? styles.selectBox1
                     : styles.selectBox2
                 }
@@ -147,25 +138,19 @@ export default class FilterResultsScreen extends React.Component {
         <View style={styles.section}>
           <Text style={styles.textHeading}>Price Range</Text>
           <View style={styles.selectBox}>
-            <TouchableOpacity
-              onPress={() => this.setState({ stateExample: 200 })}
-            >
+            <TouchableOpacity onPress={() => this.setState({ risk: 200 })}>
               <View
                 style={
-                  this.state.stateExample == 200
-                    ? styles.selectBox1
-                    : styles.selectBox2
+                  this.state.risk == 200 ? styles.selectBox1 : styles.selectBox2
                 }
               >
                 <Text style={styles.choosetxt}>{"$"}200</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => this.setState({ stateExample: 80000 })}
-            >
+            <TouchableOpacity onPress={() => this.setState({ risk: 80000 })}>
               <View
                 style={
-                  this.state.stateExample == 80000
+                  this.state.risk == 80000
                     ? styles.selectBox1
                     : styles.selectBox2
                 }
@@ -183,7 +168,7 @@ export default class FilterResultsScreen extends React.Component {
             touchableStyleProps={{ backgroundColor: "#52c41a" }}
             touchableProps={{
               onPress: () => {
-                // this.handleSubmit();
+                this.handleFilter();
               },
             }}
           />
@@ -195,7 +180,7 @@ export default class FilterResultsScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: "white",
+    backgroundColor: "white",
   },
   headerText: {
     flexDirection: "row",
