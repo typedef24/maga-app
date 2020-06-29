@@ -2,6 +2,7 @@ import * as React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import fonts from "../constants/fonts";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { Ionicons } from '@expo/vector-icons';
 
 export default class Expandable extends React.Component {
   constructor(props) {
@@ -45,7 +46,7 @@ export default class Expandable extends React.Component {
                 {this.props.title}
               </Text>
             </View>
-            <FontAwesome5 name="money-check-alt" size={24} color="#003a8c" />
+            <Ionicons name={ this.state.curState ? "ios-arrow-up" : "ios-arrow-down" } size={24} color="#003a8c" />
           </View>
         </TouchableOpacity>
         {this.state.curState && (

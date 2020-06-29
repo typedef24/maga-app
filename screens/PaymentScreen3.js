@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  Clipboard,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "../components/Button";
@@ -17,6 +18,7 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import Image1 from "../assets/images/investment.png";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
+import Toast from "react-native-simple-toast";
 
 export default class PaymentScreen extends React.Component {
   constructor(props) {
@@ -30,7 +32,10 @@ export default class PaymentScreen extends React.Component {
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
-        <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.container}>
+        <ScrollView
+          style={{ flex: 1 }}
+          contentContainerStyle={styles.container}
+        >
           <View style={{ paddingLeft: 10, paddingRight: 10 }}>
             <View
               style={{
@@ -179,7 +184,16 @@ export default class PaymentScreen extends React.Component {
                   <Text style={{ fontSize: fonts.large }}>
                     invest@kemet.app
                   </Text>
-                  <TouchableOpacity onPress={() => alert("Copy clicked")}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      Clipboard.setString("invest@kemet.app");
+                      Toast.showWithGravity(
+                        "Coppied to your clipboard",
+                        Toast.LONG,
+                        Toast.BOTTOM
+                      );
+                    }}
+                  >
                     <Text
                       style={[globalStyles.btnLabel2, { color: "#003a8c" }]}
                     >
@@ -198,7 +212,16 @@ export default class PaymentScreen extends React.Component {
                   <Text style={{ fontSize: fonts.large }}>
                     https://www.ppl.us/kemetsO1Qs
                   </Text>
-                  <TouchableOpacity onPress={() => alert("Copy clicked")}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      Clipboard.setString("https://www.ppl.us/kemetsO1Qs");
+                      Toast.showWithGravity(
+                        "Coppied to your clipboard",
+                        Toast.LONG,
+                        Toast.BOTTOM
+                      );
+                    }}
+                  >
                     <Text
                       style={[globalStyles.btnLabel2, { color: "#003a8c" }]}
                     >
@@ -226,7 +249,7 @@ export default class PaymentScreen extends React.Component {
               padding: 15,
               paddingTop: 5,
               textAlign: "center",
-              fontSize: fonts.large
+              fontSize: fonts.large,
             }}
           >
             You will receive confirmation of your investment not later than 2

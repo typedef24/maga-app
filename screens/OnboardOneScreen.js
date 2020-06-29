@@ -9,30 +9,13 @@ import {
   StatusBar,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { MaterialIcons } from "@expo/vector-icons";
-import Swipeable from "react-native-gesture-handler/Swipeable";
 
 import Image1 from "../assets/images/onboard1.png";
 import { SafeAreaView } from "react-native-safe-area-context";
 import fonts from "../constants/fonts";
 
-// const hideNav = navigationOptions({
-//   //To hide the ActionBar/NavigationBar
-//   header: null,
-// });
-
-export default function OnboardOneScreen({ navigation, navigationOptions }) {
-  const RightAction = (progress, dragX) => {
-    const scale = dragX.interpolate({
-      inputRange: [0, 100],
-      outputRange: [0, 1],
-      extrapolate: "clamp",
-    });
-    return <View>{/* <OnboardTwoScreen /> */}</View>;
-  };
-
+export default function OnboardOneScreen({ navigation }) {
   return (
-    // <Swipeable renderRightActions={RightAction} >
     <SafeAreaView style={styles.container}>
       {Platform.OS === "android" && (
         <StatusBar backgroundColor="white" barStyle="dark-content" />
@@ -89,7 +72,6 @@ export default function OnboardOneScreen({ navigation, navigationOptions }) {
         </TouchableOpacity>
       </View>
     </SafeAreaView>
-    // </Swipeable>
   );
 }
 
