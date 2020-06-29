@@ -39,6 +39,7 @@ import CompareInvestmentsScreen from "./screens/CompareInvestmentsScreen";
 import InvestmentPerformanceScreen from "./screens/InvestmentPerformance";
 import RiskProfilesScreen from "./screens/RiskProfilesScreen";
 import CompareTableScreen from "./screens/CompareTableScreen";
+import TransactionsScreen from "./screens/TransactionsScreen";
 
 const Stack = createStackNavigator();
 

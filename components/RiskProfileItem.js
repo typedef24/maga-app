@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Text, View, StyleSheet, Image } from "react-native";
 
-import ImageRisk from "../assets/images/risk1.png";
 import Layout from "../constants/Layout";
 import fonts from "../constants/fonts";
 
