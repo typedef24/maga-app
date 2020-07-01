@@ -5,6 +5,7 @@ import { FlatList } from "react-native-gesture-handler";
 import Button from "../components/Button";
 
 import globalStyles from "../constants/globalStyles";
+import TransactionComponent from "../components/Transaction";
 
 export default function TransactionsHistoryScreen() {
   const [items, setItems] = useState([
@@ -72,11 +73,12 @@ export default function TransactionsHistoryScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
+      <TransactionComponent />
+      {/* <FlatList
         contentContainerStyle={styles.flatListContainer}
         data={items}
-        renderItem={({ item }) => <RiskProfileItem item={item} />}
-      />
+        renderItem={({ item }) => <TransactionComponent item={item} />}
+      /> */}
     </SafeAreaView>
   );
 }

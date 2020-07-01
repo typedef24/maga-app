@@ -6,7 +6,7 @@ import Iconfont from "@expo/vector-icons/FontAwesome5";
 import ProgressBarComponent from "./ProgressBarComponent";
 import Layout from "../constants/Layout";
 
-export function OppotunityPreview({ item }) {
+export function OppotunityPreview({ item }, props) {
   return (
     <View style={styles.container}>
       <View
@@ -33,7 +33,7 @@ export function OppotunityPreview({ item }) {
               color="#003A8C"
             />
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity {...props.touchableProps}>
             <View style={styles.body}>
               <Text style={{ width: Layout.window.width * 0.8 }}>
                 {item.title}
@@ -85,7 +85,7 @@ export function OppotunityPreview({ item }) {
             >
               {" "}
               {"$"}
-              {item.total}
+              {item.price}
             </Text>
           </View>
         </View>
