@@ -12,6 +12,7 @@ import Button from "../components/Button";
 import globalStyles from "../constants/globalStyles";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import axios from "axios";
 
 export default class SignUpScreen extends React.Component {
   constructor(props) {
@@ -20,7 +21,7 @@ export default class SignUpScreen extends React.Component {
       email: "",
       password: "",
       confirmPassword: "",
-      errorStr: '',
+      errorStr: "",
     };
   }
 
@@ -28,10 +29,23 @@ export default class SignUpScreen extends React.Component {
     //check if password match
     if (this.state.password !== this.state.confirmPassword) {
       this.setState({ errorStr: "Passwords didn't match" });
-      //more code still has to be written wrt validation
-
+    } else {
+      // POST request for Registration API
+      axios
+        .post("http://64.227.20.176/auth/local/register", {
+          username: "Change Username",
+          email: this.state.email,
+          password: this.state.password,
+        })
+        .then((response) => {
+          this.props.navigation.navigate("login");
+          console.log(response);
+        })
+        .catch((error) => {
+          alert("Error occured");
+          console.log(error);
+        });
     }
-
   }
 
   render() {
@@ -45,14 +59,19 @@ export default class SignUpScreen extends React.Component {
             colors={["#003a8c", "#137fe9"]}
             style={styles.gradient}
           >
-            { this.state.errorStr ?
-              <View style={ styles.errorBox }>
-                <FontAwesome name="exclamation-triangle" size={20} color="white" style={{ marginRight: 10 }} />
-                <Text style={ globalStyles.label }>{ this.state.errorStr }</Text>
+            {this.state.errorStr ? (
+              <View style={styles.errorBox}>
+                <FontAwesome
+                  name="exclamation-triangle"
+                  size={20}
+                  color="white"
+                  style={{ marginRight: 10 }}
+                />
+                <Text style={globalStyles.label}>{this.state.errorStr}</Text>
               </View>
-              :
+            ) : (
               <Text style={{ display: "none" }}></Text>
-            }
+            )}
             <View>
               <Text style={globalStyles.label}>Email</Text>
               <InputField
@@ -71,7 +90,11 @@ export default class SignUpScreen extends React.Component {
               />
               <Text style={globalStyles.label}>Repeat Password</Text>
               <InputField
-                inputStyle={ this.state.errorStr ? { borderColor: "red", color: "red", borderWidth: 1 } : {} }
+                inputStyle={
+                  this.state.errorStr
+                    ? { borderColor: "red", color: "red", borderWidth: 1 }
+                    : {}
+                }
                 secureTextEntry={true}
                 textContentType="password"
                 value={this.state.confirmPassword}
@@ -99,14 +122,12 @@ export default class SignUpScreen extends React.Component {
                   marginTop: 5,
                 }}
               >
-                <Text style={[ globalStyles.btnLabel2, {fontWeight: "100"} ]}>
+                <Text style={[globalStyles.btnLabel2, { fontWeight: "100" }]}>
                   Have an account?
                 </Text>
                 <TouchableOpacity
                   style={{ marginLeft: 10 }}
-                  onPress={() =>
-                    this.props.navigation.navigate("login")
-                  }
+                  onPress={() => this.props.navigation.navigate("login")}
                 >
                   <Text style={globalStyles.btnLabel2}>Login</Text>
                 </TouchableOpacity>
@@ -185,6 +206,5 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     padding: 10,
     paddingBottom: 0,
-  }
-
+  },
 });
