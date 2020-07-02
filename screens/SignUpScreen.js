@@ -5,6 +5,7 @@ import {
   Text,
   StatusBar,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import InputField from "../components/InputField";
@@ -12,7 +13,9 @@ import Button from "../components/Button";
 import globalStyles from "../constants/globalStyles";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import axios from "axios";
+
+// import API connection
+import Strapi from "../api/Strapi";
 
 export default class SignUpScreen extends React.Component {
   constructor(props) {
@@ -22,29 +25,32 @@ export default class SignUpScreen extends React.Component {
       password: "",
       confirmPassword: "",
       errorStr: "",
+      submitErr: "",
+      loading: "",
     };
   }
 
-  handleSignup() {
-    //check if password match
-    if (this.state.password !== this.state.confirmPassword) {
-      this.setState({ errorStr: "Passwords didn't match" });
-    } else {
-      // POST request for Registration API
-      axios
-        .post("http://64.227.20.176/auth/local/register", {
-          username: "Change Username",
+  async handleSignup() {
+    try {
+      this.setState({ loading: true });
+      // Check if password matches
+      if (this.state.password !== this.state.confirmPassword) {
+        this.setState({ errorStr: "Passwords didn't match" });
+        this.setState({ loading: false });
+      } else {
+        const response = await Strapi.post("/auth/local/register", {
+          username: "",
           email: this.state.email,
           password: this.state.password,
-        })
-        .then((response) => {
-          this.props.navigation.navigate("login");
-          console.log(response);
-        })
-        .catch((error) => {
-          alert("Error occured");
-          console.log(error);
         });
+        response
+          ? this.props.navigation.navigate("login") ||
+            this.setState({ loading: false })
+          : null;
+      }
+    } catch (error) {
+      this.setState({ loading: false });
+      this.setState({ submitErr: "Fields can't be empty" });
     }
   }
 
@@ -59,6 +65,7 @@ export default class SignUpScreen extends React.Component {
             colors={["#003a8c", "#137fe9"]}
             style={styles.gradient}
           >
+            {/* Display error for incorrect password match */}
             {this.state.errorStr ? (
               <View style={styles.errorBox}>
                 <FontAwesome
@@ -72,6 +79,22 @@ export default class SignUpScreen extends React.Component {
             ) : (
               <Text style={{ display: "none" }}></Text>
             )}
+
+            {/* Display error for empty field submit */}
+            {this.state.submitErr ? (
+              <View style={[styles.errorBox, { backgroundColor: "red" }]}>
+                <FontAwesome
+                  name="exclamation-triangle"
+                  size={20}
+                  color="white"
+                  style={{ marginRight: 10 }}
+                />
+                <Text style={globalStyles.label}>{this.state.submitErr}</Text>
+              </View>
+            ) : (
+              <Text style={{ display: "none" }}></Text>
+            )}
+
             <View>
               <Text style={globalStyles.label}>Email</Text>
               <InputField
@@ -133,6 +156,11 @@ export default class SignUpScreen extends React.Component {
                 </TouchableOpacity>
               </View>
             </View>
+            {this.state.loading ? (
+              <View>
+                <ActivityIndicator size="large" color="white" />
+              </View>
+            ) : null}
             <View>
               <Text style={globalStyles.btnLabel2}>Signup with</Text>
               <View style={{ flexDirection: "row", marginTop: 10 }}>

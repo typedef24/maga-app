@@ -17,7 +17,10 @@ import Button from "../components/Button";
 import Layout from "../constants/Layout";
 import image from "../assets/images/dish.png";
 
-export default function InvestmentDetailsScreen({ navigation }) {
+export default function InvestmentDetailsScreen({ route, navigation }) {
+  // Read params from navigation state
+  const { item } = route.params;
+
   return (
     <View>
       {Platform.OS === "android" && (
@@ -28,7 +31,14 @@ export default function InvestmentDetailsScreen({ navigation }) {
           <View style={styles.progress}>
             <View style={styles.statusBar}>
               <View style={styles.status}>
-                <Text style={styles.statusText}>Onging</Text>
+                {item.status === "ongoing" ? (
+                  <Text style={styles.statusText}>{item.status}</Text>
+                ) : (
+                  <Text style={[styles.statusText, { backgroundColor: "red" }]}>
+                    {item.status}
+                  </Text>
+                )}
+
                 <Icon
                   name="bookmark"
                   size={25}
@@ -38,10 +48,9 @@ export default function InvestmentDetailsScreen({ navigation }) {
               </View>
               <View style={styles.body}>
                 <Text style={{ width: Layout.window.width * 0.8 }}>
-                  Real estate investments funds in the dubai, los Angeles, new
-                  York and sub-saharan Africa.
+                  {item.title}
                 </Text>
-                <Image source={image} style={styles.Image}></Image>
+                <Image source={item.img} style={styles.Image}></Image>
               </View>
             </View>
             {/* </TouchableOpacity> */}
@@ -57,7 +66,7 @@ export default function InvestmentDetailsScreen({ navigation }) {
                   style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
                 >
                   {" "}
-                  20
+                  {item.rate}
                   {"%"}
                 </Text>
               </View>
@@ -87,17 +96,12 @@ export default function InvestmentDetailsScreen({ navigation }) {
                 >
                   {" "}
                   {"$"}
-                  4000
+                  {item.price}
                 </Text>
               </View>
             </View>
             <View style={styles.description}>
-              <Text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-              </Text>
+              <Text>{item.description}</Text>
             </View>
             <View>
               <Text
@@ -183,7 +187,7 @@ export default function InvestmentDetailsScreen({ navigation }) {
             </View>
             <View style={styles.details}>
               <Text>Investment Deadline</Text>
-              <Text>23/09/20</Text>
+              <Text>{item.risk_profile}</Text>
             </View>
             <TouchableOpacity
               onPress={() => navigation.navigate("contact-support")}
@@ -199,7 +203,7 @@ export default function InvestmentDetailsScreen({ navigation }) {
         </View>
         <Button
           onPress={() => navigation.navigate("signup")}
-          body={<Text style={globalStyles.btnLabel}>Invest $1000</Text>}
+          body={<Text style={globalStyles.btnLabel}>Invest ${item.price}</Text>}
           touchableStyleProps={{
             backgroundColor: "#52c41a",
             marginRight: 5,

@@ -121,11 +121,6 @@ export default function App({ props }) {
                     open: config,
                     close: config,
                   },
-                  // title: "Skip",
-                  // headerTitleAlign: "right",
-                  // headerStyle: {
-                  //   borderBottomColor: "#fff",
-                  // },
                 }}
               />
             ) : (

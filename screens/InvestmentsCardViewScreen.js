@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { PageTitle } from "../components/PageTitle";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
@@ -11,16 +11,25 @@ import { ScrollView } from "react-native-gesture-handler";
 import globalStyles from "../constants/globalStyles";
 import Button from "../components/Button";
 
-export default function InvestmentsCardViewScreen({ navigation }) {
+export default function InvestmentsCardViewScreen({ route, navigation }) {
+  const { item } = route.params;
+
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <PageTitle title="Investment Opportunities" />
-      <ScrollView style={({ marginBottom: 20 }, styles.containerMain)}>
+      <ScrollView style={styles.containerMain}>
         <View style={styles.container}>
           <View style={styles.progress}>
             <View style={styles.statusBar}>
               <View style={styles.status}>
-                <Text style={styles.statusText}>Onging</Text>
+                {item.status === "ongoing" ? (
+                  <Text style={styles.statusText}>{item.status}</Text>
+                ) : (
+                  <Text style={[styles.statusText, { backgroundColor: "red" }]}>
+                    {item.status}
+                  </Text>
+                )}
+
                 <Icon
                   name="bookmark"
                   size={25}
@@ -30,10 +39,9 @@ export default function InvestmentsCardViewScreen({ navigation }) {
               </View>
               <View style={styles.body}>
                 <Text style={{ width: Layout.window.width * 0.8 }}>
-                  Real estate investments funds in the dubai, los Angeles, new
-                  York and sub-saharan Africa.
+                  {item.title}
                 </Text>
-                <Image source={image} style={styles.Image}></Image>
+                <Image source={item.img} style={styles.Image}></Image>
               </View>
             </View>
             {/* </TouchableOpacity> */}
@@ -49,7 +57,7 @@ export default function InvestmentsCardViewScreen({ navigation }) {
                   style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
                 >
                   {" "}
-                  20
+                  {item.rate}
                   {"%"}
                 </Text>
               </View>
@@ -64,7 +72,7 @@ export default function InvestmentsCardViewScreen({ navigation }) {
                   style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
                 >
                   {" "}
-                  6 {"months"}
+                  {item.duration} {"months"}
                 </Text>
               </View>
               <View style={styles.iconText}>
@@ -79,17 +87,12 @@ export default function InvestmentsCardViewScreen({ navigation }) {
                 >
                   {" "}
                   {"$"}
-                  4000
+                  {item.price}
                 </Text>
               </View>
             </View>
             <View style={styles.description}>
-              <Text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-              </Text>
+              <Text>{item.description}</Text>
             </View>
             <View style={styles.details}>
               <Text>Monthly Interest</Text>
@@ -122,10 +125,11 @@ export default function InvestmentsCardViewScreen({ navigation }) {
             marginRight: 5,
             marginLeft: 5,
             marginTop: 20,
+            marginBottom: 20,
           }}
           touchableProps={{
             onPress: () => {
-              navigation.navigate("investment-detail");
+              navigation.navigate("investment-detail", { item });
             },
           }}
         />
@@ -136,7 +140,7 @@ export default function InvestmentsCardViewScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   containerMain: {
-    // height: Layout.window.height * 0.8,
+    backgroundColor: "white",
   },
   container: {
     backgroundColor: "#F4FBFF",

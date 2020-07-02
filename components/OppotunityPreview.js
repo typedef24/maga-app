@@ -6,12 +6,12 @@ import Iconfont from "@expo/vector-icons/FontAwesome5";
 import ProgressBarComponent from "./ProgressBarComponent";
 import Layout from "../constants/Layout";
 
-export function OppotunityPreview({ item }, props) {
+export function OppotunityPreview(props) {
   return (
     <View style={styles.container}>
       <View
         style={[
-          item.rate >= 50 ? styles.success : styles.progress,
+          props.item.rate >= 50 ? styles.success : styles.progress,
           styles.shadowStyle,
         ]}
       >
@@ -19,12 +19,12 @@ export function OppotunityPreview({ item }, props) {
           <View style={styles.status}>
             <Text
               style={[
-                item.status === "closed"
+                props.item.status === "closed"
                   ? styles.dangerText
                   : styles.statusText,
               ]}
             >
-              {item.status}
+              {props.item.status}
             </Text>
             <Icon
               name="bookmark"
@@ -36,9 +36,9 @@ export function OppotunityPreview({ item }, props) {
           <TouchableOpacity {...props.touchableProps}>
             <View style={styles.body}>
               <Text style={{ width: Layout.window.width * 0.8 }}>
-                {item.title}
+                {props.item.title}
               </Text>
-              <Image source={item.img} style={styles.Image}></Image>
+              <Image source={props.item.img} style={styles.Image}></Image>
             </View>
           </TouchableOpacity>
         </View>
@@ -54,7 +54,7 @@ export function OppotunityPreview({ item }, props) {
               style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
             >
               {" "}
-              {item.rate}
+              {props.item.rate}
               {"%"}
             </Text>
           </View>
@@ -69,7 +69,7 @@ export function OppotunityPreview({ item }, props) {
               style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
             >
               {" "}
-              {item.duration}
+              {props.item.duration}
               {" months"}
             </Text>
           </View>
@@ -85,12 +85,12 @@ export function OppotunityPreview({ item }, props) {
             >
               {" "}
               {"$"}
-              {item.price}
+              {props.item.price}
             </Text>
           </View>
         </View>
         <ProgressBarComponent
-          data={item}
+          data={props.item}
           progressBarStyle={{
             backgroundColor: "#91D5FF",
           }}
