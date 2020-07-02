@@ -5,6 +5,7 @@ import {
   Text,
   StatusBar,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import InputField from "../components/InputField";
@@ -12,10 +13,10 @@ import Button from "../components/Button";
 import globalStyles from "../constants/globalStyles";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import axios from "axios";
 import fonts from "../constants/fonts";
 
-import baseUrl from "../provider/BaseUrl";
+// API connection
+import Strapi from "../api/Strapi";
 
 export default class LoginScreen extends React.Component {
   constructor(props) {
@@ -24,25 +25,35 @@ export default class LoginScreen extends React.Component {
       email: "",
       password: "",
       errorStr: "",
+      loading: "",
     };
   }
 
-  handleLogin() {
+  async handleLogin() {
     // Request API for login routes
-    axios
-      .post("http://64.227.20.176/auth/local", {
+    try {
+      this.setState({ loading: true });
+      const response = await Strapi.post("/auth/local", {
         identifier: this.state.email,
         password: this.state.password,
-      })
-      .then(() => {
-        this.props.navigation.navigate("Root");
-      })
-      .catch((error) => {
-        this.setState({
-          errorStr: "Sorry password or email is incorrect\n Forget password?",
-        });
-        console.log("An error occured", error.response);
       });
+      response
+        ? this.props.navigation.navigate("Root") ||
+          this.setState({ loading: false })
+        : null;
+      // if (response) {
+      //   this.props.navigation.navigate("Root");
+      //   this.setState({ loading: false });
+      // } else {
+      //   return null;
+      // }
+    } catch (error) {
+      this.setState({ loading: false });
+      this.setState({
+        errorStr: "Sorry password or email is incorrect\n Forget password?",
+      });
+      console.log("An error occured", error.response);
+    }
   }
 
   render() {
@@ -94,8 +105,7 @@ export default class LoginScreen extends React.Component {
                 touchableStyleProps={{ backgroundColor: "#52c41a" }}
                 touchableProps={{
                   onPress: () => {
-                    // this.handleLogin();
-                    this.props.navigation.navigate("Root");
+                    this.handleLogin();
                   },
                 }}
               />
@@ -108,6 +118,12 @@ export default class LoginScreen extends React.Component {
                 <Text style={globalStyles.btnLabel2}>Forgot password?</Text>
               </TouchableOpacity>
             </View>
+            {this.state.loading ? (
+              <View>
+                <ActivityIndicator size="large" color="white" />
+              </View>
+            ) : null}
+
             <View>
               <Text style={globalStyles.btnLabel2}>Login with</Text>
               <View style={{ flexDirection: "row", marginTop: 10 }}>
