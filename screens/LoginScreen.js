@@ -41,18 +41,11 @@ export default class LoginScreen extends React.Component {
         ? this.props.navigation.navigate("Root") ||
           this.setState({ loading: false })
         : null;
-      // if (response) {
-      //   this.props.navigation.navigate("Root");
-      //   this.setState({ loading: false });
-      // } else {
-      //   return null;
-      // }
     } catch (error) {
       this.setState({ loading: false });
       this.setState({
         errorStr: "Sorry password or email is incorrect\n Forget password?",
       });
-      console.log("An error occured", error.response);
     }
   }
 
@@ -125,7 +118,7 @@ export default class LoginScreen extends React.Component {
             ) : null}
 
             <View>
-              <Text style={globalStyles.btnLabel2}>Login with</Text>
+              {/* <Text style={globalStyles.btnLabel2}>Login with</Text>
               <View style={{ flexDirection: "row", marginTop: 10 }}>
                 <Button
                   body={
@@ -171,11 +164,11 @@ export default class LoginScreen extends React.Component {
                     },
                   }}
                 />
-              </View>
+              </View> */}
               <View
                 style={{
                   flexDirection: "row",
-                  justifyContent: "flex-end",
+                  justifyContent: "center",
                   alignItems: "center",
                   marginTop: 5,
                 }}

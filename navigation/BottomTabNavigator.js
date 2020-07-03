@@ -11,7 +11,7 @@ import { Button } from "react-native";
 import TargetInvestmentsScreen from "../screens/TargetInvestmentsScreen";
 
 const BottomTab = createBottomTabNavigator();
-const INITIAL_ROUTE_NAME = "Home";
+const INITIAL_ROUTE_NAME = "opportunities";
 
 export default function BottomTabNavigator({ navigation, route }) {
   // Set the header title on the parent stack navigator depending on the
@@ -21,9 +21,10 @@ export default function BottomTabNavigator({ navigation, route }) {
 
   return (
     <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
+      {/* Render Opportunity as the main HomeScreen */}
       <BottomTab.Screen
-        name="Home"
-        component={HomeScreen}
+        name="opportunities"
+        component={OppotunitiesScreen}
         options={{
           title: "Home",
           tabBarIcon: ({ focused }) => (
@@ -35,40 +36,25 @@ export default function BottomTabNavigator({ navigation, route }) {
           ),
         }}
       />
-      <BottomTab.Screen
-        name="opportunities"
-        component={OppotunitiesScreen}
-        options={{
-          title: "Opportunities",
-          tabBarIcon: ({ focused }) => (
-            <TabBarIcon
-              focused={focused}
-              name="lightbulb"
-              bottomNavStyleProps={{ marginBottom: -3 }}
-            />
-          ),
-        }}
-      />
+
+      {/* Search Screen */}
       <BottomTab.Screen
         name="target-investments"
         component={TargetInvestmentsScreen}
         options={{
-          title: "",
+          title: "Search",
           tabBarIcon: ({ focused }) => (
             <TabBarIcon
               focused={focused}
               name="search-dollar"
               bottomNavStyleProps={{
                 marginBottom: -3,
-                color: "white",
-                backgroundColor: "#4670d7",
-                borderRadius: 30,
-                padding: 10,
               }}
             ></TabBarIcon>
           ),
         }}
       />
+
       <BottomTab.Screen
         name="myinvestsments"
         component={MyInvestmentsScreen}
@@ -84,8 +70,8 @@ export default function BottomTabNavigator({ navigation, route }) {
         }}
       />
       <BottomTab.Screen
-        name="investment-card"
-        component={InvestmentsCardViewScreen}
+        name="home"
+        component={HomeScreen}
         options={{
           title: "Profile",
           tabBarIcon: ({ focused }) => (

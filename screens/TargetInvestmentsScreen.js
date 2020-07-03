@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, TextInput, StyleSheet, Picker } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Picker,
+  SafeAreaView,
+} from "react-native";
 
 // import components
 import { PageTitle } from "../components/PageTitle";
@@ -10,6 +17,8 @@ import Button from "../components/Button";
 import fonts from "../constants/fonts";
 import { ScrollView } from "react-native-gesture-handler";
 
+import Strapi from "../api/Strapi";
+
 export default class TargetInvestmentsScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -17,19 +26,34 @@ export default class TargetInvestmentsScreen extends React.Component {
       amount: "",
       index: 0,
       duration: 0,
-      risk: "",
+      risk_profile: "",
+      id: 1,
     };
   }
 
+  // componentDidMount() {
+  //   this.handleSubmit();
+  // }
+
   // Handle data submitted
-  handleSubmit() {
-    alert("Data " + JSON.stringify(this.state));
+  async handleSubmit() {
+    try {
+      const response = await Strapi.get(
+        "/opportunities?risk_profile=" + this.state.risk_profile
+      );
+      this.setState(response.data[0]);
+      console.log(response.data);
+    } catch (error) {
+      console.log("Error");
+    }
   }
 
   render() {
+    const result = this.setState;
     return (
-      <ScrollView style={{ flex: 1, backgroundColor: "white" }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
         <PageTitle title="Target Investments" />
+        {/* {result === 0 ? alert("Items found") : alert("not found")} */}
         <View style={styles.container}>
           <View style={styles.containerContent}>
             <Text style={styles.textHeading}>Enter investment amount</Text>
@@ -91,20 +115,20 @@ export default class TargetInvestmentsScreen extends React.Component {
               <Accordion
                 // Inherit prop from child
                 mode="dropdown"
-                selectedValue={this.state.risk}
+                selectedValue={this.state.risk_profile}
                 onValueChange={(itemValue) => {
-                  this.setState({ risk: itemValue });
+                  this.setState({ risk_profile: itemValue });
                 }}
               >
-                <Picker.Item label="Low" value="Low" />
-                <Picker.Item label="Medium" value="Medium" />
-                <Picker.Item label="High" value="High" />
+                <Picker.Item label="Low" value="low" />
+                <Picker.Item label="Medium" value="medium" />
+                <Picker.Item label="High" value="high" />
               </Accordion>
             </View>
           </View>
         </View>
-        <View style={styles.btnSearch}>
-          <Button
+        {/* <View style={styles.btnSearch}> */}
+        {/* <Button
             body={<Text style={globalStyles.btnLabel}>No result</Text>}
             touchableStyleProps={{ backgroundColor: "#91d5ff" }}
             touchableProps={{
@@ -112,8 +136,8 @@ export default class TargetInvestmentsScreen extends React.Component {
                 this.props.navigation.navigate("no-result");
               },
             }}
-          />
-        </View>
+          /> */}
+        {/* </View> */}
         <View style={styles.btnSearch}>
           <Button
             body={
@@ -127,7 +151,7 @@ export default class TargetInvestmentsScreen extends React.Component {
             }}
           />
         </View>
-      </ScrollView>
+      </SafeAreaView>
     );
   }
 }

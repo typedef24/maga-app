@@ -21,6 +21,7 @@ export default class SignUpScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      username: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -39,7 +40,7 @@ export default class SignUpScreen extends React.Component {
         this.setState({ loading: false });
       } else {
         const response = await Strapi.post("/auth/local/register", {
-          username: "",
+          username: this.state.username,
           email: this.state.email,
           password: this.state.password,
         });
@@ -96,6 +97,13 @@ export default class SignUpScreen extends React.Component {
             )}
 
             <View>
+              <Text style={globalStyles.label}>Username</Text>
+              <InputField
+                textContentType="emailAddress"
+                value={this.state.username}
+                placeholder="Your username"
+                onChangeText={(text) => this.setState({ username: text })}
+              />
               <Text style={globalStyles.label}>Email</Text>
               <InputField
                 textContentType="emailAddress"
@@ -161,7 +169,8 @@ export default class SignUpScreen extends React.Component {
                 <ActivityIndicator size="large" color="white" />
               </View>
             ) : null}
-            <View>
+
+            {/* <View>
               <Text style={globalStyles.btnLabel2}>Signup with</Text>
               <View style={{ flexDirection: "row", marginTop: 10 }}>
                 <Button
@@ -209,7 +218,7 @@ export default class SignUpScreen extends React.Component {
                   }}
                 />
               </View>
-            </View>
+            </View> */}
           </LinearGradient>
         </View>
       </SafeAreaView>

@@ -9,6 +9,9 @@ import Layout from "../constants/Layout";
 import Button from "../components/Button";
 import globalStyles from "../constants/globalStyles";
 
+// API connection
+import Strapi from "../api/Strapi";
+
 export default class FilterResultsScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -22,7 +25,7 @@ export default class FilterResultsScreen extends React.Component {
   }
 
   // Apply filter
-  handleFilter() {
+  async handleFilter() {
     alert("Data " + JSON.stringify(this.state));
   }
 
