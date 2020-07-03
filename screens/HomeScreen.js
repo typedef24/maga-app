@@ -1,7 +1,5 @@
-import * as WebBrowser from "expo-web-browser";
 import * as React from "react";
 import {
-  Image,
   Platform,
   StyleSheet,
   Text,
@@ -12,44 +10,79 @@ import {
 import { ScrollView } from "react-native-gesture-handler";
 import Icon from "@expo/vector-icons/Ionicons";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Ionicons } from "@expo/vector-icons";
 
 // import components
 import MyInvestmentPreview from "../components/MyInvestmentPreview";
 import MyInvestment from "../components/MyInvestment";
+import MenuDrawer from "../components/MenuDrawer";
+import { createDrawerNavigator, DrawerContent } from "@react-navigation/drawer";
 
-export default function HomeScreen({ navigation }) {
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.container}>
-        {Platform.OS === "android" && (
-          <StatusBar backgroundColor="#003A8C" barStyle="light-content" />
-        )}
-        <View style={styles.headerContainer}>
-          <View>
-            <Text style={styles.mainText}>MAGA</Text>
-          </View>
-          <View>
-            <Text style={styles.moneyValue}>CURRENT VALUE</Text>
-            <Text style={styles.currencyText}>usd 365456435</Text>
-          </View>
-          <MyInvestmentPreview />
-        </View>
-        <ScrollView>
-          <View style={styles.scrolHeading}>
-            <Text style={{ fontSize: 16, fontWeight: "bold" }}>Portfiolio</Text>
-            <TouchableOpacity
-              style={styles.linkText}
-              onPress={() => navigation.navigate("myinvestsments")}
+const Drawer = createDrawerNavigator();
+
+export default class HomeScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      menuVisible: false,
+    };
+  }
+
+  _handlePress = () =>
+    this.state({
+      expanded: !this.state.expanded,
+    });
+
+  render() {
+    return (
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={styles.container}>
+          {Platform.OS === "android" && (
+            <StatusBar backgroundColor="#003A8C" barStyle="light-content" />
+          )}
+          <View style={styles.headerContainer}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "stretch",
+              }}
             >
-              <Text>see all </Text>
-              <Icon name="ios-arrow-forward" size={20} />
-            </TouchableOpacity>
+              <View></View>
+              <View>
+                <Text style={styles.mainText}>MAGA</Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => this.setState({ menuVisible: true })}
+              >
+                <Ionicons name="md-menu" size={28} color="white" />
+              </TouchableOpacity>
+            </View>
+            <View style={{ alignItems: "center" }}>
+              <Text style={styles.moneyValue}>CURRENT VALUE</Text>
+              <Text style={styles.currencyText}>usd 365456435</Text>
+              <MyInvestmentPreview />
+            </View>
           </View>
-          <MyInvestment></MyInvestment>
-        </ScrollView>
-      </View>
-    </SafeAreaView>
-  );
+          <ScrollView>
+            <View style={styles.scrolHeading}>
+              <Text style={{ fontSize: 16, fontWeight: "bold" }}>
+                Portfiolio
+              </Text>
+              <TouchableOpacity
+                style={styles.linkText}
+                onPress={() => this.props.navigation.navigate("myinvestsments")}
+              >
+                <Text>see all </Text>
+                <Icon name="ios-arrow-forward" size={20} />
+              </TouchableOpacity>
+            </View>
+            <MyInvestment></MyInvestment>
+          </ScrollView>
+        </View>
+      </SafeAreaView>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -59,7 +92,7 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     backgroundColor: "#033c8d",
-    alignItems: "center",
+    // alignItems: "center",
     padding: 20,
   },
   mainText: {

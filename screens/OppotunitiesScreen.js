@@ -27,6 +27,9 @@ export default function OppotunitiesScreen({ navigation }) {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+      {Platform.OS === "android" && (
+        <StatusBar backgroundColor="white" barStyle="dark-content" />
+      )}
       <PageTitle title="Investment Opportunities" />
       <FlatList
         data={data}

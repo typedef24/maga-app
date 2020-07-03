@@ -1,10 +1,5 @@
 import * as React from "react";
-import {
-  View,
-  Text,
-  Modal,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, Modal, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import fonts from "../constants/fonts";
 
@@ -43,7 +38,7 @@ export default class ModalComponent extends React.Component {
                 alignItems: "center",
                 backgroundColor: "#bae7ff",
                 flexDirection: "row",
-                justifyContent: 'space-between'
+                justifyContent: "space-between",
               }}
             >
               <Text></Text>
@@ -61,8 +56,7 @@ export default class ModalComponent extends React.Component {
               </TouchableOpacity>
             </View>
 
-            { this.props.children }
-
+            {this.props.children}
           </View>
         </View>
       </Modal>

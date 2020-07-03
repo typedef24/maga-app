@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import React from "react";
+import { View, Text, StyleSheet, Image } from "react-native";
 import { PageTitle } from "../components/PageTitle";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import Iconfont from "@expo/vector-icons/FontAwesome5";
 
-import image from "../assets/images/dish.png";
 import Layout from "../constants/Layout";
 import ProgressBarComponent from "../components/ProgressBarComponent";
 import { ScrollView } from "react-native-gesture-handler";
@@ -16,7 +15,7 @@ export default function InvestmentsCardViewScreen({ route, navigation }) {
 
   return (
     <View style={{ flex: 1 }}>
-      <PageTitle title="Investment Opportunities" />
+      {/* <PageTitle title="Investment Opportunities" /> */}
       <ScrollView style={styles.containerMain}>
         <View style={styles.container}>
           <View style={styles.progress}>
