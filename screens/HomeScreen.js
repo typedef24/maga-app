@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Platform,
   StyleSheet,
@@ -7,82 +7,102 @@ import {
   StatusBar,
   View,
 } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView, FlatList } from "react-native-gesture-handler";
 import Icon from "@expo/vector-icons/Ionicons";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Ionicons } from "@expo/vector-icons";
+import { NavigationContainer, DrawerActions } from "@react-navigation/native";
 
 // import components
 import MyInvestmentPreview from "../components/MyInvestmentPreview";
 import MyInvestment from "../components/MyInvestment";
-import MenuDrawer from "../components/MenuDrawer";
-import { createDrawerNavigator, DrawerContent } from "@react-navigation/drawer";
+import { Ionicons } from "@expo/vector-icons";
 
-const Drawer = createDrawerNavigator();
+// API Connetion
+import Strapi from "../api/Strapi";
 
-export default class HomeScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      menuVisible: false,
-    };
-  }
+export default function HomeScreen({ route, navigation }) {
+  const [data, setData] = useState();
+  const [currentValue, setCurrentValue] = useState();
 
-  _handlePress = () =>
-    this.state({
-      expanded: !this.state.expanded,
-    });
+  useEffect(() => {
+    fetchInvestments();
+  }, []);
 
-  render() {
-    return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <View style={styles.container}>
-          {Platform.OS === "android" && (
-            <StatusBar backgroundColor="#003A8C" barStyle="light-content" />
-          )}
-          <View style={styles.headerContainer}>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "stretch",
-              }}
+  // Fetch for available investments
+  const fetchInvestments = async () => {
+    try {
+      const response = await Strapi.get("/investments", {
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTk0MDI0MzQwLCJleHAiOjE1OTY2MTYzNDB9.gu2xIUQTlwfJW0t6yo-JhjDZx3DaU0aLilNpj8jd3xw",
+        },
+      });
+      console.log(response.data);
+      setData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        {Platform.OS === "android" && (
+          <StatusBar backgroundColor="#003A8C" barStyle="light-content" />
+        )}
+        <View style={styles.headerContainer}>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "stretch",
+            }}
+          >
+            <View></View>
+            <View>
+              <Text style={styles.mainText}>MAGA</Text>
+            </View>
+            <TouchableOpacity
+              // onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+              onPress={() => alert("Clicked")}
             >
-              <View></View>
-              <View>
-                <Text style={styles.mainText}>MAGA</Text>
-              </View>
-              <TouchableOpacity
-                onPress={() => this.setState({ menuVisible: true })}
-              >
-                <Ionicons name="md-menu" size={28} color="white" />
-              </TouchableOpacity>
-            </View>
-            <View style={{ alignItems: "center" }}>
-              <Text style={styles.moneyValue}>CURRENT VALUE</Text>
-              <Text style={styles.currencyText}>usd 365456435</Text>
-              <MyInvestmentPreview />
-            </View>
+              <Ionicons name="md-menu" size={28} color="white" />
+            </TouchableOpacity>
           </View>
-          <ScrollView>
-            <View style={styles.scrolHeading}>
-              <Text style={{ fontSize: 16, fontWeight: "bold" }}>
-                Portfiolio
-              </Text>
-              <TouchableOpacity
-                style={styles.linkText}
-                onPress={() => this.props.navigation.navigate("myinvestsments")}
-              >
-                <Text>see all </Text>
-                <Icon name="ios-arrow-forward" size={20} />
-              </TouchableOpacity>
-            </View>
-            <MyInvestment></MyInvestment>
-          </ScrollView>
+          <View style={{ alignItems: "center" }}>
+            <Text style={styles.moneyValue}>CURRENT VALUE</Text>
+            <Text style={styles.currencyText}>usd 36545643</Text>
+            <MyInvestmentPreview />
+          </View>
         </View>
-      </SafeAreaView>
-    );
-  }
+        <View>
+          <View style={styles.scrolHeading}>
+            <Text style={{ fontSize: 16, fontWeight: "bold" }}>Portfiolio</Text>
+            <TouchableOpacity
+              style={styles.linkText}
+              onPress={() => navigation.navigate("myinvestsments")}
+            >
+              <Text>see all </Text>
+              <Icon name="ios-arrow-forward" size={20} />
+            </TouchableOpacity>
+          </View>
+          <FlatList
+            data={data}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => (
+              <MyInvestment
+                item={item}
+                touchableProps={{
+                  onPress: () =>
+                    navigation.navigate("details-screen", { item }),
+                }}
+              />
+            )}
+          />
+        </View>
+      </View>
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({

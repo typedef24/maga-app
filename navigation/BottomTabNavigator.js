@@ -4,10 +4,8 @@ import * as React from "react";
 import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
 import OppotunitiesScreen from "../screens/OppotunitiesScreen";
-import InvestmentsCardViewScreen from "../screens/InvestmentsCardViewScreen";
 import MyInvestmentsScreen from "../screens/MyInvestmentsScreen";
 
-import { Button } from "react-native";
 import TargetInvestmentsScreen from "../screens/TargetInvestmentsScreen";
 
 const BottomTab = createBottomTabNavigator();
