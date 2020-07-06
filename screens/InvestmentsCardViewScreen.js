@@ -117,7 +117,7 @@ export default function InvestmentsCardViewScreen({ route, navigation }) {
           />
         </View>
         <Button
-          onPress={() => navigation.navigate("signup")}
+          // onPress={() => navigation.navigate("signup")}
           body={<Text style={globalStyles.btnLabel}>Explore</Text>}
           touchableStyleProps={{
             backgroundColor: "#52c41a",

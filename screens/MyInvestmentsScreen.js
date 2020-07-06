@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  SafeAreaView,
-  Platform,
-  StatusBar,
-} from "react-native";
+import { StyleSheet, SafeAreaView, Platform, StatusBar } from "react-native";
 
 // Import components
 import MyInvestment from "../components/MyInvestment";
-import { ScrollView, FlatList } from "react-native-gesture-handler";
+import { FlatList } from "react-native-gesture-handler";
 import { PageTitle } from "../components/PageTitle";
 
 // API connection
@@ -19,10 +12,23 @@ import Strapi from "../api/Strapi";
 export default function MyInvestmentsScreen({ navigation }) {
   const [data, setData] = useState();
 
+  useEffect(() => {
+    fetchInvestments();
+  }, []);
+
   // Fetch for available investments
   const fetchInvestments = async () => {
     try {
-      const response = await Strapi.get("/investments");
+      const response = await Strapi.get("/investments", {
+        // headers: {
+        //   Authorization: `token ${access_token}`,
+        // },
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTk0MDI0MzQwLCJleHAiOjE1OTY2MTYzNDB9.gu2xIUQTlwfJW0t6yo-JhjDZx3DaU0aLilNpj8jd3xw",
+        },
+      });
+      console.log(response.data);
       setData(response.data);
     } catch (error) {
       console.log(error);
@@ -35,7 +41,7 @@ export default function MyInvestmentsScreen({ navigation }) {
         <StatusBar backgroundColor="white" barStyle="dark-content" />
       )}
       <PageTitle title="My Investments" />
-      {/* <FlatList
+      <FlatList
         data={data}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
@@ -46,13 +52,6 @@ export default function MyInvestmentsScreen({ navigation }) {
             }}
           />
         )}
-      /> */}
-      <MyInvestment
-        touchableProps={{
-          onPress: () => {
-            navigation.navigate("details-screen");
-          },
-        }}
       />
     </SafeAreaView>
   );

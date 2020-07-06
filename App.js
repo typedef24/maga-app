@@ -3,8 +3,9 @@ import {
   createStackNavigator,
   CardStyleInterpolators,
 } from "@react-navigation/stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import React, { useState } from "react";
-import { Platform, StatusBar, StyleSheet, View } from "react-native";
+import { Platform, StatusBar, StyleSheet, View, Text } from "react-native";
 
 import useCachedResources from "./hooks/useCachedResources";
 import BottomTabNavigator from "./navigation/BottomTabNavigator";
@@ -38,6 +39,7 @@ import InvestmentPerformanceScreen from "./screens/InvestmentPerformance";
 import RiskProfilesScreen from "./screens/RiskProfilesScreen";
 import CompareTableScreen from "./screens/CompareTableScreen";
 import AsyncStorage from "@react-native-community/async-storage";
+import DrawerNavigation from "./navigation/DrawerNavigation";
 
 const Stack = createStackNavigator();
 
@@ -170,6 +172,9 @@ export default function App({ props }) {
               }}
             />
 
+            {/* Nest Drawer Navigation */}
+            <Stack.Screen name="feed" component={DrawerNavigation} />
+
             {/* Bottom Nav */}
             <Stack.Screen
               name="Root"
@@ -179,6 +184,7 @@ export default function App({ props }) {
               }}
             />
             <Stack.Screen name="opportunities" component={BottomTabNavigator} />
+
             <Stack.Screen
               name="signup"
               component={SignUpScreen}

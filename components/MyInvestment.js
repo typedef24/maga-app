@@ -1,26 +1,35 @@
 import * as React from "react";
 import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import Icon from "@expo/vector-icons/FontAwesome";
-// Import image
-import Image1 from "../assets/images/investment.png";
-import InvestmentDetailScreen from "../screens/InvestmentDetailsScreen";
 
 export default function MyInvestment(props) {
   return (
     <View>
-      {/* Bullish statistics */}
       {/* FIrst section */}
-      <View style={[styles.container, styles.shadowStyle]}>
+      <View
+        style={[
+          styles.shadowStyle,
+          props.item.grow_rate <= 20
+            ? styles.dangerContainer
+            : styles.container,
+        ]}
+      >
         <TouchableOpacity {...props.touchableProps}>
           <View style={styles.body}>
-            <Text style={{ width: "90%" }}>
-              Real estate investments funds in the dubai, los Angeles, new York
-              and sub-saharan Africa.
-            </Text>
-            <Image source={Image1} style={styles.Image}></Image>
+            <Text style={{ width: "90%" }}>{props.item.opportunity.title}</Text>
+            <Image
+              source={props.item.opportunity.img}
+              style={styles.Image}
+            ></Image>
           </View>
         </TouchableOpacity>
-        <View style={styles.statistics}>
+        <View
+          style={[
+            props.item.grow_rate <= 20
+              ? styles.dangerStatistics
+              : styles.statistics,
+          ]}
+        >
           <View style={styles.iconText}>
             <Icon
               name="line-chart"
@@ -30,7 +39,8 @@ export default function MyInvestment(props) {
             />
             <Text style={{ color: "#fff", fontSize: 13, fontWeight: "bold" }}>
               {" "}
-              20.5{"%"}
+              {props.item.grow_rate}
+              {"%"}
             </Text>
           </View>
           <View style={styles.iconText}>
@@ -40,7 +50,14 @@ export default function MyInvestment(props) {
               color="#fff"
               style={{ paddingTop: 4 }}
             />
-            <Text style={{ color: "#fff", fontSize: 13, fontWeight: "bold" }}>
+            <Text
+              style={{
+                color: "#fff",
+                fontSize: 13,
+                fontWeight: "bold",
+                alignItems: "center",
+              }}
+            >
               {" "}
               6 {"Days ago"}
             </Text>
@@ -54,115 +71,8 @@ export default function MyInvestment(props) {
             />
             <Text style={{ color: "#fff", fontSize: 13, fontWeight: "bold" }}>
               {" "}
-              {"$"}4,300
-            </Text>
-          </View>
-        </View>
-      </View>
-
-      {/* Second Scetion */}
-      <View style={[styles.container, styles.shadowStyle]}>
-        <TouchableOpacity>
-          <View style={styles.body}>
-            <View style={{ width: "90%" }}>
-              <Text style={styles.headingMain}>AWAA AND SONS LTD</Text>
-              <Text style={styles.textMain}>
-                Real estate investments funds in the dubai, los Angeles, new
-                York and sub-saharan Africa.
-              </Text>
-            </View>
-            <Image source={Image1} style={styles.Image}></Image>
-          </View>
-        </TouchableOpacity>
-        <View style={styles.statistics}>
-          <View style={styles.iconText}>
-            <Icon
-              name="line-chart"
-              size={20}
-              color="#fff"
-              style={{ paddingTop: 4 }}
-            />
-            <Text style={{ color: "#fff", fontSize: 13, fontWeight: "bold" }}>
-              {" "}
-              0.8{"%"}
-            </Text>
-          </View>
-          <View style={styles.iconText}>
-            <Icon
-              name="calendar"
-              size={20}
-              color="#fff"
-              style={{ paddingTop: 4 }}
-            />
-            <Text style={{ color: "#fff", fontSize: 13, fontWeight: "bold" }}>
-              {" "}
-              6 {"Days ago"}
-            </Text>
-          </View>
-          <View style={styles.iconText}>
-            <Icon
-              name="money"
-              size={20}
-              color="#fff"
-              style={{ paddingTop: 4 }}
-            />
-            <Text style={{ color: "#fff", fontSize: 13, fontWeight: "bold" }}>
-              {" "}
-              {"$"}2,300
-            </Text>
-          </View>
-        </View>
-      </View>
-
-      {/* Bearish Statistics */}
-      <View style={[styles.dangerContainer, styles.shadowStyle]}>
-        <TouchableOpacity>
-          <View style={styles.body}>
-            <View style={{ width: "90%" }}>
-              <Text style={styles.headingMain}>BIGSITTER AND BRO LLC</Text>
-              <Text style={styles.textMain}>
-                Real estate investments funds in the dubai, los Angeles, new
-                York and sub-saharan Africa.
-              </Text>
-            </View>
-            <Image source={Image1} style={styles.Image}></Image>
-          </View>
-        </TouchableOpacity>
-        <View style={styles.dangerStatistics}>
-          <View style={styles.iconText}>
-            <Icon
-              name="line-chart"
-              size={20}
-              color="#fff"
-              style={{ paddingTop: 4 }}
-            />
-            <Text style={{ color: "#fff", fontSize: 13, fontWeight: "bold" }}>
-              {" "}
-              -0.5{"%"}
-            </Text>
-          </View>
-          <View style={styles.iconText}>
-            <Icon
-              name="calendar"
-              size={20}
-              color="#fff"
-              style={{ paddingTop: 4 }}
-            />
-            <Text style={{ color: "#fff", fontSize: 13, fontWeight: "bold" }}>
-              {" "}
-              28 {"Days ago"}
-            </Text>
-          </View>
-          <View style={styles.iconText}>
-            <Icon
-              name="money"
-              size={20}
-              color="#fff"
-              style={{ paddingTop: 4 }}
-            />
-            <Text style={{ color: "#fff", fontSize: 13, fontWeight: "bold" }}>
-              {" "}
-              {"$"}1,300
+              {"$"}
+              {props.item.current_earnings}
             </Text>
           </View>
         </View>
@@ -190,13 +100,18 @@ const styles = StyleSheet.create({
     borderTopColor: "#003A8C",
     margin: 5,
   },
+  dangerContainer: {
+    borderTopWidth: 3,
+    borderTopColor: "red",
+    margin: 5,
+  },
   shadowStyle: elevationShadowStyle(5),
   body: {
     flexDirection: "row",
     paddingTop: 30,
     paddingBottom: 10,
-    paddingRight: 10,
-    paddingLeft: 5,
+    paddingRight: 20,
+    paddingLeft: 10,
     backgroundColor: "#F4FBFF",
   },
   headingMain: {
@@ -216,7 +131,7 @@ const styles = StyleSheet.create({
   },
   Image: {
     alignItems: "center",
-    marginTop: 10,
+    marginTop: 5,
   },
 
   // style for bearish statistics

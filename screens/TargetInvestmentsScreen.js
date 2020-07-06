@@ -43,13 +43,15 @@ export default class TargetInvestmentsScreen extends React.Component {
       );
       this.setState(response.data[0]);
       console.log(response.data);
+      response.data[0] != null
+        ? this.props.navigation.navigate("opportunities")
+        : this.props.navigation.navigate("no-result");
     } catch (error) {
       console.log("Error");
     }
   }
 
   render() {
-    const result = this.setState;
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
         <PageTitle title="Target Investments" />

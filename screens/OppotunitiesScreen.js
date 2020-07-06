@@ -13,13 +13,14 @@ export default function OppotunitiesScreen({ navigation }) {
 
   useEffect(() => {
     fetchOpportunities();
-  });
+  }, []);
 
   // Fectch available Opportunities
   const fetchOpportunities = async () => {
     try {
       const response = await Strapi.get("/opportunities");
       setData(response.data);
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }

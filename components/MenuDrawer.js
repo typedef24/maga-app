@@ -1,116 +1,28 @@
 import React, { Component } from "react";
-import { View, StyleSheet } from "react-native";
-import { DrawerItem, DrawerContentScrollView } from "@react-navigation/drawer";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import {
-  useTheme,
-  Avatar,
-  Title,
-  Caption,
-  Paragraph,
-  Drawer,
-  Text,
-  TouchableRipple,
-  Switch,
-  Modal,
-} from "react-native-paper";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+  DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem,
+} from "@react-navigation/drawer";
+import { Ionicons } from "@expo/vector-icons";
+import { NavigationContainer } from "@react-navigation/native";
+import HomeScreen from "../screens/HomeScreen";
 
-export default class MenuDrawer extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <Modal
-        animationType="slide"
-        transparent={true}
-        {...this.props} // Inherit any props passed to it e.g visible
-      >
-        <DrawerContentScrollView {...props}>
-          <View style={styles.drawerContent}>
-            <View style={styles.userInfoSection}>
-              <Avatar.Image
-                source={{
-                  uri:
-                    "https://pbs.twimg.com/profile_images/952545910990495744/b59hSXUd_400x400.jpg",
-                }}
-                size={50}
-              />
-              <Title style={styles.title}>Dawid Urbaniak</Title>
-              <Caption style={styles.caption}>@trensik</Caption>
-              <View style={styles.row}>
-                <View style={styles.section}>
-                  <Paragraph style={[styles.paragraph, styles.caption]}>
-                    202
-                  </Paragraph>
-                  <Caption style={styles.caption}>Following</Caption>
-                </View>
-                <View style={styles.section}>
-                  <Paragraph style={[styles.paragraph, styles.caption]}>
-                    159
-                  </Paragraph>
-                  <Caption style={styles.caption}>Followers</Caption>
-                </View>
-              </View>
-            </View>
-            <Drawer.Section style={styles.drawerSection}>
-              <DrawerItem
-                icon={({ color, size }) => (
-                  <MaterialCommunityIcons
-                    name="account-outline"
-                    color={color}
-                    size={size}
-                  />
-                )}
-                label="Profile"
-                onPress={() => {}}
-              />
-              <DrawerItem
-                icon={({ color, size }) => (
-                  <MaterialCommunityIcons
-                    name="tune"
-                    color={color}
-                    size={size}
-                  />
-                )}
-                label="Preferences"
-                onPress={() => {}}
-              />
-              <DrawerItem
-                icon={({ color, size }) => (
-                  <MaterialCommunityIcons
-                    name="bookmark-outline"
-                    color={color}
-                    size={size}
-                  />
-                )}
-                label="Bookmarks"
-                onPress={() => {}}
-              />
-            </Drawer.Section>
-            <Drawer.Section title="Preferences">
-              <TouchableRipple onPress={() => {}}>
-                <View style={styles.preference}>
-                  <Text>Dark Theme</Text>
-                  <View pointerEvents="none">
-                    <Switch value={false} />
-                  </View>
-                </View>
-              </TouchableRipple>
-              <TouchableRipple onPress={() => {}}>
-                <View style={styles.preference}>
-                  <Text>RTL</Text>
-                  <View pointerEvents="none">
-                    <Switch value={false} />
-                  </View>
-                </View>
-              </TouchableRipple>
-            </Drawer.Section>
-          </View>
-        </DrawerContentScrollView>
-      </Modal>
-    );
-  }
+export default function MenuDrawer(props) {
+  return (
+    <DrawerContentScrollView {...props}>
+      <DrawerItemList {...props} />
+      <DrawerItem
+        label="Close drawer"
+        onPress={() => props.navigation.closeDrawer()}
+      />
+      <DrawerItem
+        label="Toggle drawer"
+        onPress={() => props.navigation.toggleDrawer()}
+      />
+    </DrawerContentScrollView>
+  );
 }
 
 const styles = StyleSheet.create({

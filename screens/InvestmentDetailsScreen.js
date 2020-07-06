@@ -201,17 +201,43 @@ export default function InvestmentDetailsScreen({ route, navigation }) {
             }}
           />
         </View>
-        <Button
-          onPress={() => navigation.navigate("signup")}
-          body={<Text style={globalStyles.btnLabel}>Invest ${item.price}</Text>}
-          touchableStyleProps={{
-            backgroundColor: "#52c41a",
-            marginRight: 5,
-            marginLeft: 5,
-            marginTop: 20,
-            marginBottom: 10,
-          }}
-        />
+        {item.status === "ongoing" ? (
+          <Button
+            touchableProps={{
+              onPress: () => {
+                navigation.navigate("paymentScreen", { item });
+              },
+            }}
+            body={
+              <Text style={globalStyles.btnLabel}>Invest ${item.price}</Text>
+            }
+            touchableStyleProps={{
+              backgroundColor: "#52c41a",
+              marginRight: 5,
+              marginLeft: 5,
+              marginTop: 20,
+              marginBottom: 10,
+            }}
+          />
+        ) : (
+          <Button
+            touchableProps={{
+              onPress: () => {
+                alert(
+                  "This investment has been closed, Please invest on and ongoing investment"
+                );
+              },
+            }}
+            body={<Text style={globalStyles.btnLabel}>Investment Closed</Text>}
+            touchableStyleProps={{
+              backgroundColor: "red",
+              marginRight: 5,
+              marginLeft: 5,
+              marginTop: 20,
+              marginBottom: 10,
+            }}
+          />
+        )}
       </ScrollView>
     </View>
   );
