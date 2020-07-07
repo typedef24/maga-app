@@ -20,12 +20,8 @@ export default function MyInvestmentsScreen({ navigation }) {
   const fetchInvestments = async () => {
     try {
       const response = await Strapi.get("/investments", {
-        // headers: {
-        //   Authorization: `token ${access_token}`,
-        // },
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTk0MDI0MzQwLCJleHAiOjE1OTY2MTYzNDB9.gu2xIUQTlwfJW0t6yo-JhjDZx3DaU0aLilNpj8jd3xw",
+          Authorization: `Bearer ${store.getState().jwt}`,
         },
       });
       console.log(response.data);

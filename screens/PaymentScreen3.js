@@ -26,6 +26,7 @@ export default class PaymentScreen extends React.Component {
     this.state = {
       modalVisible: false,
       paymentMethod: props.route.params.paymentMethod,
+      item: props.route.params.item,
     };
   }
 
@@ -49,8 +50,7 @@ export default class PaymentScreen extends React.Component {
               }}
             >
               <Text style={{ fontSize: fonts.medium, flex: 5 }}>
-                Real estate investments funds in the dubai, los Angeles, new
-                York and sub-saharan Africa.
+                {this.state.item.title}
               </Text>
               <Image style={styles.sliderImage} source={Image1} />
             </View>
@@ -69,7 +69,7 @@ export default class PaymentScreen extends React.Component {
                   color="white"
                   style={{ paddingRight: 5 }}
                 />
-                <Text style={{ color: "white" }}>15%</Text>
+                <Text style={{ color: "white" }}>{this.state.item.rate}%</Text>
               </View>
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <MaterialCommunityIcons
@@ -78,7 +78,9 @@ export default class PaymentScreen extends React.Component {
                   size={24}
                   color="white"
                 />
-                <Text style={{ color: "white" }}>40 months</Text>
+                <Text style={{ color: "white" }}>
+                  {this.state.item.duration} months
+                </Text>
               </View>
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <FontAwesome5
@@ -87,7 +89,7 @@ export default class PaymentScreen extends React.Component {
                   size={20}
                   color="white"
                 />
-                <Text style={{ color: "white" }}>$2 000</Text>
+                <Text style={{ color: "white" }}>${this.state.item.price}</Text>
               </View>
             </View>
 
@@ -101,7 +103,9 @@ export default class PaymentScreen extends React.Component {
               }}
             >
               <Text>Total Amount:</Text>
-              <Text style={{ fontWeight: "bold" }}>USD 2,000</Text>
+              <Text style={{ fontWeight: "bold" }}>
+                USD {this.state.item.price}
+              </Text>
             </View>
             <View
               style={{
