@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { Text, SafeAreaView, View, StyleSheet, Image } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 
@@ -10,54 +10,24 @@ import fonts from "../constants/fonts";
 
 import img from "../assets/images/dish.png";
 
-export default function CompareInvestmentsScreen() {
-  const investments = [
-    {
-      id: "1",
-      title:
-        "Real estate investments funds in the dubai, los Angeles, new York and sub-saharan Africa.",
-      status: "ongoing",
-      img: require("../assets/images/dish.png"),
-      rate: 90,
-      duration: 6,
-      total: 2000,
-    },
-    {
-      id: "2",
-      title:
-        "Online store specialized in casual outfits for both men and women of all sizes.",
-      status: "ongoing",
-      img: require("../assets/images/dish.png"),
-      rate: 90,
-      duration: 6,
-      total: 2000,
-    },
-    {
-      id: "3",
-      title:
-        "Restaurant chain specialized in Mexican, Irish and African dishes.",
-      status: "ongoing",
-      img: require("../assets/images/dish.png"),
-      rate: 90,
-      duration: 6,
-      total: 2000,
-    },
-    {
-      id: "4",
-      title:
-        "Real estate investments funds in the dubai, los Angeles, new York and sub-saharan Africa.",
-      status: "ongoing",
-      img: require("../assets/images/dish.png"),
-      rate: 90,
-      duration: 6,
-      total: 2000,
-    },
-  ];
+export default function CompareInvestmentsScreen({ route }) {
+  const data = route.params.data;
+  const [compareOne, setCompareOne] = useState();
+  const [compareTwo, setCompareTwo] = useState();
+  const [compareThree, setCompareThree] = useState();
+  const [compareFour, setCompareFour] = useState();
+
   return (
     <SafeAreaView style={styles.containerMain}>
       <FlatList
-        data={investments}
-        renderItem={({ item }) => <CompareInvestmentsComponent item={item} />}
+        data={[data]}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <CompareInvestmentsComponent
+            item={item}
+            onClickFnx={() => setCompareOne}
+          />
+        )}
       />
       <View style={styles.container}>
         <View style={styles.boxContainer}>

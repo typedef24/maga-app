@@ -14,6 +14,7 @@ import globalStyles from "../constants/globalStyles";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import fonts from "../constants/fonts";
+import AsyncStorage from "@react-native-community/async-storage";
 
 // API connection
 import Strapi from "../api/Strapi";
@@ -26,8 +27,13 @@ export default class LoginScreen extends React.Component {
       password: "",
       errorStr: "",
       loading: "",
+      isLoggedIn: false,
     };
   }
+
+  // componentWillMount() {
+  //   this.setState({ isLoggedIn: this.checkLoggedIn() });
+  // }
 
   async handleLogin() {
     // Request API for login routes
@@ -37,10 +43,17 @@ export default class LoginScreen extends React.Component {
         identifier: this.state.email,
         password: this.state.password,
       });
-      response
-        ? this.props.navigation.navigate("Root") ||
-          this.setState({ loading: false })
-        : null;
+      if (response) {
+        console.log(response);
+        this.props.navigation.navigate("Root");
+        this.setState({ loading: false });
+        await AsyncStorage.setItem(
+          "loggedInUser",
+          JSON.stringify(response.data)
+        );
+      } else {
+        return null;
+      }
     } catch (error) {
       this.setState({ loading: false });
       this.setState({
@@ -48,6 +61,27 @@ export default class LoginScreen extends React.Component {
       });
     }
   }
+
+  // Check Logged In
+  // async checkLoggedIn() {
+  //   //alert("Hello");
+  //   try {
+  //     const jsonValue = await AsyncStorage.getItem("loggedInUser");
+  //     jsonValue != null ? JSON.parse(jsonValue) : null;
+  //     if (jsonValue) {
+  //       //not first time access
+  //       return true;
+  //     } else {
+  //       //store in AsyncStorage against next time lunch
+  //       return false;
+  //     }
+  //   } catch (e) {
+  //     // error reading value
+  //     console.warn(
+  //       "Error reading from AsyncStorage! Hope your device supports AsyncStorage?"
+  //     );
+  //   }
+  // }
 
   render() {
     return (

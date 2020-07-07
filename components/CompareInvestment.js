@@ -41,7 +41,7 @@ const CompareInvestmentsComponent = ({ item }) => {
               <Text style={{ width: Layout.window.width * 0.8 }}>
                 {item.title}
               </Text>
-              <Image source={item.img} style={styles.Image}></Image>
+              <Image source={item.img} style={styles.Image} />
             </View>
           </View>
         </View>
@@ -88,7 +88,7 @@ const CompareInvestmentsComponent = ({ item }) => {
             >
               {" "}
               {"$"}
-              {item.total}
+              {item.price}
             </Text>
           </View>
         </View>
@@ -230,6 +230,8 @@ const styles = StyleSheet.create({
   },
   Image: {
     alignItems: "center",
+    height: 10,
+    width: 10,
   },
   compareStyle: {
     backgroundColor: "#f5f5f5",

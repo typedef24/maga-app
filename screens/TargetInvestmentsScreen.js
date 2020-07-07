@@ -31,20 +31,23 @@ export default class TargetInvestmentsScreen extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   this.handleSubmit();
-  // }
-
   // Handle data submitted
   async handleSubmit() {
     try {
-      const response = await Strapi.get(
-        "/opportunities?risk_profile=" + this.state.risk_profile
-      );
+      const response = await Strapi.get("/opportunities", {
+        params: {
+          risk_profile_in: this.state.risk_profile,
+          // success_index_lte: this.state.index,
+          // investment_time_lte: this.state.duration,
+          // price_lte: this.state.amount,
+        },
+      });
       this.setState(response.data[0]);
       console.log(response.data);
       response.data[0] != null
-        ? this.props.navigation.navigate("opportunities")
+        ? this.props.navigation.navigate("compare-investments", {
+            data: this.state,
+          })
         : this.props.navigation.navigate("no-result");
     } catch (error) {
       console.log("Error");
@@ -129,17 +132,6 @@ export default class TargetInvestmentsScreen extends React.Component {
             </View>
           </View>
         </View>
-        {/* <View style={styles.btnSearch}> */}
-        {/* <Button
-            body={<Text style={globalStyles.btnLabel}>No result</Text>}
-            touchableStyleProps={{ backgroundColor: "#91d5ff" }}
-            touchableProps={{
-              onPress: () => {
-                this.props.navigation.navigate("no-result");
-              },
-            }}
-          /> */}
-        {/* </View> */}
         <View style={styles.btnSearch}>
           <Button
             body={

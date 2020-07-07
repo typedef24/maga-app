@@ -20,7 +20,7 @@ export default function OppotunitiesScreen({ navigation }) {
     try {
       const response = await Strapi.get("/opportunities");
       setData(response.data);
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       console.log(error);
     }

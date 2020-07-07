@@ -1,4 +1,4 @@
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, StackActions } from "@react-navigation/native";
 import {
   createStackNavigator,
   CardStyleInterpolators,
@@ -40,13 +40,16 @@ import RiskProfilesScreen from "./screens/RiskProfilesScreen";
 import CompareTableScreen from "./screens/CompareTableScreen";
 import AsyncStorage from "@react-native-community/async-storage";
 import DrawerNavigation from "./navigation/DrawerNavigation";
+import ResultScreen from "./screens/ResultsScreen";
 
 const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 export default function App({ props }) {
   const isLoadingComplete = useCachedResources(1);
 
   const [isInstalling, setIsInstalling] = useState();
+  const [isLoggedIn, setIsLoggedIn] = useState();
   //setIsInstalling(1);
   //alert(isInstalling);
 
@@ -81,7 +84,30 @@ export default function App({ props }) {
         );
       }
     }
+    // Check Logged In
+    async function checkLoggedIn() {
+      //alert("Hello");
+      try {
+        const jsonValue = await AsyncStorage.getItem("loggedInUser");
+        jsonValue != null ? JSON.parse(jsonValue) : null;
+        if (jsonValue) {
+          //not first time access
+          // return true;
+          setIsLoggedIn(true);
+        } else {
+          //store in AsyncStorage against next time lunch
+          // return false;
+          setIsLoggedIn(false);
+        }
+      } catch (e) {
+        // error reading value
+        console.warn(
+          "Error reading from AsyncStorage! Hope your device supports AsyncStorage?"
+        );
+      }
+    }
 
+    // checkLoggedIn();
     checkFirstInstall();
   }, []);
 
@@ -134,6 +160,7 @@ export default function App({ props }) {
                 }}
               />
             )}
+
             <Stack.Screen
               name="onboard2"
               component={OnboardTwoScreen}
@@ -173,7 +200,7 @@ export default function App({ props }) {
             />
 
             {/* Nest Drawer Navigation */}
-            <Stack.Screen name="feed" component={DrawerNavigation} />
+            {/* <Stack.Screen name="feed" component={DrawerNavigation} /> */}
 
             {/* Bottom Nav */}
             <Stack.Screen
@@ -183,7 +210,16 @@ export default function App({ props }) {
                 headerShown: false,
               }}
             />
+
             <Stack.Screen name="opportunities" component={BottomTabNavigator} />
+
+            {/* <Stack.Screen
+              name="home"
+              component={HomeScreen}
+              options={{
+                headerShown: true,
+              }}
+            ></Stack.Screen> */}
 
             <Stack.Screen
               name="signup"
@@ -306,6 +342,14 @@ export default function App({ props }) {
               }}
             />
 
+            <Stack.Screen
+              name="result-screen"
+              component={ResultScreen}
+              options={{
+                title: "Results",
+              }}
+            />
+
             {/* Invitation page */}
             <Stack.Screen
               name="invite-others"
@@ -352,6 +396,7 @@ export default function App({ props }) {
                 title: "Risk Profile",
               }}
             />
+            <Stack.Screen name="home" component={DrawerNavigation} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>
