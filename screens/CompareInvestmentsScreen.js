@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Text, SafeAreaView, View, StyleSheet, Image } from "react-native";
+import {
+  Text,
+  SafeAreaView,
+  View,
+  StyleSheet,
+  Image,
+  Alert,
+} from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 
 import CompareInvestmentsComponent from "../components/CompareInvestment";
@@ -7,6 +14,7 @@ import Button from "../components/Button";
 import globalStyles from "../constants/globalStyles";
 import Layout from "../constants/Layout";
 import fonts from "../constants/fonts";
+import AppConstants from "../constants/AppConstants";
 
 import img from "../assets/images/dish.png";
 
@@ -28,10 +36,19 @@ export default function CompareInvestmentsScreen({ route }) {
           <CompareInvestmentsComponent
             item={item}
             onClickFnx={() => {
-              //alert("Clicked!!");
-              setCompareArray("A");
-              console.log("Compare Array: " + compareArray);
-              //console.log("Item.image: " + item.image);
+              //ensure compareArray has less than 4 items
+              if (compareArray.length < 4) {
+                let tempCompareArray = compareArray.slice(); //copy compareArray to a temporal array
+                tempCompareArray.push(item); //add new item to tempCompareArray
+                setCompareArray(tempCompareArray);
+                console.log("Compare Array: " + JSON.stringify(compareArray));
+                console.log("Item added to state: " + JSON.stringify(item));
+              } else {
+                Alert.alert(
+                  "NOTICE!",
+                  "You can add a maximum of four investments to compare."
+                );
+              }
             }}
           />
         )}
@@ -39,32 +56,48 @@ export default function CompareInvestmentsScreen({ route }) {
       <View style={styles.container}>
         <View style={styles.boxContainer}>
           <TouchableOpacity style={styles.boxSimple}>
-            <Image
-              source={img}
-              style={{ height: 30, width: 30 }}
-              resizeMode="cover"
-            />
+            {compareArray[0] && (
+              <Image
+                source={{
+                  uri: AppConstants.strapiBaseURL + compareArray[0].img.url,
+                }}
+                style={{ height: 30, width: 30 }}
+                resizeMode="cover"
+              />
+            )}
           </TouchableOpacity>
           <TouchableOpacity style={styles.boxSimple}>
-            <Image
-              source={img}
-              style={{ height: 30, width: 30 }}
-              resizeMode="cover"
-            />
+            {compareArray[1] && (
+              <Image
+                source={{
+                  uri: AppConstants.strapiBaseURL + compareArray[1].img.url,
+                }}
+                style={{ height: 30, width: 30 }}
+                resizeMode="cover"
+              />
+            )}
           </TouchableOpacity>
           <TouchableOpacity style={styles.boxSimple}>
-            <Image
-              source={img}
-              style={{ height: 30, width: 30 }}
-              resizeMode="cover"
-            />
+            {compareArray[2] && (
+              <Image
+                source={{
+                  uri: AppConstants.strapiBaseURL + compareArray[2].img.url,
+                }}
+                style={{ height: 30, width: 30 }}
+                resizeMode="cover"
+              />
+            )}
           </TouchableOpacity>
           <TouchableOpacity style={styles.boxSimple}>
-            <Image
-              source={img}
-              style={{ height: 30, width: 30 }}
-              resizeMode="cover"
-            />
+            {compareArray[3] && (
+              <Image
+                source={{
+                  uri: AppConstants.strapiBaseURL + compareArray[3].img.url,
+                }}
+                style={{ height: 30, width: 30 }}
+                resizeMode="cover"
+              />
+            )}
           </TouchableOpacity>
         </View>
         <View>

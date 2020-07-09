@@ -8,6 +8,7 @@ import Layout from "../constants/Layout";
 import fonts from "../constants/fonts";
 import Button from "../components/Button";
 import globalStyles from "../constants/globalStyles";
+import AppConstants from "../constants/AppConstants";
 
 class CompareInvestmentsComponent extends React.Component {
   render() {
@@ -42,7 +43,7 @@ class CompareInvestmentsComponent extends React.Component {
                 <Text style={{ width: Layout.window.width * 0.8 }}>
                   {this.props.item.title}
                 </Text>
-                <Image source={this.props.item.img} style={styles.Image} />
+                <Image source={{uri: AppConstants.strapiBaseURL + this.props.item.img.url }} style={styles.Image} />
               </View>
             </View>
           </View>
@@ -230,8 +231,8 @@ const styles = StyleSheet.create({
   },
   Image: {
     alignItems: "center",
-    height: 10,
-    width: 10,
+    height: 40,
+    width: 40,
   },
   compareStyle: {
     backgroundColor: "#f5f5f5",
