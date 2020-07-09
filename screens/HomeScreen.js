@@ -7,10 +7,9 @@ import {
   StatusBar,
   View,
 } from "react-native";
-import { ScrollView, FlatList } from "react-native-gesture-handler";
+import { FlatList } from "react-native-gesture-handler";
 import Icon from "@expo/vector-icons/Ionicons";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { NavigationContainer, DrawerActions } from "@react-navigation/native";
 
 // import components
 import MyInvestmentPreview from "../components/MyInvestmentPreview";
@@ -75,7 +74,7 @@ export default function HomeScreen({ route, navigation }) {
             <MyInvestmentPreview />
           </View>
         </View>
-        <View>
+        <View style={{ flex: 1 }}>
           <View style={styles.scrolHeading}>
             <Text style={{ fontSize: 16, fontWeight: "bold" }}>Portfiolio</Text>
             <TouchableOpacity
@@ -86,19 +85,21 @@ export default function HomeScreen({ route, navigation }) {
               <Icon name="ios-arrow-forward" size={20} />
             </TouchableOpacity>
           </View>
-          <FlatList
-            data={data}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-              <MyInvestment
-                item={item}
-                touchableProps={{
-                  onPress: () =>
-                    navigation.navigate("details-screen", { item }),
-                }}
-              />
-            )}
-          />
+          <View style={{ marginBottom: 60 }}>
+            <FlatList
+              data={data}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={({ item }) => (
+                <MyInvestment
+                  item={item}
+                  touchableProps={{
+                    onPress: () =>
+                      navigation.navigate("details-screen", { item }),
+                  }}
+                />
+              )}
+            />
+          </View>
         </View>
       </View>
     </SafeAreaView>
@@ -112,7 +113,6 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     backgroundColor: "#033c8d",
-    // alignItems: "center",
     padding: 20,
   },
   mainText: {

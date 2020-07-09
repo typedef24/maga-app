@@ -1,4 +1,7 @@
 import * as React from "react";
+import * as MediaLibrary from "expo-media-library";
+import * as Permissions from "expo-permissions";
+import * as FileSystem from "expo-file-system";
 import {
   View,
   Text,
@@ -15,11 +18,33 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import globalStyles from "../constants/globalStyles";
 import Button from "../components/Button";
 import Layout from "../constants/Layout";
-import image from "../assets/images/dish.png";
+
+const Strapi_Url = "http://64.227.20.176";
 
 export default function InvestmentDetailsScreen({ route, navigation }) {
   // Read params from navigation state
   const { item } = route.params;
+
+  function downloadFile() {
+    const uri = "http://64.227.20.176/uploads/Resumes_517670e13b.docx";
+    let fileUri = FileSystem.documentDirectory + "Resumes_517670e13b.docx";
+    FileSystem.downloadAsync(uri, fileUri)
+      .then(({ uri }) => {
+        saveFile(uri);
+        console.log("Downloaded");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  saveFile = async (fileUri) => {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    if (status === "granted") {
+      const asset = await MediaLibrary.createAssetAsync(fileUri);
+      await MediaLibrary.createAlbumAsync("Download", asset, false);
+    }
+  };
 
   return (
     <View>
@@ -50,7 +75,10 @@ export default function InvestmentDetailsScreen({ route, navigation }) {
                 <Text style={{ width: Layout.window.width * 0.8 }}>
                   {item.title}
                 </Text>
-                <Image source={item.img} style={styles.Image}></Image>
+                <Image
+                  source={{ uri: Strapi_Url + item.img.url }}
+                  style={styles.Image}
+                ></Image>
               </View>
             </View>
             {/* </TouchableOpacity> */}
@@ -117,38 +145,16 @@ export default function InvestmentDetailsScreen({ route, navigation }) {
               </Text>
               <View style={styles.fileDisplay}>
                 <View>
-                  <Image source={require("../assets/images/xls.png")} />
-                  <Text>daatash...</Text>
-                </View>
-                <View>
-                  <Image source={require("../assets/images/xls.png")} />
-                  <Text>daatash...</Text>
-                </View>
-                <View>
-                  <Image source={require("../assets/images/pdf-file.png")} />
-                  <Text>daatash...</Text>
-                </View>
-                <View>
-                  <Image source={require("../assets/images/pdf-file.png")} />
-                  <Text>daatash...</Text>
-                </View>
-                <View>
-                  <Image source={require("../assets/images/pdf-file.png")} />
-                  <Text>daatash...</Text>
-                </View>
-              </View>
-              <View style={styles.fileDisplay}>
-                <View>
-                  <Image source={require("../assets/images/docx.png")} />
-                  <Text>daatash...</Text>
-                </View>
-                <View>
-                  <Image source={require("../assets/images/docx.png")} />
-                  <Text>daatash...</Text>
-                </View>
-                <View>
-                  <Image source={require("../assets/images/docx.png")} />
-                  <Text>daatash...</Text>
+                  {/* <Image
+                    // source={{ uri: Strapi_Url + item.support_documents.url }}
+                    source={{
+                      uri: `64.227.20.176/uploads/Resumes_517670e13b.docx`,
+                    }}
+                    style={{ height: 50, width: 40 }}
+                  /> */}
+                  <TouchableOpacity onPress={() => downloadFile()}>
+                    <Text>daatash...</Text>
+                  </TouchableOpacity>
                 </View>
               </View>
             </View>
@@ -224,7 +230,7 @@ export default function InvestmentDetailsScreen({ route, navigation }) {
             touchableProps={{
               onPress: () => {
                 alert(
-                  "This investment has been closed, Please invest on and ongoing investment"
+                  "This investment has been closed, Please invest on an ongoing investment"
                 );
               },
             }}
@@ -308,7 +314,8 @@ const styles = StyleSheet.create({
   },
   Image: {
     alignItems: "center",
-    marginTop: 10,
+    height: 40,
+    width: 50,
   },
   fileDisplay: {
     flexDirection: "row",

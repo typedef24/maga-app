@@ -22,6 +22,8 @@ import globalStyles from "../constants/globalStyles";
 import Font from "../constants/fonts";
 import { SimpleLineIcons } from "@expo/vector-icons";
 
+const Strapi_Url = "http://64.227.20.176";
+
 export default function DetailsInvestmentScreen({ route, navigation }) {
   const [modalVisible, isModalVisible] = useState(false);
   const [expanded, isExapanded] = useState(true);
@@ -213,7 +215,10 @@ export default function DetailsInvestmentScreen({ route, navigation }) {
             <Text style={{ width: Layout.window.width * 0.82 }}>
               {item.opportunity.title}
             </Text>
-            <Image source={Image1} style={styles.Image}></Image>
+            <Image
+              source={{ uri: Strapi_Url + item.opportunity.img.url }}
+              style={styles.Image}
+            ></Image>
           </View>
         </View>
         <View style={styles.statistics}>
@@ -266,10 +271,6 @@ export default function DetailsInvestmentScreen({ route, navigation }) {
                   <Image source={item.support_documents} />
                   <Text>daatash...</Text>
                 </View>
-                {/* <View>
-                  <Image source={require("../assets/images/xls.png")} />
-                  <Text>daatash...</Text>
-                </View>*/}
               </View>
             </List.Accordion>
           </List.Section>
@@ -401,6 +402,8 @@ const styles = StyleSheet.create({
   },
   Image: {
     alignItems: "center",
+    height: 50,
+    width: 40,
   },
 
   // Accordion

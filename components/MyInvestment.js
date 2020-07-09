@@ -2,10 +2,11 @@ import * as React from "react";
 import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import Icon from "@expo/vector-icons/FontAwesome";
 
+const Strapi_Url = "http://64.227.20.176";
+
 export default function MyInvestment(props) {
   return (
     <View>
-      {/* FIrst section */}
       <View
         style={[
           styles.shadowStyle,
@@ -18,7 +19,7 @@ export default function MyInvestment(props) {
           <View style={styles.body}>
             <Text style={{ width: "90%" }}>{props.item.opportunity.title}</Text>
             <Image
-              source={props.item.opportunity.img}
+              source={{ uri: Strapi_Url + props.item.opportunity.img.url }}
               style={styles.Image}
             ></Image>
           </View>
@@ -131,7 +132,8 @@ const styles = StyleSheet.create({
   },
   Image: {
     alignItems: "center",
-    marginTop: 5,
+    height: 50,
+    width: 40,
   },
 
   // style for bearish statistics
