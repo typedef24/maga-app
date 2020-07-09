@@ -9,152 +9,152 @@ import fonts from "../constants/fonts";
 import Button from "../components/Button";
 import globalStyles from "../constants/globalStyles";
 
-const CompareInvestmentsComponent = ({ item }) => {
-  return (
-    <View style={styles.container}>
-      <View
-        style={[
-          item.rate >= 50 ? styles.success : styles.progress,
-          styles.shadowStyle,
-        ]}
-      >
-        <View style={styles.statusBar}>
-          <View style={styles.status}>
-            <Text
-              style={[
-                item.status === "closed"
-                  ? styles.dangerText
-                  : styles.statusText,
-              ]}
-            >
-              {item.status}
-            </Text>
-            <Icon
-              name="bookmark"
-              size={25}
-              style={{ marginTop: -10 }}
-              color="#003A8C"
-            />
-          </View>
-          <View>
-            <View style={styles.body}>
-              <Text style={{ width: Layout.window.width * 0.8 }}>
-                {item.title}
+class CompareInvestmentsComponent extends React.Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <View
+          style={[
+            this.props.item.rate >= 50 ? styles.success : styles.progress,
+            styles.shadowStyle,
+          ]}
+        >
+          <View style={styles.statusBar}>
+            <View style={styles.status}>
+              <Text
+                style={[
+                  this.props.item.status === "closed"
+                    ? styles.dangerText
+                    : styles.statusText,
+                ]}
+              >
+                {this.props.item.status}
               </Text>
-              <Image source={item.img} style={styles.Image} />
+              <Icon
+                name="bookmark"
+                size={25}
+                style={{ marginTop: -10 }}
+                color="#003A8C"
+              />
+            </View>
+            <View>
+              <View style={styles.body}>
+                <Text style={{ width: Layout.window.width * 0.8 }}>
+                  {this.props.item.title}
+                </Text>
+                <Image source={this.props.item.img} style={styles.Image} />
+              </View>
+            </View>
+          </View>
+          <View style={styles.statistics}>
+            <View style={styles.iconText}>
+              <Icon
+                name="alert-decagram"
+                size={20}
+                color="#4D7BF3"
+                style={{ paddingTop: 4 }}
+              />
+              <Text
+                style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
+              >
+                {" "}
+                {this.props.item.rate}
+                {"%"}
+              </Text>
+            </View>
+            <View style={styles.iconText}>
+              <Icon
+                name="square-inc-cash"
+                size={20}
+                color="#4D7BF3"
+                style={{ paddingTop: 4 }}
+              />
+              <Text
+                style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
+              >
+                {" "}
+                {this.props.item.duration}
+                {" months"}
+              </Text>
+            </View>
+            <View style={styles.iconText}>
+              <Iconfont
+                name="piggy-bank"
+                size={20}
+                color="#4D7BF3"
+                style={{ paddingTop: 4 }}
+              />
+              <Text
+                style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
+              >
+                {" "}
+                {"$"}
+                {this.props.item.price}
+              </Text>
+            </View>
+          </View>
+          <ProgressBarComponent
+            data={this.props.item}
+            progressBarStyle={{
+              backgroundColor: "white",
+              borderTopWidth: 1,
+              borderTopColor: "#f0dfe0",
+            }}
+          />
+          <View style={styles.compareStyle}>
+            <View style={{ flexDirection: "row" }}>
+              <Button
+                body={
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      borderRightWidth: 1,
+                      borderRightColor: "#e6e6e6",
+                    }}
+                  >
+                    <Text style={[globalStyles.btnLabel, { color: "#0b4291" }]}>
+                      Invest
+                    </Text>
+                  </View>
+                }
+                touchableStyleProps={{
+                  backgroundColor: "#f5f5f5",
+                  flex: 1,
+                }}
+                touchableProps={{
+                  onPress: () => {
+                    alert("Button clicked!!");
+                  },
+                }}
+              />
+              <Button
+                body={
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Text style={[globalStyles.btnLabel, { color: "#5b5b5b" }]}>
+                      Add to compare
+                    </Text>
+                  </View>
+                }
+                touchableStyleProps={{ backgroundColor: "#f5f5f5", flex: 1 }}
+                touchableProps={{
+                  onPress: this.props.onClickFnx,
+                }}
+              />
             </View>
           </View>
         </View>
-        <View style={styles.statistics}>
-          <View style={styles.iconText}>
-            <Icon
-              name="alert-decagram"
-              size={20}
-              color="#4D7BF3"
-              style={{ paddingTop: 4 }}
-            />
-            <Text
-              style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
-            >
-              {" "}
-              {item.rate}
-              {"%"}
-            </Text>
-          </View>
-          <View style={styles.iconText}>
-            <Icon
-              name="square-inc-cash"
-              size={20}
-              color="#4D7BF3"
-              style={{ paddingTop: 4 }}
-            />
-            <Text
-              style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
-            >
-              {" "}
-              {item.duration}
-              {" months"}
-            </Text>
-          </View>
-          <View style={styles.iconText}>
-            <Iconfont
-              name="piggy-bank"
-              size={20}
-              color="#4D7BF3"
-              style={{ paddingTop: 4 }}
-            />
-            <Text
-              style={{ color: "#003A8C", fontSize: 13, fontWeight: "bold" }}
-            >
-              {" "}
-              {"$"}
-              {item.price}
-            </Text>
-          </View>
-        </View>
-        <ProgressBarComponent
-          data={item}
-          progressBarStyle={{
-            backgroundColor: "white",
-            borderTopWidth: 1,
-            borderTopColor: "#f0dfe0",
-          }}
-        />
-        <View style={styles.compareStyle}>
-          <View style={{ flexDirection: "row" }}>
-            <Button
-              body={
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    borderRightWidth: 1,
-                    borderRightColor: "#e6e6e6",
-                  }}
-                >
-                  <Text style={[globalStyles.btnLabel, { color: "#0b4291" }]}>
-                    Invest
-                  </Text>
-                </View>
-              }
-              touchableStyleProps={{
-                backgroundColor: "#f5f5f5",
-                flex: 1,
-              }}
-              touchableProps={{
-                onPress: () => {
-                  alert("Button clicked!!");
-                },
-              }}
-            />
-            <Button
-              body={
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Text style={[globalStyles.btnLabel, { color: "#5b5b5b" }]}>
-                    Add to compare
-                  </Text>
-                </View>
-              }
-              touchableStyleProps={{ backgroundColor: "#f5f5f5", flex: 1 }}
-              touchableProps={{
-                onPress: () => {
-                  alert("Button clicked!!");
-                },
-              }}
-            />
-          </View>
-        </View>
       </View>
-    </View>
-  );
-};
+    );
+  }
+}
 
 // Implementing BorderShaow
 function elevationShadowStyle(elevation) {

@@ -17,6 +17,8 @@ export default function CompareInvestmentsScreen({ route }) {
   const [compareThree, setCompareThree] = useState();
   const [compareFour, setCompareFour] = useState();
 
+  const [compareArray, setCompareArray] = useState([]);
+
   return (
     <SafeAreaView style={styles.containerMain}>
       <FlatList
@@ -25,7 +27,12 @@ export default function CompareInvestmentsScreen({ route }) {
         renderItem={({ item }) => (
           <CompareInvestmentsComponent
             item={item}
-            onClickFnx={() => setCompareOne}
+            onClickFnx={() => {
+              //alert("Clicked!!");
+              setCompareArray("A");
+              console.log("Compare Array: " + compareArray);
+              //console.log("Item.image: " + item.image);
+            }}
           />
         )}
       />
