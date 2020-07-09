@@ -1,52 +1,169 @@
 import React, { useState } from "react";
-import { Text, SafeAreaView, View, StyleSheet, Image } from "react-native";
+import {
+  Text,
+  SafeAreaView,
+  View,
+  StyleSheet,
+  Image,
+  Alert,
+} from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
-
+import { MaterialIcons } from "@expo/vector-icons";
 import CompareInvestmentsComponent from "../components/CompareInvestment";
 import fonts from "../constants/fonts";
+import AppConstants from "../constants/AppConstants";
 
 import img from "../assets/images/dish.png";
 
-export default function CompareInvestmentsScreen({ route }) {
+export default function CompareInvestmentsScreen({ route, navigation }) {
   const data = route.params.data;
+
+  const [compareArray, setCompareArray] = useState([]);
 
   return (
     <SafeAreaView style={styles.containerMain}>
       <FlatList
         data={data}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => <CompareInvestmentsComponent item={item} />}
+        renderItem={({ item }) => (
+          <CompareInvestmentsComponent
+            item={item}
+            onClickFnx={() => {
+              //ensure compareArray has less than 4 items
+              if (compareArray.length < 4) {
+                //ensure that item doesn't already exist in compareArray
+                let isItemInCompareArray = false;
+                for (let index = 0; index < compareArray.length; index++) {
+                  if (compareArray[index].id == item.id) {
+                    //item already in compareArray
+                    isItemInCompareArray = true;
+                    break;
+                  }
+                }
+                if (!isItemInCompareArray) {
+                  let tempCompareArray = compareArray.slice(); //copy compareArray to a temporal array
+                  tempCompareArray.push(item); //add new item to tempCompareArray
+                  setCompareArray(tempCompareArray);
+                  console.log("Compare Array: " + JSON.stringify(compareArray));
+                  console.log("Item added to state: " + JSON.stringify(item));
+                } else {
+                  Alert.alert(
+                    "NOTICE!",
+                    "Investment already in your compare list."
+                  );
+                }
+              } else {
+                Alert.alert(
+                  "NOTICE!",
+                  "You can add a maximum of four investments to compare."
+                );
+              }
+            }}
+          />
+        )}
       />
       <View style={styles.container}>
         <View style={styles.boxContainer}>
-          <TouchableOpacity style={styles.boxSimple}>
-            <Image
-              source={img}
-              style={{ height: 30, width: 30 }}
-              resizeMode="cover"
-            />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.boxSimple}>
-            <Image
-              source={img}
-              style={{ height: 30, width: 30 }}
-              resizeMode="cover"
-            />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.boxSimple}>
-            <Image
-              source={img}
-              style={{ height: 30, width: 30 }}
-              resizeMode="cover"
-            />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.boxSimple}>
-            <Image
-              source={img}
-              style={{ height: 30, width: 30 }}
-              resizeMode="cover"
-            />
-          </TouchableOpacity>
+          <View style={styles.boxSimple}>
+            {compareArray[0] ? (
+              <View style={{ flex: 1 }}>
+                <TouchableOpacity
+                  style={{ marginRight: -11, marginTop: -11, alignItems: "flex-end" }}
+                  onPress={() => {
+                    let tempCompareArray = compareArray.slice(); //copy compareArray to a temporal array
+                    tempCompareArray.splice(0, 1); //Remove the item at index 0
+                    setCompareArray(tempCompareArray);
+                  }}
+                >
+                  <MaterialIcons name="cancel" size={25} color="red" />
+                </TouchableOpacity>
+                <Image
+                  source={{
+                    uri: AppConstants.strapiBaseURL + compareArray[0].img.url,
+                  }}
+                  style={{ height: 30, width: 30, marginTop: -10 }}
+                  resizeMode="cover"
+                />
+              </View>
+            ) : (
+              <View style={{ height: 30, width: 30 }}></View>
+            )}
+          </View>
+          <View style={styles.boxSimple}>
+            {compareArray[1] ? (
+              <View style={{ flex: 1 }}>
+                <TouchableOpacity
+                  style={{ marginRight: -11, marginTop: -11, alignItems: "flex-end" }}
+                  onPress={() => {
+                    let tempCompareArray = compareArray.slice(); //copy compareArray to a temporal array
+                    tempCompareArray.splice(1, 1); //Remove the item at index 1
+                    setCompareArray(tempCompareArray);
+                  }}
+                >
+                  <MaterialIcons name="cancel" size={25} color="red" />
+                </TouchableOpacity>
+                <Image
+                  source={{
+                    uri: AppConstants.strapiBaseURL + compareArray[0].img.url,
+                  }}
+                  style={{ height: 30, width: 30, marginTop: -10 }}
+                  resizeMode="cover"
+                />
+              </View>
+            ) : (
+              <View style={{ height: 30, width: 30 }}></View>
+            )}
+          </View>
+          <View style={styles.boxSimple}>
+            {compareArray[2] ? (
+              <View style={{ flex: 1 }}>
+                <TouchableOpacity
+                  style={{ marginRight: -11, marginTop: -11, alignItems: "flex-end" }}
+                  onPress={() => {
+                    let tempCompareArray = compareArray.slice(); //copy compareArray to a temporal array
+                    tempCompareArray.splice(2, 1); //Remove the item at index 0
+                    setCompareArray(tempCompareArray);
+                  }}
+                >
+                  <MaterialIcons name="cancel" size={25} color="red" />
+                </TouchableOpacity>
+                <Image
+                  source={{
+                    uri: AppConstants.strapiBaseURL + compareArray[0].img.url,
+                  }}
+                  style={{ height: 30, width: 30, marginTop: -10 }}
+                  resizeMode="cover"
+                />
+              </View>
+            ) : (
+              <View style={{ height: 30, width: 30 }}></View>
+            )}
+          </View>
+          <View style={styles.boxSimple}>
+            {compareArray[3] ? (
+              <View style={{ flex: 1 }}>
+                <TouchableOpacity
+                  style={{ marginRight: -11, marginTop: -11, alignItems: "flex-end" }}
+                  onPress={() => {
+                    let tempCompareArray = compareArray.slice(); //copy compareArray to a temporal array
+                    tempCompareArray.splice(3, 1); //Remove the item at index 0
+                    setCompareArray(tempCompareArray);
+                  }}
+                >
+                  <MaterialIcons name="cancel" size={25} color="red" />
+                </TouchableOpacity>
+                <Image
+                  source={{
+                    uri: AppConstants.strapiBaseURL + compareArray[0].img.url,
+                  }}
+                  style={{ height: 30, width: 30, marginTop: -10 }}
+                  resizeMode="cover"
+                />
+              </View>
+            ) : (
+              <View style={{ height: 30, width: 30 }}></View>
+            )}
+          </View>
         </View>
         <View>
           <TouchableOpacity
@@ -57,6 +174,9 @@ export default function CompareInvestmentsScreen({ route }) {
               alignItems: "center",
               marginTop: 15,
               marginLeft: 5,
+            }}
+            onPress = {() => {
+              navigation.navigate("compare-table", { data: compareArray });
             }}
           >
             <Text
