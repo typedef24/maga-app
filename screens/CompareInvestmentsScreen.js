@@ -3,31 +3,19 @@ import { Text, SafeAreaView, View, StyleSheet, Image } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 
 import CompareInvestmentsComponent from "../components/CompareInvestment";
-import Button from "../components/Button";
-import globalStyles from "../constants/globalStyles";
-import Layout from "../constants/Layout";
 import fonts from "../constants/fonts";
 
 import img from "../assets/images/dish.png";
 
 export default function CompareInvestmentsScreen({ route }) {
   const data = route.params.data;
-  const [compareOne, setCompareOne] = useState();
-  const [compareTwo, setCompareTwo] = useState();
-  const [compareThree, setCompareThree] = useState();
-  const [compareFour, setCompareFour] = useState();
 
   return (
     <SafeAreaView style={styles.containerMain}>
       <FlatList
-        data={[data]}
+        data={data}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <CompareInvestmentsComponent
-            item={item}
-            onClickFnx={() => setCompareOne}
-          />
-        )}
+        renderItem={({ item }) => <CompareInvestmentsComponent item={item} />}
       />
       <View style={styles.container}>
         <View style={styles.boxContainer}>

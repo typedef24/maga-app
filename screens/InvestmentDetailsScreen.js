@@ -19,19 +19,21 @@ import globalStyles from "../constants/globalStyles";
 import Button from "../components/Button";
 import Layout from "../constants/Layout";
 
-const Strapi_Url = "http://64.227.20.176";
+const Strapi_Url = "http://64.227.20.176/";
 
 export default function InvestmentDetailsScreen({ route, navigation }) {
   // Read params from navigation state
   const { item } = route.params;
 
   function downloadFile() {
-    const uri = "http://64.227.20.176/uploads/Resumes_517670e13b.docx";
-    let fileUri = FileSystem.documentDirectory + "Resumes_517670e13b.docx";
+    // const uri = "http://64.227.20.176/uploads/database_245055346c.pdf";
+    const uri = Strapi_Url + item.support_documents.url;
+    let fileUri = FileSystem.documentDirectory + "Maga.ext"; // Specify the end directory with a defualt name and file extension
     FileSystem.downloadAsync(uri, fileUri)
       .then(({ uri }) => {
         saveFile(uri);
         console.log("Downloaded");
+        console.log(docExt);
       })
       .catch((error) => {
         console.log(error);
@@ -152,7 +154,13 @@ export default function InvestmentDetailsScreen({ route, navigation }) {
                     }}
                     style={{ height: 50, width: 40 }}
                   /> */}
-                  <TouchableOpacity onPress={() => downloadFile()}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      downloadFile();
+                      alert("Downloaded");
+                      console.log("Downloaded");
+                    }}
+                  >
                     <Text>daatash...</Text>
                   </TouchableOpacity>
                 </View>
