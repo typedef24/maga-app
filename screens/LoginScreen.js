@@ -31,10 +31,6 @@ export default class LoginScreen extends React.Component {
     };
   }
 
-  // componentWillMount() {
-  //   this.setState({ isLoggedIn: this.checkLoggedIn() });
-  // }
-
   async handleLogin() {
     // Request API for login routes
     try {
@@ -156,53 +152,6 @@ export default class LoginScreen extends React.Component {
             ) : null}
 
             <View>
-              {/* <Text style={globalStyles.btnLabel2}>Login with</Text>
-              <View style={{ flexDirection: "row", marginTop: 10 }}>
-                <Button
-                  body={
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <FontAwesome name="facebook" size={20} color="white" />
-                      <Text style={globalStyles.btnLabel}>Facebook</Text>
-                    </View>
-                  }
-                  touchableStyleProps={{
-                    backgroundColor: "#4d7bf3",
-                    flex: 1,
-                    marginRight: 30,
-                  }}
-                  touchableProps={{
-                    onPress: () => {
-                      alert("Button clicked!!");
-                    },
-                  }}
-                />
-                <Button
-                  body={
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <FontAwesome name="google" size={20} color="white" />
-                      <Text style={globalStyles.btnLabel}>Google</Text>
-                    </View>
-                  }
-                  touchableStyleProps={{ backgroundColor: "#4d7bf3", flex: 1 }}
-                  touchableProps={{
-                    onPress: () => {
-                      alert("Button clicked!!");
-                    },
-                  }}
-                />
-              </View> */}
               <View
                 style={{
                   flexDirection: "row",
