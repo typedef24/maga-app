@@ -6,6 +6,8 @@ import Iconfont from "@expo/vector-icons/FontAwesome5";
 import ProgressBarComponent from "./ProgressBarComponent";
 import Layout from "../constants/Layout";
 
+const Strapi_Url = "http://64.227.20.176";
+
 export function OppotunityPreview(props) {
   return (
     <View style={styles.container}>
@@ -38,7 +40,12 @@ export function OppotunityPreview(props) {
               <Text style={{ width: Layout.window.width * 0.8 }}>
                 {props.item.title}
               </Text>
-              <Image source={props.item.img} style={styles.Image}></Image>
+              <Image
+                source={{
+                  uri: Strapi_Url + props.item.img.url,
+                }}
+                style={[styles.Image, { width: 50, height: 40 }]}
+              ></Image>
             </View>
           </TouchableOpacity>
         </View>

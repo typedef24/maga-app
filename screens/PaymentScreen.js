@@ -6,11 +6,10 @@ import ModalComponent from "../components/ModalComponent";
 import globalStyles from "../constants/globalStyles";
 import fonts from "../constants/fonts";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
-// import image
-import Image1 from "../assets/images/investment.png";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
-// import { Item } from "react-native-paper/lib/typescript/src/components/List/List";
+
+const Strapi_Url = "http://64.227.20.176";
 
 export default function PaymentScreen({ route, navigation }) {
   const [modalVisible, isModalVisible] = useState(false);
@@ -36,7 +35,10 @@ export default function PaymentScreen({ route, navigation }) {
             <Text style={{ fontSize: fonts.medium, flex: 5 }}>
               {item.title}
             </Text>
-            <Image style={styles.sliderImage} source={Image1} />
+            <Image
+              style={styles.sliderImage}
+              source={{ uri: Strapi_Url + item.img.url }}
+            />
           </View>
           <View
             style={{
@@ -62,7 +64,7 @@ export default function PaymentScreen({ route, navigation }) {
                 size={24}
                 color="white"
               />
-              <Text style={{ color: "white" }}>40 months</Text>
+              <Text style={{ color: "white" }}>{item.duration} months</Text>
             </View>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <FontAwesome5
@@ -176,5 +178,7 @@ const styles = StyleSheet.create({
 
   sliderImage: {
     flex: 1,
+    height: 50,
+    width: 60,
   },
 });
