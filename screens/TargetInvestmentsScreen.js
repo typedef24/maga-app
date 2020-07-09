@@ -15,7 +15,6 @@ import Accordion from "../components/Accordion";
 import globalStyles from "../constants/globalStyles";
 import Button from "../components/Button";
 import fonts from "../constants/fonts";
-import { ScrollView } from "react-native-gesture-handler";
 
 import Strapi from "../api/Strapi";
 
@@ -28,6 +27,7 @@ export default class TargetInvestmentsScreen extends React.Component {
       duration: 0,
       risk_profile: "",
       id: 1,
+      responseOne: [],
     };
   }
 
@@ -36,17 +36,16 @@ export default class TargetInvestmentsScreen extends React.Component {
     try {
       const response = await Strapi.get("/opportunities", {
         params: {
-          risk_profile_in: this.state.risk_profile,
+          risk_profile_contains: this.state.risk_profile,
           // success_index_lte: this.state.index,
           // investment_time_lte: this.state.duration,
           // price_lte: this.state.amount,
         },
       });
-      this.setState(response.data[0]);
-      console.log(response.data);
-      response.data[0] != null
+      this.setState({ responseOne: response.data });
+      response.data
         ? this.props.navigation.navigate("compare-investments", {
-            data: this.state,
+            data: this.state.responseOne,
           })
         : this.props.navigation.navigate("no-result");
     } catch (error) {
@@ -58,7 +57,6 @@ export default class TargetInvestmentsScreen extends React.Component {
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
         <PageTitle title="Target Investments" />
-        {/* {result === 0 ? alert("Items found") : alert("not found")} */}
         <View style={styles.container}>
           <View style={styles.containerContent}>
             <Text style={styles.textHeading}>Enter investment amount</Text>
