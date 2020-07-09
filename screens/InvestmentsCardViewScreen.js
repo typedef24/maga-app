@@ -10,6 +10,8 @@ import { ScrollView } from "react-native-gesture-handler";
 import globalStyles from "../constants/globalStyles";
 import Button from "../components/Button";
 
+const Strapi_Url = "http://64.227.20.176";
+
 export default function InvestmentsCardViewScreen({ route, navigation }) {
   const { item } = route.params;
 
@@ -40,7 +42,12 @@ export default function InvestmentsCardViewScreen({ route, navigation }) {
                 <Text style={{ width: Layout.window.width * 0.8 }}>
                   {item.title}
                 </Text>
-                <Image source={item.img} style={styles.Image}></Image>
+                <Image
+                  source={{
+                    uri: Strapi_Url + item.img.url,
+                  }}
+                  style={styles.Image}
+                ></Image>
               </View>
             </View>
             {/* </TouchableOpacity> */}
@@ -202,6 +209,7 @@ const styles = StyleSheet.create({
   },
   Image: {
     alignItems: "center",
-    marginTop: 10,
+    height: 40,
+    width: 50,
   },
 });

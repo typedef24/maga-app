@@ -20,6 +20,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import Toast from "react-native-simple-toast";
 
+const Strapi_Url = "http://64.227.20.176";
+
 export default class PaymentScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -52,7 +54,10 @@ export default class PaymentScreen extends React.Component {
               <Text style={{ fontSize: fonts.medium, flex: 5 }}>
                 {this.state.item.title}
               </Text>
-              <Image style={styles.sliderImage} source={Image1} />
+              <Image
+                style={styles.sliderImage}
+                source={{ uri: Strapi_Url + this.state.item.img.url }}
+              />
             </View>
             <View
               style={{
@@ -286,5 +291,7 @@ const styles = StyleSheet.create({
 
   sliderImage: {
     flex: 1,
+    height: 50,
+    width: 40,
   },
 });
