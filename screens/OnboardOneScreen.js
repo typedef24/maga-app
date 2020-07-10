@@ -24,7 +24,7 @@ export default function OnboardOneScreen({ navigation }) {
         <View></View>
         <TouchableOpacity
           style={{ padding: 10 }}
-          onPress={() => navigation.navigate("login")}
+          onPress={() => navigation.navigate("signup")}
         >
           <Text style={{ fontSize: fonts.medium, marginRight: 10 }}>Skip</Text>
         </TouchableOpacity>

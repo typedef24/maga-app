@@ -6,6 +6,8 @@ import MyInvestment from "../components/MyInvestment";
 import { FlatList } from "react-native-gesture-handler";
 import { PageTitle } from "../components/PageTitle";
 
+import AsyncStorage from "@react-native-community/async-storage";
+
 // API connection
 import Strapi from "../api/Strapi";
 
@@ -19,9 +21,12 @@ export default function MyInvestmentsScreen({ navigation }) {
   // Fetch for available investments
   const fetchInvestments = async () => {
     try {
+      const jsonValue = await AsyncStorage.getItem("loggedInUser");
+      // jsonValue != null ? JSON.parse(jsonValue) : null;
+      console.log(jsonValue);
       const response = await Strapi.get("/investments", {
         headers: {
-          Authorization: `Bearer ${store.getState().jwt}`,
+          Authorization: `Bearer ${jsonValue.jwt}`,
         },
       });
       console.log(response.data);

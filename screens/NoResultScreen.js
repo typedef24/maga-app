@@ -21,7 +21,7 @@ const NoResultScreen = ({ navigation }) => {
           touchableStyleProps={{ backgroundColor: "#52c41a" }}
           touchableProps={{
             onPress: () => {
-              navigation.navigate("result-filter");
+              navigation.navigate("target-investments");
             },
           }}
         />

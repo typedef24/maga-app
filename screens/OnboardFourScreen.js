@@ -45,12 +45,6 @@ export default function OnboardFourScreen({ navigation }) {
       </View>
       <TouchableOpacity
         style={styles.btn}
-        onPress={() => navigation.navigate("Root")}
-      >
-        <Text style={styles.btnText}>Goto Home Page</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.btn}
         onPress={() => navigation.navigate("signup")}
       >
         <Text style={styles.btnText}>SIGN UP</Text>
