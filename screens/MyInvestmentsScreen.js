@@ -13,6 +13,7 @@ import Strapi from "../api/Strapi";
 
 export default function MyInvestmentsScreen({ navigation }) {
   const [data, setData] = useState();
+  const [token, setToken] = useState([""]);
 
   useEffect(() => {
     fetchInvestments();
@@ -22,15 +23,18 @@ export default function MyInvestmentsScreen({ navigation }) {
   const fetchInvestments = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("loggedInUser");
-      // jsonValue != null ? JSON.parse(jsonValue) : null;
-      console.log(jsonValue);
+      const token = jsonValue !== null ? JSON.parse(jsonValue) : null;
+
       const response = await Strapi.get("/investments", {
         headers: {
-          Authorization: `Bearer ${jsonValue.jwt}`,
+          // Authorization header
+          Authorization: "Bearer " + token.jwt,
         },
       });
-      console.log(response.data);
-      setData(response.data);
+      const finalData = response.data;
+
+      setData(finalData);
+      console.log(data);
     } catch (error) {
       console.log(error);
     }

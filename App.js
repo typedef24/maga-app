@@ -41,6 +41,8 @@ import CompareTableScreen from "./screens/CompareTableScreen";
 import AsyncStorage from "@react-native-community/async-storage";
 import DrawerNavigation from "./navigation/DrawerNavigation";
 import ResultScreen from "./screens/ResultsScreen";
+import ProfileScreen from "./screens/ProfileScreen";
+import MyprofileScreen from "./screens/MyProfileScreen";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -398,7 +400,23 @@ export default function App({ props }) {
                 title: "Risk Profile",
               }}
             />
-            <Stack.Screen name="home" component={DrawerNavigation} />
+            <Stack.Screen
+              name="profileScreen"
+              component={ProfileScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="myProfileScreen"
+              component={MyprofileScreen}
+              options={{
+                title: "Edit profile",
+                // headerShown: false,
+              }}
+            />
+
+            {/* <Stack.Screen name="home" component={DrawerNavigation} /> */}
           </Stack.Navigator>
         </NavigationContainer>
       </View>
