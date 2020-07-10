@@ -1,5 +1,6 @@
 import axios from "axios";
+import AppConstants from "../constants/AppConstants";
 
 export default axios.create({
-  baseURL: "http://64.227.20.176",
+  baseURL: AppConstants.strapiBaseURL,
 });

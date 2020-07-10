@@ -48,12 +48,16 @@ export default class LoginScreen extends React.Component {
           JSON.stringify(response.data)
         );
       } else {
-        return null;
+        // return null;
+        this.setState({ loading: false });
+        this.setState({
+          errorStr: "Sorry password or email is incorrect\nForget password?",
+        });
       }
     } catch (error) {
       this.setState({ loading: false });
       this.setState({
-        errorStr: "Sorry password or email is incorrect\n Forget password?",
+        errorStr: "Seems you're offline!\nCheck your connection and try again.",
       });
     }
   }
