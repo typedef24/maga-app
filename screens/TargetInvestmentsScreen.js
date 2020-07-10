@@ -43,7 +43,8 @@ export default class TargetInvestmentsScreen extends React.Component {
         },
       });
       this.setState({ responseOne: response.data });
-      response.data
+      // Check if responseOne from has length 0
+      this.state.responseOne.length
         ? this.props.navigation.navigate("compare-investments", {
             data: this.state.responseOne,
           })

@@ -6,11 +6,14 @@ import MyInvestment from "../components/MyInvestment";
 import { FlatList } from "react-native-gesture-handler";
 import { PageTitle } from "../components/PageTitle";
 
+import AsyncStorage from "@react-native-community/async-storage";
+
 // API connection
 import Strapi from "../api/Strapi";
 
 export default function MyInvestmentsScreen({ navigation }) {
   const [data, setData] = useState();
+  const [token, setToken] = useState([""]);
 
   useEffect(() => {
     fetchInvestments();
@@ -19,13 +22,19 @@ export default function MyInvestmentsScreen({ navigation }) {
   // Fetch for available investments
   const fetchInvestments = async () => {
     try {
+      const jsonValue = await AsyncStorage.getItem("loggedInUser");
+      const token = jsonValue !== null ? JSON.parse(jsonValue) : null;
+
       const response = await Strapi.get("/investments", {
         headers: {
-          Authorization: `Bearer ${store.getState().jwt}`,
+          // Authorization header
+          Authorization: "Bearer " + token.jwt,
         },
       });
-      console.log(response.data);
-      setData(response.data);
+      const finalData = response.data;
+
+      setData(finalData);
+      console.log(data);
     } catch (error) {
       console.log(error);
     }

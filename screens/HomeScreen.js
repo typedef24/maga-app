@@ -18,6 +18,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 // API Connetion
 import Strapi from "../api/Strapi";
+import AsyncStorage from "@react-native-community/async-storage";
 
 export default function HomeScreen({ route, navigation }) {
   const [data, setData] = useState();
@@ -30,10 +31,11 @@ export default function HomeScreen({ route, navigation }) {
   // Fetch for available investments
   const fetchInvestments = async () => {
     try {
+      const jsonValue = await AsyncStorage.getItem("loggedInUser");
+      const token = jsonValue !== null ? JSON.parse(jsonValue) : null;
       const response = await Strapi.get("/investments", {
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTk0MDI0MzQwLCJleHAiOjE1OTY2MTYzNDB9.gu2xIUQTlwfJW0t6yo-JhjDZx3DaU0aLilNpj8jd3xw",
+          Authorization: "Bearer " + token.jwt,
         },
       });
       console.log(response.data);
@@ -63,9 +65,9 @@ export default function HomeScreen({ route, navigation }) {
             </View>
             <TouchableOpacity
               // onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-              onPress={() => alert("Clicked")}
+              onPress={() => navigation.navigate("profileScreen")}
             >
-              <Ionicons name="md-menu" size={28} color="white" />
+              <Ionicons name="md-person" size={24} color="white" />
             </TouchableOpacity>
           </View>
           <View style={{ alignItems: "center" }}>
