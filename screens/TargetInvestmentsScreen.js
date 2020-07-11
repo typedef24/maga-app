@@ -17,6 +17,7 @@ import Button from "../components/Button";
 import fonts from "../constants/fonts";
 
 import Strapi from "../api/Strapi";
+import { ActivityIndicator } from "react-native-paper";
 
 export default class TargetInvestmentsScreen extends React.Component {
   constructor(props) {
@@ -28,12 +29,14 @@ export default class TargetInvestmentsScreen extends React.Component {
       risk_profile: "",
       id: 1,
       responseOne: [],
+      isLoading: false,
     };
   }
 
   // Handle data submitted
   async handleSubmit() {
     try {
+      this.setState({ loading: true });
       const response = await Strapi.get("/opportunities", {
         params: {
           risk_profile_contains: this.state.risk_profile,
@@ -43,18 +46,21 @@ export default class TargetInvestmentsScreen extends React.Component {
         },
       });
       this.setState({ responseOne: response.data });
-      response.data
+      this.setState({ loading: false });
+      // Check if responseOne from has length 0
+      this.state.responseOne.length
         ? this.props.navigation.navigate("compare-investments", {
             data: this.state.responseOne,
           })
         : this.props.navigation.navigate("no-result");
     } catch (error) {
+      this.setState({ loading: false });
       console.log("Error");
     }
   }
 
   render() {
-    return (
+    return ( 
       <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
         <PageTitle title="Target Investments" />
         <View style={styles.container}>
@@ -130,6 +136,11 @@ export default class TargetInvestmentsScreen extends React.Component {
             </View>
           </View>
         </View>
+        {this.state.loading ? (
+                <View>
+                  <ActivityIndicator size="large" color="green" />
+                </View>
+              ) : null}
         <View style={styles.btnSearch}>
           <Button
             body={

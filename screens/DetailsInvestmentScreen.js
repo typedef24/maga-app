@@ -340,6 +340,7 @@ export default function DetailsInvestmentScreen({ route, navigation }) {
           marginRight: 5,
           marginLeft: 5,
           marginTop: 25,
+          marginBottom: 20
         }}
       />
     </ScrollView>

@@ -73,12 +73,11 @@ export default function TransactionsHistoryScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TransactionComponent />
-      {/* <FlatList
+      <FlatList
         contentContainerStyle={styles.flatListContainer}
         data={items}
         renderItem={({ item }) => <TransactionComponent item={item} />}
-      /> */}
+      />
     </SafeAreaView>
   );
 }
@@ -89,7 +88,7 @@ const styles = StyleSheet.create({
   },
 
   flatListContainer: {
-    padding: 15,
+    padding: 5,
     paddingBottom: 5,
   },
 });

@@ -39,11 +39,11 @@ import InvestmentPerformanceScreen from "./screens/InvestmentPerformance";
 import RiskProfilesScreen from "./screens/RiskProfilesScreen";
 import CompareTableScreen from "./screens/CompareTableScreen";
 import AsyncStorage from "@react-native-community/async-storage";
-import DrawerNavigation from "./navigation/DrawerNavigation";
 import ResultScreen from "./screens/ResultsScreen";
+import ProfileScreen from "./screens/ProfileScreen";
+import MyprofileScreen from "./screens/MyProfileScreen";
 
 const Stack = createStackNavigator();
-const Drawer = createDrawerNavigator();
 
 export default function App({ props }) {
   const isLoadingComplete = useCachedResources(1);
@@ -85,27 +85,27 @@ export default function App({ props }) {
       }
     }
     // Check Logged In
-    async function checkLoggedIn() {
-      //alert("Hello");
-      try {
-        const jsonValue = await AsyncStorage.getItem("loggedInUser");
-        jsonValue != null ? JSON.parse(jsonValue) : null;
-        if (jsonValue) {
-          //not first time access
-          // return true;
-          setIsLoggedIn(true);
-        } else {
-          //store in AsyncStorage against next time lunch
-          // return false;
-          setIsLoggedIn(false);
-        }
-      } catch (e) {
-        // error reading value
-        console.warn(
-          "Error reading from AsyncStorage! Hope your device supports AsyncStorage?"
-        );
-      }
-    }
+    // async function checkLoggedIn() {
+    //   //alert("Hello");
+    //   try {
+    //     const jsonValue = await AsyncStorage.getItem("loggedInUser");
+    //     jsonValue != null ? JSON.parse(jsonValue) : null;
+    //     if (jsonValue) {
+    //       //not first time access
+    //       // return true;
+    //       setIsLoggedIn(true);
+    //     } else {
+    //       //store in AsyncStorage against next time lunch
+    //       // return false;
+    //       setIsLoggedIn(false);
+    //     }
+    //   } catch (e) {
+    //     // error reading value
+    //     console.warn(
+    //       "Error reading from AsyncStorage! Hope your device supports AsyncStorage?"
+    //     );
+    //   }
+    // }
 
     // checkLoggedIn();
     checkFirstInstall();
@@ -138,7 +138,7 @@ export default function App({ props }) {
             }}
           >
             {/* OnBoarding Navigation Screen */}
-            {isInstalling == true ? (
+            {isInstalling ? (
               <Stack.Screen
                 name="onboard1"
                 component={OnboardOneScreen}
@@ -152,6 +152,16 @@ export default function App({ props }) {
                 }}
               />
             ) : (
+              <Stack.Screen
+                name="login"
+                component={LoginScreen}
+                options={{
+                  headerShown: false,
+                }}
+              />
+            )}
+
+            {isInstalling && (
               <Stack.Screen
                 name="login"
                 component={LoginScreen}
@@ -213,14 +223,6 @@ export default function App({ props }) {
 
             <Stack.Screen name="opportunities" component={BottomTabNavigator} />
 
-            {/* <Stack.Screen
-              name="home"
-              component={HomeScreen}
-              options={{
-                headerShown: true,
-              }}
-            ></Stack.Screen> */}
-
             <Stack.Screen
               name="signup"
               component={SignUpScreen}
@@ -268,6 +270,7 @@ export default function App({ props }) {
               name="myinvestsments"
               component={MyInvestmentsScreen}
               options={{
+                headerShown: false,
                 title: "My Investments",
               }}
             />
@@ -396,7 +399,23 @@ export default function App({ props }) {
                 title: "Risk Profile",
               }}
             />
-            <Stack.Screen name="home" component={DrawerNavigation} />
+            <Stack.Screen
+              name="profileScreen"
+              component={ProfileScreen}
+              options={{
+                title: "Profile",
+              }}
+            />
+            <Stack.Screen
+              name="myProfileScreen"
+              component={MyprofileScreen}
+              options={{
+                title: "Edit profile",
+                // headerShown: false,
+              }}
+            />
+
+            {/* <Stack.Screen name="home" component={DrawerNavigation} /> */}
           </Stack.Navigator>
         </NavigationContainer>
       </View>

@@ -18,9 +18,12 @@ import { Ionicons } from "@expo/vector-icons";
 
 // API Connetion
 import Strapi from "../api/Strapi";
+import AsyncStorage from "@react-native-community/async-storage";
+import { ActivityIndicator } from "react-native-paper";
 
 export default function HomeScreen({ route, navigation }) {
   const [data, setData] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const [currentValue, setCurrentValue] = useState();
 
   useEffect(() => {
@@ -30,15 +33,21 @@ export default function HomeScreen({ route, navigation }) {
   // Fetch for available investments
   const fetchInvestments = async () => {
     try {
+      // Set loading indicator to true
+      setIsLoading(true);
+      const jsonValue = await AsyncStorage.getItem("loggedInUser");
+      const token = jsonValue !== null ? JSON.parse(jsonValue) : null;
       const response = await Strapi.get("/investments", {
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTk0MDI0MzQwLCJleHAiOjE1OTY2MTYzNDB9.gu2xIUQTlwfJW0t6yo-JhjDZx3DaU0aLilNpj8jd3xw",
+          Authorization: "Bearer " + token.jwt,
         },
       });
-      console.log(response.data);
       setData(response.data);
+      // Set loading indicator to false
+      setIsLoading(false);
     } catch (error) {
+      // Set loading indicator to false
+      setIsLoading(false);
       console.log(error);
     }
   };
@@ -63,9 +72,9 @@ export default function HomeScreen({ route, navigation }) {
             </View>
             <TouchableOpacity
               // onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-              onPress={() => alert("Clicked")}
+              onPress={() => navigation.navigate("profileScreen")}
             >
-              <Ionicons name="md-menu" size={28} color="white" />
+              <Ionicons name="md-person" size={24} color="white" />
             </TouchableOpacity>
           </View>
           <View style={{ alignItems: "center" }}>
@@ -86,6 +95,11 @@ export default function HomeScreen({ route, navigation }) {
             </TouchableOpacity>
           </View>
           <View style={{ marginBottom: 60 }}>
+            {isLoading ? (
+              <View>
+                <ActivityIndicator size="large" color="green" />
+              </View>
+            ) : null}
             <FlatList
               data={data}
               keyExtractor={(item) => item.id.toString()}

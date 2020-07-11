@@ -18,8 +18,8 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import globalStyles from "../constants/globalStyles";
 import Button from "../components/Button";
 import Layout from "../constants/Layout";
+import AppConstants from "../constants/AppConstants";
 
-const Strapi_Url = "http://64.227.20.176/";
 
 export default function InvestmentDetailsScreen({ route, navigation }) {
   // Read params from navigation state
@@ -78,7 +78,7 @@ export default function InvestmentDetailsScreen({ route, navigation }) {
                   {item.title}
                 </Text>
                 <Image
-                  source={{ uri: Strapi_Url + item.img.url }}
+                  source={{ uri: AppConstants.strapiBaseURL + item.img.url }}
                   style={styles.Image}
                 ></Image>
               </View>
