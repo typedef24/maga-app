@@ -5,8 +5,9 @@ import Iconfont from "@expo/vector-icons/FontAwesome5";
 
 import ProgressBarComponent from "./ProgressBarComponent";
 import Layout from "../constants/Layout";
+import AppConstants from "../constants/AppConstants";
 
-const Strapi_Url = "http://64.227.20.176";
+
 
 export function OppotunityPreview(props) {
   return (
@@ -42,7 +43,7 @@ export function OppotunityPreview(props) {
               </Text>
               <Image
                 source={{
-                  uri: Strapi_Url + props.item.img.url,
+                  uri: AppConstants.strapiBaseURL + props.item.img.url,
                 }}
                 style={[styles.Image, { width: 50, height: 40 }]}
               ></Image>

@@ -5,63 +5,79 @@ import { FlatList } from "react-native-gesture-handler";
 import Button from "../components/Button";
 
 import globalStyles from "../constants/globalStyles";
+import TransactionComponent from "../components/Transaction";
 
 export default function TransactionsPendingScreen() {
   const [items, setItems] = useState([
     {
       id: "1",
-      title: "Low Risk Tolerance",
-      description:
-        "looking for a stable investment and is not comfortable with any complex fluctuation in business",
-      img: require("../assets/images/risk1.png"),
+      date: "18 days ago",
+      title: "Real estate investments funds",
+      amount: "300,800.88",
     },
     {
       id: "2",
-      title: "Short Term investment",
-      description:
-        "looking for liquidity in less than three years, to better take control over uncertainties in investments.",
-      img: require("../assets/images/risk2.png"),
+      date: "18 days ago",
+      title: "Real estate investments funds",
+      amount: "300,800.88",
     },
     {
       id: "3",
-      title: "Stable Returns",
-      description:
-        "Looking for guaranteed returns, tax efficiency and better option than bank deposits.",
-      img: require("../assets/images/risk3.png"),
+      date: "18 days ago",
+      title: "Real estate investments funds",
+      amount: "300,800.88",
     },
     {
       id: "4",
-      title: "Less than 35% asset allocation",
-      description:
-        "you’re  willing to allocate 35% of your assets in your savings. will default if this limit is reached.",
-      img: require("../assets/images/risk4.png"),
+      date: "18 days ago",
+      title: "Real estate investments funds",
+      amount: "300,800.88",
     },
     {
       id: "5",
-      title: "Limited knowledge in investing",
-      description:
-        "Has very little/no knowledge about investing and mutual funds. Has no knowledge of it legal implications.",
-      img: require("../assets/images/risk5.png"),
+      date: "18 days ago",
+      title: "Real estate investments funds",
+      amount: "300,800.88",
+    },
+    {
+      id: "6",
+      date: "18 days ago",
+      title: "Real estate investments funds",
+      amount: "300,800.88",
+    },
+    {
+      id: "7",
+      date: "18 days ago",
+      title: "Real estate investments funds",
+      amount: "300,800.88",
+    },
+    {
+      id: "8",
+      date: "18 days ago",
+      title: "Real estate investments funds",
+      amount: "300,800.88",
+    },
+    {
+      id: "9",
+      date: "18 days ago",
+      title: "Real estate investments funds",
+      amount: "300,800.88",
+    },
+    {
+      id: "10",
+      date: "18 days ago",
+      title: "Real estate investments funds",
+      amount: "300,800.88",
     },
   ]);
 
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
+        contentContainerStyle={styles.flatListContainer}
         data={items}
-        renderItem={({ item }) => <RiskProfileItem item={item} />}
+        renderItem={({ item }) => <TransactionComponent item={item} />}
       />
-      <View style={styles.btnContainer}>
-        <Button
-          body={<Text style={globalStyles.btnLabel}>Yes, I'm a starter</Text>}
-          touchableStyleProps={{ backgroundColor: "#52c41a" }}
-          touchableProps={{
-            onPress: () => {
-              alert("Button clicked!");
-            },
-          }}
-        />
-      </View>
     </SafeAreaView>
   );
 }

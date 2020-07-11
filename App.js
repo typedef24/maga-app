@@ -39,13 +39,11 @@ import InvestmentPerformanceScreen from "./screens/InvestmentPerformance";
 import RiskProfilesScreen from "./screens/RiskProfilesScreen";
 import CompareTableScreen from "./screens/CompareTableScreen";
 import AsyncStorage from "@react-native-community/async-storage";
-import DrawerNavigation from "./navigation/DrawerNavigation";
 import ResultScreen from "./screens/ResultsScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import MyprofileScreen from "./screens/MyProfileScreen";
 
 const Stack = createStackNavigator();
-const Drawer = createDrawerNavigator();
 
 export default function App({ props }) {
   const isLoadingComplete = useCachedResources(1);
@@ -272,6 +270,7 @@ export default function App({ props }) {
               name="myinvestsments"
               component={MyInvestmentsScreen}
               options={{
+                headerShown: false,
                 title: "My Investments",
               }}
             />
@@ -404,7 +403,7 @@ export default function App({ props }) {
               name="profileScreen"
               component={ProfileScreen}
               options={{
-                headerShown: false,
+                title: "Profile",
               }}
             />
             <Stack.Screen

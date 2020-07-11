@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, SafeAreaView, Platform, StatusBar } from "react-native";
+import {
+  StyleSheet,
+  SafeAreaView,
+  Platform,
+  StatusBar,
+  View,
+} from "react-native";
 
 // Import components
 import MyInvestment from "../components/MyInvestment";
@@ -10,9 +16,11 @@ import AsyncStorage from "@react-native-community/async-storage";
 
 // API connection
 import Strapi from "../api/Strapi";
+import { ActivityIndicator } from "react-native-paper";
 
 export default function MyInvestmentsScreen({ navigation }) {
   const [data, setData] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const [token, setToken] = useState([""]);
 
   useEffect(() => {
@@ -22,9 +30,13 @@ export default function MyInvestmentsScreen({ navigation }) {
   // Fetch for available investments
   const fetchInvestments = async () => {
     try {
+      // Set loading indicator to true
+      setIsLoading(true);
       const jsonValue = await AsyncStorage.getItem("loggedInUser");
       const token = jsonValue !== null ? JSON.parse(jsonValue) : null;
-
+      // retrive userId
+      const id = token.user.id;
+      console.log(id);
       const response = await Strapi.get("/investments", {
         headers: {
           // Authorization header
@@ -34,8 +46,12 @@ export default function MyInvestmentsScreen({ navigation }) {
       const finalData = response.data;
 
       setData(finalData);
-      console.log(data);
+      console.log(setData);
+      // Set loading indicator to false
+      setIsLoading(false);
     } catch (error) {
+      // Set loading indicator to false
+      setIsLoading(false);
       console.log(error);
     }
   };
@@ -46,6 +62,11 @@ export default function MyInvestmentsScreen({ navigation }) {
         <StatusBar backgroundColor="white" barStyle="dark-content" />
       )}
       <PageTitle title="My Investments" />
+      {isLoading ? (
+        <View>
+          <ActivityIndicator size="large" color="green" />
+        </View>
+      ) : null}
       <FlatList
         data={data}
         keyExtractor={(item) => item.id.toString()}

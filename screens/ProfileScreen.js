@@ -10,7 +10,7 @@ import {
 } from "react-native";
 
 import img from "../assets/images/profile.jpg";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import fonts from "../constants/fonts";
 
@@ -27,7 +27,7 @@ export default class ProfileScreen extends React.Component {
         },
         {
           profileOptionItem: "Invite Other Investors",
-          screenToNavigate: "myinvestsments",
+          screenToNavigate: "invite-others",
           itemIcon: "message",
         },
         {
@@ -67,7 +67,7 @@ export default class ProfileScreen extends React.Component {
           />
         </View>
         {/* Profile Items */}
-        <View>
+        <ScrollView>
           {this.state.profileItems.map((item, key) => (
             <View style={styles.itemsContainer} key={key}>
               <View style={styles.textStyle}>
@@ -91,7 +91,7 @@ export default class ProfileScreen extends React.Component {
               </View>
             </View>
           ))}
-        </View>
+        </ScrollView>
       </SafeAreaView>
     );
   }

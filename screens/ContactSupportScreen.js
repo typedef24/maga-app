@@ -61,24 +61,6 @@ export default class ContactSupportScreen extends React.Component {
             marginTop: 20,
           }}
         />
-        <Button
-          touchableProps={{
-            onPress: () => this.props.navigation.navigate("paymentScreen"),
-          }}
-          body={
-            <Text
-              style={[globalStyles.btnLabel, { textTransform: "uppercase" }]}
-            >
-              Goto Payments
-            </Text>
-          }
-          touchableStyleProps={{
-            backgroundColor: "cyan",
-            marginRight: 5,
-            marginLeft: 5,
-            marginTop: 20,
-          }}
-        />
       </View>
     );
   }
