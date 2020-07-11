@@ -22,7 +22,8 @@ import globalStyles from "../constants/globalStyles";
 import Font from "../constants/fonts";
 import { SimpleLineIcons } from "@expo/vector-icons";
 
-const Strapi_Url = "http://64.227.20.176";
+// Strapi url
+import AppConstants from "../constants/AppConstants";
 
 export default function DetailsInvestmentScreen({ route, navigation }) {
   const [modalVisible, isModalVisible] = useState(false);
@@ -156,6 +157,39 @@ export default function DetailsInvestmentScreen({ route, navigation }) {
           </View>
           <Divider color="red" />
 
+          {/* Withdraw Investment */}
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <MaterialCommunityIcons name="bank" size={24} color="black" />
+            <Button
+              body={
+                <Text
+                  style={[
+                    globalStyles.btnLabel,
+                    {
+                      color: "black",
+                      fontSize: Font.medium,
+                      fontWeight: "300",
+                    },
+                  ]}
+                >
+                  Withdraw Investment
+                </Text>
+              }
+              touchableProps={{
+                onPress: () => {
+                  isModalVisible({ modalVisible: false });
+                  navigation.navigate("withdraw-investment");
+                },
+              }}
+            />
+          </View>
+
           {/* Cancel Investment */}
           <View
             style={{
@@ -181,7 +215,7 @@ export default function DetailsInvestmentScreen({ route, navigation }) {
                     },
                   ]}
                 >
-                  Cancel Investment
+                  Exit Investment
                 </Text>
               }
               touchableProps={{
@@ -216,15 +250,17 @@ export default function DetailsInvestmentScreen({ route, navigation }) {
               {item.opportunity.title}
             </Text>
             <Image
-              source={{ uri: Strapi_Url + item.opportunity.img.url }}
+              source={{
+                uri: AppConstants.strapiBaseURL + item.opportunity.img.url,
+              }}
               style={styles.Image}
             ></Image>
           </View>
         </View>
         <View style={styles.statistics}>
           <View style={styles.iconText}>
-            <Icon
-              name="line-chart"
+            <MaterialCommunityIcons
+              name="alert-decagram"
               size={20}
               color="#fff"
               style={{ padding: 4 }}
@@ -328,11 +364,11 @@ export default function DetailsInvestmentScreen({ route, navigation }) {
       </View>
       <Button
         touchableProps={{
-          onPress: () => navigation.navigate("invite-others"),
+          onPress: () => navigation.navigate("investmentPerformanceScreen"),
         }}
         body={
           <Text style={[globalStyles.btnLabel, { textTransform: "uppercase" }]}>
-            set up Investment
+            Investment History
           </Text>
         }
         touchableStyleProps={{
@@ -340,7 +376,7 @@ export default function DetailsInvestmentScreen({ route, navigation }) {
           marginRight: 5,
           marginLeft: 5,
           marginTop: 25,
-          marginBottom: 20
+          marginBottom: 20,
         }}
       />
     </ScrollView>

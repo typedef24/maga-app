@@ -1,8 +1,16 @@
 import React from "react";
-import { Text, SafeAreaView, StyleSheet, View, TextInput, Clipboard } from "react-native";
+import {
+  Text,
+  SafeAreaView,
+  StyleSheet,
+  View,
+  TextInput,
+  Clipboard,
+} from "react-native";
 import Button from "../components/Button";
 import globalStyles from "../constants/globalStyles";
 import Toast from "react-native-simple-toast";
+import fonts from "../constants/fonts";
 
 export default class InvitationScreen extends React.Component {
   constructor(props) {
@@ -27,29 +35,11 @@ export default class InvitationScreen extends React.Component {
               placeholder="paste here..."
               style={styles.inputStyle}
               onChangeText={(text) => this.setState({ text })}
-              value={this.state.text}
+              editable={false}
+              // value={this.state.text}
+              value={"invest@kemet.app"}
             />
           </View>
-          <Button
-            touchableProps={{
-              onPress: () => {
-                this.props.navigation.navigate("withdraw-investment");
-              },
-            }}
-            body={
-              <Text
-                style={[globalStyles.btnLabel, { textTransform: "uppercase" }]}
-              >
-                withdraw investment
-              </Text>
-            }
-            touchableStyleProps={{
-              backgroundColor: "#c5eaff",
-              marginRight: 5,
-              marginLeft: 5,
-              marginTop: 20,
-            }}
-          />
           <Button
             touchableProps={{
               onPress: () => {

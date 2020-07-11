@@ -1,25 +1,23 @@
 import * as React from "react";
-import { View, Text, StyleSheet, Image, TextInput } from "react-native";
+import { View, Text, StyleSheet, Image, TextInput, Picker } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { RadioButton, ActivityIndicator } from "react-native-paper";
+import { ActivityIndicator } from "react-native-paper";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 import Constants from "expo-constants";
+
 import DatePicker from "react-native-datepicker";
 
 import img from "../assets/images/profile.jpg";
 import Button from "../components/Button";
 import globalStyles from "../constants/globalStyles";
-import InputField from "../components/InputField";
 import Accordion from "../components/Accordion";
 import Layout from "../constants/Layout";
-import CheckBox from "react-native-check-box";
 
 import AsyncStorage from "@react-native-community/async-storage";
 import axios from "axios";
 // import api url
 import AppConstants from "../constants/AppConstants";
-import fonts from "../constants/fonts";
 
 export default class MyprofileScreen extends React.Component {
   constructor(props) {
@@ -29,13 +27,15 @@ export default class MyprofileScreen extends React.Component {
       username: "",
       mobileNumber: "",
       dateOfBirth: "",
+      risk_profile: "",
+      gender: "",
       data: [],
       isLoggedIn: false,
       image: null,
     };
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
     this.getPermissionAync();
   }
 
@@ -64,11 +64,14 @@ export default class MyprofileScreen extends React.Component {
           name: this.state.name,
           username: this.state.username,
           mobile_number: this.state.mobileNumber,
+          risk_profile: this.state.risk_profile,
+          gender: this.state.gender,
+          profile_picture: this.state.image,
         },
       });
       if (response) {
         this.setState({ loading: false });
-        return alert("Submitted");
+        return alert("Profile updated");
       } else {
         this.setState({ loading: true });
         console.log(error);
@@ -172,9 +175,50 @@ export default class MyprofileScreen extends React.Component {
               keyboardType="numeric"
               onChangeText={(number) => this.setState({ mobileNumber: number })}
             />
-            <View style={{ marginTop: 20 }}>
+            <View style={styles.containerSlider}>
+              <Text
+                style={[styles.textHeading, { marginTop: 20, marginBottom: 5 }]}
+              >
+                Gender
+              </Text>
+              <View style={styles.sliderStyle}>
+                <Accordion
+                  // Inherit prop from child
+                  mode="dropdown"
+                  selectedValue={this.state.gender}
+                  onValueChange={(itemValue) => {
+                    this.setState({ gender: itemValue });
+                  }}
+                >
+                  <Picker.Item label="Male" value="male" />
+                  <Picker.Item label="Female" value="female" />
+                </Accordion>
+              </View>
+            </View>
+            <View style={styles.containerSlider}>
+              <Text
+                style={[styles.textHeading, { marginTop: 20, marginBottom: 5 }]}
+              >
+                Risk Level
+              </Text>
+              <View style={styles.sliderStyle}>
+                <Accordion
+                  // Inherit prop from child
+                  mode="dropdown"
+                  selectedValue={this.state.risk_profile}
+                  onValueChange={(itemValue) => {
+                    this.setState({ risk_profile: itemValue });
+                  }}
+                >
+                  <Picker.Item label="Low" value="low" />
+                  <Picker.Item label="Medium" value="medium" />
+                  <Picker.Item label="High" value="high" />
+                </Accordion>
+              </View>
+            </View>
+            {/* <View style={{ marginTop: 20 }}>
               <DatePicker
-                style={{ width: '100%' }}
+                style={{ width: "100%" }}
                 date={this.state.dateOfBirth}
                 mode="date"
                 placeholder="select date of birth"
@@ -185,10 +229,8 @@ export default class MyprofileScreen extends React.Component {
                 cancelBtnText="Cancel"
                 customStyles={{
                   dateIcon: {
-                    position: "absolute",
-                    left: 0,
-                    top: 4,
-                    marginLeft: 0,
+                    width: 0,
+                    height: 0,
                   },
                   dateInput: {
                     marginLeft: 36,
@@ -199,35 +241,7 @@ export default class MyprofileScreen extends React.Component {
                   this.setState({ dateOfBirth: date });
                 }}
               />
-            </View>
-
-            {/* <View style={[styles.flexStyles, { marginTop: 15 }]}>
-            <Text style={{ marginRight: 180 }}>Gender</Text>
-            <View style={[styles.flexStyles, { marginRight: 10 }]}>
-              <Text>M</Text>
-              <RadioButton />
-            </View>
-            <View style={styles.flexStyles}>
-              <Text>F</Text>
-              <RadioButton />
-            </View>
-          </View> */}
-            {/* <TextInput
-            placeholder="Username"
-            style={styles.inputStyle}
-            //   onChangeText={(text) => this.setState({ text })}
-          /> */}
-            {/* <View
-            style={{
-              marginTop: 10,
-            }}
-          >
-            <Text style={{ marginRight: 10 }}>Gender</Text>
-            <View>
-              <Text>Male</Text>
-              <RadioButton value="first" />
-            </View>
-          </View> */}
+            </View> */}
             {this.state.loading ? (
               <View>
                 <ActivityIndicator size="large" color="green" />
@@ -269,6 +283,10 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     borderRadius: 150 / 2,
+  },
+  containerSlider: {
+    // margin: 5,
+    width: 80,
   },
   inputStyle: {
     width: Layout.window.width * 0.9,
