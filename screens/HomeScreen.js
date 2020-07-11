@@ -19,9 +19,11 @@ import { Ionicons } from "@expo/vector-icons";
 // API Connetion
 import Strapi from "../api/Strapi";
 import AsyncStorage from "@react-native-community/async-storage";
+import { ActivityIndicator } from "react-native-paper";
 
 export default function HomeScreen({ route, navigation }) {
   const [data, setData] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const [currentValue, setCurrentValue] = useState();
 
   useEffect(() => {
@@ -31,6 +33,8 @@ export default function HomeScreen({ route, navigation }) {
   // Fetch for available investments
   const fetchInvestments = async () => {
     try {
+      // Set loading indicator to true
+      setIsLoading(true);
       const jsonValue = await AsyncStorage.getItem("loggedInUser");
       const token = jsonValue !== null ? JSON.parse(jsonValue) : null;
       const response = await Strapi.get("/investments", {
@@ -38,9 +42,12 @@ export default function HomeScreen({ route, navigation }) {
           Authorization: "Bearer " + token.jwt,
         },
       });
-      console.log(response.data);
       setData(response.data);
+      // Set loading indicator to false
+      setIsLoading(false);
     } catch (error) {
+      // Set loading indicator to false
+      setIsLoading(false);
       console.log(error);
     }
   };
@@ -88,6 +95,11 @@ export default function HomeScreen({ route, navigation }) {
             </TouchableOpacity>
           </View>
           <View style={{ marginBottom: 60 }}>
+            {isLoading ? (
+              <View>
+                <ActivityIndicator size="large" color="green" />
+              </View>
+            ) : null}
             <FlatList
               data={data}
               keyExtractor={(item) => item.id.toString()}

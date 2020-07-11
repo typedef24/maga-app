@@ -9,8 +9,7 @@ import ProgressBarComponent from "../components/ProgressBarComponent";
 import { ScrollView } from "react-native-gesture-handler";
 import globalStyles from "../constants/globalStyles";
 import Button from "../components/Button";
-
-const Strapi_Url = "http://64.227.20.176";
+import AppConstants from "../constants/AppConstants";
 
 export default function InvestmentsCardViewScreen({ route, navigation }) {
   const { item } = route.params;
@@ -44,7 +43,7 @@ export default function InvestmentsCardViewScreen({ route, navigation }) {
                 </Text>
                 <Image
                   source={{
-                    uri: Strapi_Url + item.img.url,
+                    uri: AppConstants.strapiBaseURL + item.img.url,
                   }}
                   style={styles.Image}
                 ></Image>
