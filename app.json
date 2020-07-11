@@ -7,6 +7,15 @@
       "android",
       "web"
     ],
+    "ios": {
+      "bundleIdentifier": "com.maatllc.maat",
+      "buildNumber": "1.0.0",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.maatllc.maat",
+      "versionCode": 1
+    },
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -22,9 +31,6 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
-    },
     "web": {
       "favicon": "./assets/images/favicon.png"
     }
