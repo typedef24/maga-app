@@ -2,7 +2,6 @@
   "expo": {
     "name": "Maga",
     "slug": "Maga",
-<<<<<<< HEAD
     "platforms": [
       "ios",
       "android",
@@ -17,9 +16,6 @@
       "package": "com.maatllc.maat",
       "versionCode": 1
     },
-=======
-    "platforms": ["ios", "android", "web"],
->>>>>>> 1ab3372248cc883d9e6d28f509f85e5dda664d05
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -32,16 +28,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-<<<<<<< HEAD
     "assetBundlePatterns": [
       "**/*"
     ],
-=======
-    "assetBundlePatterns": ["**/*"],
-    "ios": {
-      "supportsTablet": true
-    },
->>>>>>> 1ab3372248cc883d9e6d28f509f85e5dda664d05
     "web": {
       "favicon": "./assets/images/favicon.png"
     }
