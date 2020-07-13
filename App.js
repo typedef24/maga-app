@@ -209,9 +209,6 @@ export default function App({ props }) {
               }}
             />
 
-            {/* Nest Drawer Navigation */}
-            {/* <Stack.Screen name="feed" component={DrawerNavigation} /> */}
-
             {/* Bottom Nav */}
             <Stack.Screen
               name="Root"
@@ -270,8 +267,8 @@ export default function App({ props }) {
               name="myinvestsments"
               component={MyInvestmentsScreen}
               options={{
-                headerShown: false,
-                title: "My Investments",
+                headerShown: true,
+                title: "",
               }}
             />
             <Stack.Screen
@@ -373,7 +370,8 @@ export default function App({ props }) {
               name="withdraw-confirmation"
               component={WithdrawConfirmationScreen}
               options={{
-                headerShown: false,
+                headerShown: true,
+                title: "Withdrawal Confirmed",
               }}
             />
             <Stack.Screen

@@ -20,14 +20,13 @@ import Button from "../components/Button";
 import Layout from "../constants/Layout";
 import AppConstants from "../constants/AppConstants";
 
-
 export default function InvestmentDetailsScreen({ route, navigation }) {
   // Read params from navigation state
   const { item } = route.params;
 
   function downloadFile() {
     // const uri = "http://64.227.20.176/uploads/database_245055346c.pdf";
-    const uri = Strapi_Url + item.support_documents.url;
+    const uri = AppConstants.strapiBaseURL + item.support_documents.url;
     let fileUri = FileSystem.documentDirectory + "Maga.ext"; // Specify the end directory with a defualt name and file extension
     FileSystem.downloadAsync(uri, fileUri)
       .then(({ uri }) => {

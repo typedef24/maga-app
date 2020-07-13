@@ -20,7 +20,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import Toast from "react-native-simple-toast";
 
-const Strapi_Url = "http://64.227.20.176";
+import AppConstants from "../constants/AppConstants";
 
 export default class PaymentScreen extends React.Component {
   constructor(props) {
@@ -56,7 +56,9 @@ export default class PaymentScreen extends React.Component {
               </Text>
               <Image
                 style={styles.sliderImage}
-                source={{ uri: Strapi_Url + this.state.item.img.url }}
+                source={{
+                  uri: AppConstants.strapiBaseURL + this.state.item.img.url,
+                }}
               />
             </View>
             <View

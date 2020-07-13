@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, SafeAreaView } from "react-native";
+import { Text, View, StyleSheet, SafeAreaView, Alert } from "react-native";
 
 import Button from "../components/Button";
 import Fonts from "../constants/fonts";
@@ -14,6 +14,16 @@ export default class WithdrawInvestmentTermsScreen extends React.Component {
       termsChecked: false,
       paymentMethod: "",
     };
+  }
+
+  // Handle Submit Button
+  handleSubmit() {
+    if (!this.state.termsChecked) {
+      Alert.alert("NOTICE!", "Read and Agree to terms and condition");
+    } else {
+      this.props.navigation.navigate("withdraw-confirmation");
+      return null;
+    }
   }
 
   render() {
@@ -49,8 +59,7 @@ export default class WithdrawInvestmentTermsScreen extends React.Component {
         </View>
         <Button
           touchableProps={{
-            onPress: () =>
-              this.props.navigation.navigate("withdraw-confirmation"),
+            onPress: () => this.handleSubmit(),
           }}
           body={
             <Text
@@ -61,25 +70,6 @@ export default class WithdrawInvestmentTermsScreen extends React.Component {
           }
           touchableStyleProps={{
             backgroundColor: "#52c41a",
-            marginRight: 5,
-            marginLeft: 5,
-            marginTop: 20,
-            marginBottom: 20,
-          }}
-        />
-        <Button
-          touchableProps={{
-            onPress: () => this.props.navigation.navigate("risk-profiles"),
-          }}
-          body={
-            <Text
-              style={[globalStyles.btnLabel, { textTransform: "uppercase" }]}
-            >
-              Risk Profile
-            </Text>
-          }
-          touchableStyleProps={{
-            backgroundColor: "#91d5ff",
             marginRight: 5,
             marginLeft: 5,
             marginTop: 20,

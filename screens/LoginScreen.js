@@ -57,7 +57,8 @@ export default class LoginScreen extends React.Component {
     } catch (error) {
       this.setState({ loading: false });
       this.setState({
-        errorStr: "Seems you're offline!\nCheck your connection and try again.",
+        // errorStr: "Seems you're offline!\nCheck your connection and try again.",
+        errorStr: "Sorry password or email is incorrect\nForget password?",
       });
     }
   }

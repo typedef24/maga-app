@@ -8,21 +8,26 @@ import {
   View,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import Icon from "@expo/vector-icons/Ionicons";
+
 import { SafeAreaView } from "react-native-safe-area-context";
+import { ActivityIndicator } from "react-native-paper";
+import { Ionicons } from "@expo/vector-icons";
 
 // import components
 import MyInvestmentPreview from "../components/MyInvestmentPreview";
 import MyInvestment from "../components/MyInvestment";
-import { Ionicons } from "@expo/vector-icons";
+import Button from "../components/Button";
+
+import globalStyles from "../constants/globalStyles";
+import font from "../constants/fonts";
+import Icon from "@expo/vector-icons/Ionicons";
 
 // API Connetion
 import Strapi from "../api/Strapi";
 import AsyncStorage from "@react-native-community/async-storage";
-import { ActivityIndicator } from "react-native-paper";
 
 export default function HomeScreen({ route, navigation }) {
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentValue, setCurrentValue] = useState();
 
@@ -37,8 +42,11 @@ export default function HomeScreen({ route, navigation }) {
       setIsLoading(true);
       const jsonValue = await AsyncStorage.getItem("loggedInUser");
       const token = jsonValue !== null ? JSON.parse(jsonValue) : null;
-      const response = await Strapi.get("/investments", {
+      // Retrive the userId from token
+      const id = token.user.id;
+      const response = await Strapi.get("/investments?user=" + id, {
         headers: {
+          // Auth header
           Authorization: "Bearer " + token.jwt,
         },
       });
@@ -68,7 +76,7 @@ export default function HomeScreen({ route, navigation }) {
           >
             <View></View>
             <View>
-              <Text style={styles.mainText}>MAGA</Text>
+              <Text style={styles.mainText}>MA'AT</Text>
             </View>
             <TouchableOpacity
               // onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
@@ -100,19 +108,45 @@ export default function HomeScreen({ route, navigation }) {
                 <ActivityIndicator size="large" color="green" />
               </View>
             ) : null}
-            <FlatList
-              data={data}
-              keyExtractor={(item) => item.id.toString()}
-              renderItem={({ item }) => (
-                <MyInvestment
-                  item={item}
-                  touchableProps={{
-                    onPress: () =>
-                      navigation.navigate("details-screen", { item }),
-                  }}
-                />
-              )}
-            />
+            {data.length ? (
+              <FlatList
+                data={data}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item }) => (
+                  <MyInvestment
+                    item={item}
+                    touchableProps={{
+                      onPress: () =>
+                        navigation.navigate("details-screen", { item }),
+                    }}
+                  />
+                )}
+              />
+            ) : (
+              <View style={styles.infoContainer}>
+                <Text style={styles.textHeading}>
+                  You don't have any available investments, please add
+                  investment.
+                </Text>
+                <View style={styles.btnSearch}>
+                  <Button
+                    body={
+                      <Text style={globalStyles.btnLabel}>Add Investments</Text>
+                    }
+                    touchableStyleProps={{
+                      backgroundColor: "#003A8C",
+                      marginRight: 25,
+                      marginLeft: 25,
+                    }}
+                    touchableProps={{
+                      onPress: () => {
+                        navigation.navigate("opportunities");
+                      },
+                    }}
+                  />
+                </View>
+              </View>
+            )}
           </View>
         </View>
       </View>
@@ -155,5 +189,13 @@ const styles = StyleSheet.create({
   },
   linkText: {
     flexDirection: "row",
+  },
+  infoContainer: {
+    marginTop: 20,
+  },
+  textHeading: {
+    fontSize: font.medium,
+    textAlign: "center",
+    marginBottom: 30,
   },
 });

@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
 
   errorBox: {
     flexDirection: "row",
-    backgroundColor: "#4a7fba",
+    backgroundColor: "#ff5252",
     marginBottom: 20,
     padding: 10,
     paddingBottom: 0,

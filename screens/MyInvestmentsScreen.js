@@ -5,10 +5,12 @@ import {
   Platform,
   StatusBar,
   View,
+  Text,
 } from "react-native";
 
 // Import components
 import MyInvestment from "../components/MyInvestment";
+import Button from "../components/Button";
 import { FlatList } from "react-native-gesture-handler";
 import { PageTitle } from "../components/PageTitle";
 
@@ -17,9 +19,11 @@ import AsyncStorage from "@react-native-community/async-storage";
 // API connection
 import Strapi from "../api/Strapi";
 import { ActivityIndicator } from "react-native-paper";
+import globalStyles from "../constants/globalStyles";
+import font from "../constants/fonts";
 
 export default function MyInvestmentsScreen({ navigation }) {
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [token, setToken] = useState([""]);
 
@@ -36,8 +40,7 @@ export default function MyInvestmentsScreen({ navigation }) {
       const token = jsonValue !== null ? JSON.parse(jsonValue) : null;
       // retrive userId
       const id = token.user.id;
-      console.log(id);
-      const response = await Strapi.get("/investments", {
+      const response = await Strapi.get("/investments?user=" + id, {
         headers: {
           // Authorization header
           Authorization: "Bearer " + token.jwt,
@@ -46,7 +49,7 @@ export default function MyInvestmentsScreen({ navigation }) {
       const finalData = response.data;
 
       setData(finalData);
-      console.log(setData);
+      console.log(finalData);
       // Set loading indicator to false
       setIsLoading(false);
     } catch (error) {
@@ -67,18 +70,41 @@ export default function MyInvestmentsScreen({ navigation }) {
           <ActivityIndicator size="large" color="green" />
         </View>
       ) : null}
-      <FlatList
-        data={data}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <MyInvestment
-            item={item}
-            touchableProps={{
-              onPress: () => navigation.navigate("details-screen", { item }),
-            }}
-          />
-        )}
-      />
+      {data.length ? (
+        <FlatList
+          data={data}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <MyInvestment
+              item={item}
+              touchableProps={{
+                onPress: () => navigation.navigate("details-screen", { item }),
+              }}
+            />
+          )}
+        />
+      ) : (
+        <View style={styles.infoContainer}>
+          <Text style={styles.textHeading}>
+            You don't have any available investments, please add investment.
+          </Text>
+          <View style={styles.btnSearch}>
+            <Button
+              body={<Text style={globalStyles.btnLabel}>Add Investments</Text>}
+              touchableStyleProps={{
+                backgroundColor: "#52c41a",
+                marginRight: 25,
+                marginLeft: 25,
+              }}
+              touchableProps={{
+                onPress: () => {
+                  navigation.navigate("opportunities");
+                },
+              }}
+            />
+          </View>
+        </View>
+      )}
     </SafeAreaView>
   );
 }
@@ -99,5 +125,14 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
     flex: 1,
+  },
+  infoContainer: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  textHeading: {
+    fontSize: font.large,
+    textAlign: "center",
+    marginBottom: 30,
   },
 });
