@@ -9,35 +9,50 @@ export default class CompareTableScreen extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <CompareTable />
+        <CompareTable compareArray={this.props.route.params.compareArray} />
         <View style={{ flexDirection: "row" }}>
           <View style={styles.buttonConatiner}>
             <Text></Text>
           </View>
-          <View style={styles.buttonConatiner}>
-            <Button
-              body={<Text style={globalStyles.btnLabel}>Invest</Text>}
-              touchableStyleProps={{ backgroundColor: "#52c41a" }}
-              touchableProps={{
-                onPress: () => {
-                  alert("Button clicked");
-                },
-              }}
-            />
-          </View>
-          <View style={styles.buttonConatiner}>
-            <Button
-              body={<Text style={globalStyles.btnLabel}>Invest</Text>}
-              touchableStyleProps={{ backgroundColor: "#52c41a" }}
-              touchableProps={{
-                onPress: () => {
-                  alert("Button clicked");
-                },
-              }}
-            />
-          </View>
+          {this.props.route.params.compareArray.map((element) => {
+            return (
+              <View style={styles.buttonConatiner}>
+                <Button
+                  body={<Text style={globalStyles.btnLabel}>Invest</Text>}
+                  touchableStyleProps={{ backgroundColor: "#52c41a" }}
+                  touchableProps={{
+                    onPress: () => {
+                      this.props.navigation.navigate("paymentScreen", {
+                        item: element,
+                      });
+                    },
+                  }}
+                />
+              </View>
+            );
+          })}
         </View>
       </SafeAreaView>
+    );
+  }
+}
+
+class Item extends React.Component {
+  render() {
+    return (
+      <View style={styles.buttonConatiner}>
+        <Button
+          body={<Text style={globalStyles.btnLabel}>Invest</Text>}
+          touchableStyleProps={{ backgroundColor: "#52c41a" }}
+          touchableProps={{
+            onPress: () => {
+              this.props.navigation.navigate("payment", {
+                id: this.props.investment.id,
+              });
+            },
+          }}
+        />
+      </View>
     );
   }
 }

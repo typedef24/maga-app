@@ -3,7 +3,6 @@ import {
   createStackNavigator,
   CardStyleInterpolators,
 } from "@react-navigation/stack";
-import { createDrawerNavigator } from "@react-navigation/drawer";
 import React, { useState } from "react";
 import { Platform, StatusBar, StyleSheet, View, Text } from "react-native";
 
@@ -412,8 +411,6 @@ export default function App({ props }) {
                 // headerShown: false,
               }}
             />
-
-            {/* <Stack.Screen name="home" component={DrawerNavigation} /> */}
           </Stack.Navigator>
         </NavigationContainer>
       </View>

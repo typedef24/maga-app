@@ -15,7 +15,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Button from "../components/Button";
 import globalStyles from "../constants/globalStyles";
 import fonts from "../constants/fonts";
-import { Divider } from "react-native-paper";
+import AsyncStorage from "@react-native-community/async-storage";
 
 export default class ProfileScreen extends React.Component {
   constructor(props) {
@@ -51,6 +51,18 @@ export default class ProfileScreen extends React.Component {
       ],
     };
   }
+
+  async logout() {
+    try {
+      await AsyncStorage.removeItem("loggedInUser");
+    } catch (e) {
+      // error removing value
+      console.warn(
+        "Error removing from AsyncStorage! Hope your device supports AsyncStorage?"
+      );
+    }
+  }
+
   render() {
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
@@ -113,7 +125,7 @@ export default class ProfileScreen extends React.Component {
           </View>
           <View style={styles.btnSearch}>
             <Button
-              body={<Text style={globalStyles.btnLabel}>LogOut</Text>}
+              body={<Text style={globalStyles.btnLabel}>Logout</Text>}
               touchableStyleProps={{
                 backgroundColor: "#52c41a",
                 marginTop: 10,
@@ -122,7 +134,8 @@ export default class ProfileScreen extends React.Component {
               }}
               touchableProps={{
                 onPress: () => {
-                  alert("Logout");
+                  this.logout();
+                  this.props.navigation.navigate("login");
                 },
               }}
             />

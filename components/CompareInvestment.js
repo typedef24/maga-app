@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, Alert } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import Iconfont from "@expo/vector-icons/FontAwesome5";
 
@@ -43,7 +43,12 @@ class CompareInvestmentsComponent extends React.Component {
                 <Text style={{ width: Layout.window.width * 0.8 }}>
                   {this.props.item.title}
                 </Text>
-                <Image source={{uri: AppConstants.strapiBaseURL + this.props.item.img.url }} style={styles.Image} />
+                <Image
+                  source={{
+                    uri: AppConstants.strapiBaseURL + this.props.item.img.url,
+                  }}
+                  style={styles.Image}
+                />
               </View>
             </View>
           </View>
@@ -126,7 +131,10 @@ class CompareInvestmentsComponent extends React.Component {
                 }}
                 touchableProps={{
                   onPress: () => {
-                    alert("Button clicked!!");
+                    // this.props.navigation.navigate("paymentScreen", {
+                    //   item: this.props.item,
+                    // });
+                    alert("Invest Button clicked!")
                   },
                 }}
               />

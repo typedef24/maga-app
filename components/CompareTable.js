@@ -1,69 +1,84 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import {
-  Table,
-  TableWrapper,
-  Row,
-  Rows,
-  Col,
-  Cols,
-  Cell,
-} from "react-native-table-component";
-import { ScrollView } from "react-native-gesture-handler";
+import { Table, TableWrapper, Row, Rows } from "react-native-table-component";
 
 import Font from "../constants/fonts";
 
 export default class CompareTable extends React.Component {
   constructor(props) {
     super(props);
-
-    const elementButton = (value) => (
-      <TouchableOpacity
-        onPress={() => alert("Header Clicked")}
-        style={{
-          flex: 1,
-          backgroundColor: "#bae7ff",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <View>
-          <Text>Restuarant</Text>
-        </View>
-      </TouchableOpacity>
-    );
-
-    const elementHeader = (value) => (
-      <TouchableOpacity
-        onPress={() => alert("Header Clicked")}
-        style={{
-          flex: 1,
-          backgroundColor: "#bae7ff",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <View>
-          <Text>ShopMarket</Text>
-        </View>
-      </TouchableOpacity>
-    );
-
     this.state = {
-      HeadTable: ["Factor", elementButton("1"), elementHeader("1")],
-      DataTable: [
-        ["ROI", "13.6%", "14.6%"],
-        ["INDUSTRY", "40 months", "40 months"],
-        ["S. INDEX", "Technology", "Education"],
-        ["TARGET", "7.6", ""],
-        ["INVESTORS", "$350K", "b"],
-        ["B. PENALTY", "15%", "18%"],
-        ["B. TIME", "10 months", "2 months"],
-        ["DEADLINE", "", "3/7/2020"],
-        ["TYPE", "Fixed", "Variable"],
-        ["LIFETIME", "22 months", ""],
-      ],
+      HeadTable: this.getTableColumnHeads(),
+      DataTable: this.getTableRows(),
     };
+  }
+
+  getTableRows() {
+    let tableRowsArray = [];
+    //initialize arrays that represent a row of the table
+    let initialStatusArray = ["Status"];
+    let statusArray = [];
+    let initialRateArray = ["Rate"];
+    let rateArray = [];
+    let initialDurationArray = ['Duration'];
+    let durationArray = [];
+    let initialPriceArray = ['Price'];
+    let priceArray = [];
+    let initialInceptionDateArray = ['Inception Date'];
+    let inceptionDateArray = [];
+    let initialObjectiveArray = ['Objective'];
+    let objectiveArray = [];
+    let initialRiskProfileArray = ['Risk Profile'];
+    let riskProfileArray = [];
+    let initialExpenseRatioArray = ['Expense Ratio'];
+    let expenseRatioArray = [];
+    let initialFundStartedArray = ['Fund Started'];
+    let fundStartedArray = [];
+    let compareArray = this.props.compareArray;
+    for (let index = 0; index < compareArray.length; index++) {
+      //add new item to each array
+      statusArray.push(compareArray[index].status);
+      rateArray.push(compareArray[index].rate);
+      durationArray.push(compareArray[index].duration + " Months");
+      priceArray.push(compareArray[index].price + " USD");
+      inceptionDateArray.push(compareArray[index].inception_date);
+      objectiveArray.push(compareArray[index].objective);
+      riskProfileArray.push(compareArray[index].risk_profile);
+      expenseRatioArray.push(compareArray[index].expense_ratio);
+      fundStartedArray.push(compareArray[index].fund_started);
+    }
+    //concate arrays with their initials and add the result to the tableRowsArray
+    tableRowsArray.push(initialStatusArray.concat(statusArray));
+    tableRowsArray.push(initialRateArray.concat(rateArray));
+    tableRowsArray.push(initialDurationArray.concat(durationArray));
+    tableRowsArray.push(initialPriceArray.concat(priceArray));
+    tableRowsArray.push(initialInceptionDateArray.concat(inceptionDateArray));
+    tableRowsArray.push(initialObjectiveArray.concat(objectiveArray));
+    tableRowsArray.push(initialRiskProfileArray.concat(riskProfileArray));
+    tableRowsArray.push(initialExpenseRatioArray.concat(expenseRatioArray));
+    tableRowsArray.push(initialFundStartedArray.concat(fundStartedArray));
+    //return tableRowsArray wh is the final array to b used in the table
+    return tableRowsArray;
+  }
+
+  getTableColumnHeads() {
+    let initialArray = ["Factor"];
+    let tableColumnHeads = [];
+    let compareArray = this.props.compareArray;
+    for (let index = 0; index < compareArray.length; index++) {
+      const tableColumnHeadView = (
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: "#bae7ff"
+          }}
+        >
+          <Text>{compareArray[index].title}</Text>
+        </View>
+      );
+      tableColumnHeads.push(tableColumnHeadView); //add new item to tempCompareArray
+    }
+    return initialArray.concat(tableColumnHeads);
   }
 
   render() {

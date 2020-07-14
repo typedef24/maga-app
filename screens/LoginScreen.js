@@ -26,8 +26,8 @@ export default class LoginScreen extends React.Component {
       email: "",
       password: "",
       errorStr: "",
-      loading: "",
-      isLoggedIn: false,
+      loading: false,
+      checkingLoginStatus: false,
     };
   }
 
@@ -42,7 +42,7 @@ export default class LoginScreen extends React.Component {
       if (response) {
         console.log(response.data);
         this.props.navigation.navigate("Root");
-        this.setState({ loading: false });
+        this.setState({ loading: false, email: "", password: "" });
         await AsyncStorage.setItem(
           "loggedInUser",
           JSON.stringify(response.data)
@@ -63,21 +63,21 @@ export default class LoginScreen extends React.Component {
     }
   }
 
-  // // Check Logged In
+  // Check Logged In
   async checkLoggedIn() {
-    //alert("Hello");
     try {
+      this.setState({ checkingLoginStatus: true });
       const jsonValue = await AsyncStorage.getItem("loggedInUser");
       jsonValue != null ? JSON.parse(jsonValue) : null;
       if (jsonValue) {
-        //not first time access
-        this.setState({ isLoggedIn: true });
+        //user already logged in, show home screen
+        this.props.navigation.navigate("Root");
+        this.setState({ checkingLoginStatus: false });
       } else {
-        //store in AsyncStorage against next time lunch
-        // return false;
-        this.setState({ isLoggedIn: false });
+        this.setState({ checkingLoginStatus: false });
       }
     } catch (e) {
+      this.setState({ checkingLoginStatus: false });
       // error reading value
       console.warn(
         "Error reading from AsyncStorage! Hope your device supports AsyncStorage?"
@@ -85,10 +85,27 @@ export default class LoginScreen extends React.Component {
     }
   }
 
+  UNSAFE_componentWillMount() {
+    this.checkLoggedIn();
+  }
+
   render() {
-    if (this.state.isLoggedIn) {
-      this.props.navigation.navigate("Root");
-      return null;
+    if (this.state.checkingLoginStatus) {
+      return (
+        <SafeAreaView style={styles.container}>
+          <View style={styles.container}>
+            {/* {Platform.OS === "android" && (
+              <StatusBar backgroundColor="#003A8C" barStyle="light-content" />
+            )} */}
+            <LinearGradient
+              colors={["#003a8c", "#137fe9"]}
+              style={styles.gradient}
+            >
+              <ActivityIndicator size="large" color="white" />
+            </LinearGradient>
+          </View>
+        </SafeAreaView>
+      );
     } else {
       return (
         <SafeAreaView style={styles.container}>

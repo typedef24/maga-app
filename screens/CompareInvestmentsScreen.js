@@ -44,8 +44,8 @@ export default function CompareInvestmentsScreen({ route, navigation }) {
                   let tempCompareArray = compareArray.slice(); //copy compareArray to a temporal array
                   tempCompareArray.push(item); //add new item to tempCompareArray
                   setCompareArray(tempCompareArray);
-                  console.log("Compare Array: " + JSON.stringify(compareArray));
-                  console.log("Item added to state: " + JSON.stringify(item));
+                  console.log("Compare Array: " + JSON.stringify(compareArray, null, 2));
+                  console.log("Item added to state: " + JSON.stringify(item, null, 2));
                 } else {
                   Alert.alert(
                     "NOTICE!",
@@ -68,7 +68,11 @@ export default function CompareInvestmentsScreen({ route, navigation }) {
             {compareArray[0] ? (
               <View style={{ flex: 1 }}>
                 <TouchableOpacity
-                  style={{ marginRight: -11, marginTop: -11, alignItems: "flex-end" }}
+                  style={{
+                    marginRight: -11,
+                    marginTop: -11,
+                    alignItems: "flex-end",
+                  }}
                   onPress={() => {
                     let tempCompareArray = compareArray.slice(); //copy compareArray to a temporal array
                     tempCompareArray.splice(0, 1); //Remove the item at index 0
@@ -93,7 +97,11 @@ export default function CompareInvestmentsScreen({ route, navigation }) {
             {compareArray[1] ? (
               <View style={{ flex: 1 }}>
                 <TouchableOpacity
-                  style={{ marginRight: -11, marginTop: -11, alignItems: "flex-end" }}
+                  style={{
+                    marginRight: -11,
+                    marginTop: -11,
+                    alignItems: "flex-end",
+                  }}
                   onPress={() => {
                     let tempCompareArray = compareArray.slice(); //copy compareArray to a temporal array
                     tempCompareArray.splice(1, 1); //Remove the item at index 1
@@ -118,7 +126,11 @@ export default function CompareInvestmentsScreen({ route, navigation }) {
             {compareArray[2] ? (
               <View style={{ flex: 1 }}>
                 <TouchableOpacity
-                  style={{ marginRight: -11, marginTop: -11, alignItems: "flex-end" }}
+                  style={{
+                    marginRight: -11,
+                    marginTop: -11,
+                    alignItems: "flex-end",
+                  }}
                   onPress={() => {
                     let tempCompareArray = compareArray.slice(); //copy compareArray to a temporal array
                     tempCompareArray.splice(2, 1); //Remove the item at index 0
@@ -143,7 +155,11 @@ export default function CompareInvestmentsScreen({ route, navigation }) {
             {compareArray[3] ? (
               <View style={{ flex: 1 }}>
                 <TouchableOpacity
-                  style={{ marginRight: -11, marginTop: -11, alignItems: "flex-end" }}
+                  style={{
+                    marginRight: -11,
+                    marginTop: -11,
+                    alignItems: "flex-end",
+                  }}
                   onPress={() => {
                     let tempCompareArray = compareArray.slice(); //copy compareArray to a temporal array
                     tempCompareArray.splice(3, 1); //Remove the item at index 0
@@ -175,8 +191,13 @@ export default function CompareInvestmentsScreen({ route, navigation }) {
               marginTop: 15,
               marginLeft: 5,
             }}
-            onPress = {() => {
-              navigation.navigate("compare-table", { data: compareArray });
+            onPress={() => {
+              compareArray.length > 1
+                ? navigation.navigate("compare-table", { compareArray: compareArray })
+                : Alert.alert(
+                    "NOTICE!",
+                    "Please add at least 2 investemts to compare to proceed."
+                  );
             }}
           >
             <Text
